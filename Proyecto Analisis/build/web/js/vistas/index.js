@@ -10,7 +10,8 @@ var config = {
             type: 'step'
         },
         node: {
-            HTMLclass: 'nodeExample1'
+            HTMLclass: 'nodeExample1',
+            
         }
     },
     sebas = {
