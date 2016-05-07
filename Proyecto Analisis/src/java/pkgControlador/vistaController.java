@@ -37,7 +37,7 @@ public class vistaController extends HttpServlet {
 //        response.setContentType("application/json");
 //        response.setCharacterEncoding("UTF-8");
         Arbol arbol = new Arbol(new Dato("1", "var 1"));
-        arbol.getRaiz().adicionarHijo(new Dato("2", "var 2"));
+        arbol.getRaiz().adicionarHijo(new Dato("2", "var 2asdsadasd sdfsdfsd sdfsdf"));
         arbol.getRaiz().getHijos().get(0).adicionarHijo(new Dato("3", "var 3"));
         arbol.getRaiz().adicionarHijo(new Dato("4", "var 4"));
         System.out.println(arbol.toJSONParaGraficar());

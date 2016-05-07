@@ -16,11 +16,27 @@
         <link rel="stylesheet" href="css/index.css">
 
         <link rel="stylesheet" href="css/perfect-scrollbar.css">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/bootstrap-theme.min.css">
 
     </head>
-    <body>
-        <button id="btn">Mostrar grafico</button>
-        <div class="chart" id="collapsable-example"></div>
+    <body style="background-color: #000">
+        <div class="container">
+            <header class="col-xs-12" style="background-color: #c4e3f3">
+                <button id="btn">Mostrar grafico</button>
+            </header>
+            <section class="col-xs-12" style="background-color: #fff">
+                <div class="chart col-xs-5" id="codigo"></div>
+                <div class="chart col-xs-6" id="collapsable-example"></div>
+            </section>
+            <footer class="col-xs-12" style="background-color: #c4e3f3">
+                <p style="float: right">Andres Felipe Ososrio Echavarria <br> Sebastian Ortiz Valencia</p>
+            </footer>
+            
+            
+        </div>
+
+
         <script src="js/raphael.js"></script>
         <script src="js/Treant.js"></script>
 
@@ -28,11 +44,9 @@
         <script src="js/jquery.easing.js"></script>
         <script src="js/jquery.mousewheel.js"></script>
         <script src="js/perfect-scrollbar.js"></script>
+        <script src="js/bootstrap.min.js"></script>
 
 
         <script src="js/index.js"></script>
-        <script>
-            
-        </script>
     </body>
 </html>
