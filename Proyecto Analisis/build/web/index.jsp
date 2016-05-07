@@ -26,7 +26,21 @@
                 <button id="btn">Mostrar grafico</button>
             </header>
             <section class="col-xs-12" style="background-color: #fff">
-                <div class="chart col-xs-5" id="codigo"></div>
+                <div class="chart col-xs-5" id="codigo">
+                    <!--<table class="table-responsive">
+                        <tbody>
+                            <tr style="background-color: #1b6d85">
+                                <td>Hola</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hola</td>
+                            </tr>
+                            <tr>
+                                <td>Hola</td>
+                            </tr>
+                        </tbody>
+                    </table>-->
+                </div>
                 <div class="chart col-xs-6" id="collapsable-example"></div>
             </section>
             <footer class="col-xs-12" style="background-color: #c4e3f3">

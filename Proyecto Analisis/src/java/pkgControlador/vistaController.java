@@ -13,7 +13,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
+import java.util.LinkedList;
 import pkgModelo.Arbol;
+import pkgModelo.CodigoParaGraficarTabla;
 import pkgModelo.Dato;
 
 /**
@@ -40,7 +42,19 @@ public class vistaController extends HttpServlet {
         arbol.getRaiz().adicionarHijo(new Dato("2", "var 2asdsadasd sdfsdfsd sdfsdf"));
         arbol.getRaiz().getHijos().get(0).adicionarHijo(new Dato("3", "var 3"));
         arbol.getRaiz().adicionarHijo(new Dato("4", "var 4"));
-        System.out.println(arbol.toJSONParaGraficar());
+        //System.out.println(arbol.toJSONParaGraficar());
+        
+        CodigoParaGraficarTabla codigo = new CodigoParaGraficarTabla();
+        LinkedList<String> cod = new LinkedList<>();
+        cod.add("Nombre del metodo y esas cosas");
+        cod.add("instruccion 1");
+        cod.add("instruccion 2");
+        cod.add("instruccion 3");
+        cod.add("instruccion 4");
+        codigo.setLineas(cod);
+        codigo.setLineaSeleccionada(0);
+        
+        
         int accion = Integer.parseInt(request.getParameter("accion"));
         if (accion == 1) {
             //String respuesta = "{\"chart\":{\"container\": \"#collapsable-example\", \"rootOrientation\":  \"WEST\", \"animateOnInit\": true, \"node\": { \"collapsable\": true}, \"animation\": {\"nodeAnimation\": \"easeOutBounce\", \"nodeSpeed\": 700, \"connectorsAnimation\": \"bounce\", \"connectorsSpeed\": 700}}, \"nodeStructure\": { \"text\": {\"name\": \"1 variables\",\"title\": \"variables\"}, \"children\": [{ \"text\": {\"name\": \"2 variables\",\"title\": \"variables\"}, \"children\": [{ \"text\": {\"name\": \"3 variables\",\"title\": \"variables\"}}] },{\"text\": {\"name\": \"4 variables\",\"title\": \"variables\"}, \"children\": [ { \"text\": {\"name\": \"5 variables\",\"title\": \"variables\"}}]},{\"text\": {\"name\": \"6 variables\",\"title\": \"variables\"}},{\"text\": {\"name\": \"7 variables\",\"title\": \"variables\"}}]}}";
@@ -48,7 +62,27 @@ public class vistaController extends HttpServlet {
 //            Gson gson = new Gson();
 //            String json = gson.toJson(respuesta);
             response.getWriter().write(respuesta);
-        } 
+        } else if(accion == 2){
+            int linea = Integer.parseInt(request.getParameter("linea"));
+            String respuesta;
+            if(linea == -1){
+                respuesta = codigo.getLineaSeleccionada()+"";
+                
+            }else{
+                codigo.setLineaSeleccionada(linea+1);
+                if(codigo.getLineas().size() == codigo.getLineaSeleccionada()){
+                    codigo.setLineaSeleccionada(0);
+                }
+                respuesta = codigo.getLineaSeleccionada()+"";
+            }
+            response.getWriter().write(respuesta);
+            
+        }else if (accion == 3){
+            int linea = Integer.parseInt(request.getParameter("linea"));
+            codigo.setLineaSeleccionada(linea);
+            String respuesta = codigo.toString();
+            response.getWriter().write(respuesta);
+        }
 //        try (PrintWriter out = response.getWriter()) {
 //            /* TODO output your page here. You may use following sample code. */
 //            out.println("<!DOCTYPE html>");

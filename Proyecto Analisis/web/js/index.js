@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    var linea = -1;
     //var  chart_config = {chart:{container: "#collapsable-example", rootOrientation:  'WEST', animateOnInit: true, node: { collapsable: true}, animation: {nodeAnimation: "easeOutBounce", nodeSpeed: 700, connectorsAnimation: "bounce", connectorsSpeed: 700}}, nodeStructure: { image: "imagenes/malory.png", children: [{ image:"imagenes/lana.png", children: [{ image: "imagenes/figgs.png"}] },{image:"imagenes/sterling.png", children: [ { image: "imagenes/woodhouse.png"}]},{image: "imagenes/cheryl.png"},{image: "imagenes/pam.png"}]}};
     $("#btn").click(function () {
 
@@ -7,7 +8,25 @@ $(document).ready(function () {
             url: 'vistaController',
             type: 'post',
             success: function (response) {
-                tree = new Treant(JSON.parse(response));               
+                $("#collapsable-example").empty();
+                tree = new Treant(JSON.parse(response));
+                $.ajax({
+                    data: {accion: 2, linea: linea},
+                    url: 'vistaController',
+                    type: 'post',
+                    success: function (response) {
+                        linea = response;
+                        $.ajax({
+                            data: {accion: 3, linea: linea},
+                            url: 'vistaController',
+                            type: 'post',
+                            success: function (response) {
+                                $("#codigo").empty();
+                                $("#codigo").html(response);
+                            }
+                        });
+                    }
+                });
             }
         });
 
