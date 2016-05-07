@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
+import pkgModelo.Arbol;
+import pkgModelo.Dato;
 
 /**
  *
@@ -34,9 +36,15 @@ public class vistaController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 //        response.setContentType("application/json");
 //        response.setCharacterEncoding("UTF-8");
+        Arbol arbol = new Arbol(new Dato("1", "var 1"));
+        arbol.getRaiz().adicionarHijo(new Dato("2", "var 2"));
+        arbol.getRaiz().getHijos().get(0).adicionarHijo(new Dato("3", "var 3"));
+        arbol.getRaiz().adicionarHijo(new Dato("4", "var 4"));
+        System.out.println(arbol.toJSONParaGraficar());
         int accion = Integer.parseInt(request.getParameter("accion"));
         if (accion == 1) {
-            String respuesta = "{\"chart\":{\"container\": \"#collapsable-example\", \"rootOrientation\":  \"WEST\", \"animateOnInit\": true, \"node\": { \"collapsable\": true}, \"animation\": {\"nodeAnimation\": \"easeOutBounce\", \"nodeSpeed\": 700, \"connectorsAnimation\": \"bounce\", \"connectorsSpeed\": 700}}, \"nodeStructure\": { \"image\": \"imagenes/malory.png\", \"children\": [{ \"image\":\"imagenes/lana.png\", \"children\": [{ \"image\": \"imagenes/figgs.png\"}] },{\"image\":\"imagenes/sterling.png\", \"children\": [ { \"image\": \"imagenes/woodhouse.png\"}]},{\"image\": \"imagenes/cheryl.png\"},{\"image\": \"imagenes/pam.png\"},{\"image\": \"imagenes/cheryl.png\"},{\"image\": \"imagenes/pam.png\"}]}}";
+            //String respuesta = "{\"chart\":{\"container\": \"#collapsable-example\", \"rootOrientation\":  \"WEST\", \"animateOnInit\": true, \"node\": { \"collapsable\": true}, \"animation\": {\"nodeAnimation\": \"easeOutBounce\", \"nodeSpeed\": 700, \"connectorsAnimation\": \"bounce\", \"connectorsSpeed\": 700}}, \"nodeStructure\": { \"text\": {\"name\": \"1 variables\",\"title\": \"variables\"}, \"children\": [{ \"text\": {\"name\": \"2 variables\",\"title\": \"variables\"}, \"children\": [{ \"text\": {\"name\": \"3 variables\",\"title\": \"variables\"}}] },{\"text\": {\"name\": \"4 variables\",\"title\": \"variables\"}, \"children\": [ { \"text\": {\"name\": \"5 variables\",\"title\": \"variables\"}}]},{\"text\": {\"name\": \"6 variables\",\"title\": \"variables\"}},{\"text\": {\"name\": \"7 variables\",\"title\": \"variables\"}}]}}";
+            String respuesta = arbol.toJSONParaGraficar();
 //            Gson gson = new Gson();
 //            String json = gson.toJson(respuesta);
             response.getWriter().write(respuesta);
