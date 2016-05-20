@@ -24,7 +24,7 @@ public class Dato {
 
     @Override
     public String toString() {
-        return "\"text\": {\"name\": \""+this.idNodo+"\",\"desc\": \""+this.contenido+"\"}";
+        return "\"text\": {\"desc\": \""+this.contenido+"\"}";
     }
 
     /**

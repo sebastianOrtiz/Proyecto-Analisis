@@ -12,16 +12,16 @@ import java.util.LinkedList;
  * @author Sebas
  */
 public class Nodo {
-    private Dato dato;
+    private String dato;
     private LinkedList<Nodo> hijos;
 
-    public Nodo(Dato dato) {
+    public Nodo(String dato) {
         this.dato = dato;
         this.hijos = new LinkedList<>();
     }
     
     public String obtenerEstructuraDeNososJSON(){
-        String json = "{"+this.dato.toString();
+        String json = "{\"text\": {\"desc\": \""+this.dato+"\"}";
         if(!this.esHoja()){
             json=json+",\"children\": [";
             for (int i = 0; i < this.hijos.size(); i++) {
@@ -35,7 +35,7 @@ public class Nodo {
         json = json+"}";
         return json;
     }
-    public void adicionarHijo(Dato dato){
+    public void adicionarHijo(String dato){
         this.hijos.add(new Nodo(dato));
     }
     
@@ -46,14 +46,14 @@ public class Nodo {
     /**
      * @return the dato
      */
-    public Dato getDato() {
+    public String getDato() {
         return dato;
     }
 
     /**
      * @param dato the dato to set
      */
-    public void setDato(Dato dato) {
+    public void setDato(String dato) {
         this.dato = dato;
     }
 

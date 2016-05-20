@@ -12,7 +12,7 @@ package pkgModelo;
 public class Arbol {
     private Nodo raiz;
 
-    public Arbol(Dato datoRaiz) {
+    public Arbol(String datoRaiz) {
         this.raiz = new Nodo(datoRaiz);
     }
 
