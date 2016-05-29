@@ -26,13 +26,9 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
-        p = new Panelprueba();
-        p.setVisible(true);
-        p.setBounds(this.getLocation().x + 250, this.getLocation().y, 250, 500);
-        p.setBackground(Color.red);
-        this.add(p);
         
-        this.setBounds(0, 0, 800, 600);
+        
+        
         
     }
 
@@ -46,9 +42,9 @@ public class Principal extends javax.swing.JFrame {
     private void initComponents() {
 
         btnarbol = new javax.swing.JButton();
+        panelprueba1 = new Vista.Panelprueba();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(800, 600));
 
         btnarbol.setText("Generar arbol");
         btnarbol.addActionListener(new java.awt.event.ActionListener() {
@@ -57,21 +53,34 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        javax.swing.GroupLayout panelprueba1Layout = new javax.swing.GroupLayout(panelprueba1);
+        panelprueba1.setLayout(panelprueba1Layout);
+        panelprueba1Layout.setHorizontalGroup(
+            panelprueba1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        panelprueba1Layout.setVerticalGroup(
+            panelprueba1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 258, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(340, 340, 340)
+            .addComponent(panelprueba1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(855, Short.MAX_VALUE)
                 .addComponent(btnarbol)
-                .addContainerGap(361, Short.MAX_VALUE))
+                .addGap(592, 592, 592))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(558, Short.MAX_VALUE)
+                .addComponent(panelprueba1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 511, Short.MAX_VALUE)
                 .addComponent(btnarbol)
-                .addGap(19, 19, 19))
+                .addGap(46, 46, 46))
         );
 
         pack();
@@ -92,7 +101,7 @@ public class Principal extends javax.swing.JFrame {
             
         }
        
-        p.setarbol(e.Escena(q.generarNodos(q.getRegistroAmbientes())));
+        panelprueba1.setarbol(e.Escena(q.generarNodos(q.getRegistroAmbientes())));
         
         this.repaint();
     }//GEN-LAST:event_btnarbolActionPerformed
@@ -134,5 +143,6 @@ public class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnarbol;
+    private Vista.Panelprueba panelprueba1;
     // End of variables declaration//GEN-END:variables
 }

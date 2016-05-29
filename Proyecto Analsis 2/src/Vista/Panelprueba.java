@@ -41,7 +41,7 @@ public class Panelprueba extends javax.swing.JPanel {
         super.paintComponent(g);
 
         if (arbolGeneral != null && !arbolGeneral.estaVacia()) {
-            dibujar(g, arbolGeneral.getRaiz(), getWidth() / 2, 30, getWidth() / 5);
+            dibujar(g, arbolGeneral.getRaiz(), (getWidth() / 2)-radio, 30, getWidth() / 4);
         }
     }
 
