@@ -7,6 +7,7 @@
 package Vista;
 
 import App5.Escena;
+import java.awt.Color;
 import javax.swing.JFrame;
 
 /**
@@ -15,18 +16,21 @@ import javax.swing.JFrame;
  */
 public class Principal extends javax.swing.JFrame {
 Escena e = new Escena();
-PanelArbol panelnuevo;
+Panelprueba p;
     /**
      * Creates new form Principal
      */
     public Principal() {
         initComponents();
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(800,600);
-       panelArbol1.setarbol(e.Escena());
-        this.add(panelArbol1);
-        this.setLocationRelativeTo(null);
-        this.setVisible(true);
+        
+        //this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setBounds(0, 0, 800, 600);
+        //panelArbol1.setarbol(e.Escena());
+        //this.add(panelArbol1);
+        //this.setLocationRelativeTo(null);
+       // this.setVisible(true);
+        
+        
     }
 
     /**
@@ -38,40 +42,47 @@ PanelArbol panelnuevo;
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panelArbol1 = new Vista.PanelArbol();
+        btnarbol = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(800, 600));
 
-        javax.swing.GroupLayout panelArbol1Layout = new javax.swing.GroupLayout(panelArbol1);
-        panelArbol1.setLayout(panelArbol1Layout);
-        panelArbol1Layout.setHorizontalGroup(
-            panelArbol1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 409, Short.MAX_VALUE)
-        );
-        panelArbol1Layout.setVerticalGroup(
-            panelArbol1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 445, Short.MAX_VALUE)
-        );
+        btnarbol.setText("Generar arbol");
+        btnarbol.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnarbolActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(130, 130, 130)
-                .addComponent(panelArbol1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(127, Short.MAX_VALUE))
+                .addGap(340, 340, 340)
+                .addComponent(btnarbol)
+                .addContainerGap(361, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(panelArbol1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(558, Short.MAX_VALUE)
+                .addComponent(btnarbol)
+                .addGap(19, 19, 19))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnarbolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnarbolActionPerformed
+        
+        p = new Panelprueba(e.Escena());
+        p.setVisible(true);
+        p.setBounds(this.getLocation().x+250,this.getLocation().y,250,500);
+        p.setBackground(Color.red);
+        this.add(p);
+        this.repaint();
+    }//GEN-LAST:event_btnarbolActionPerformed
 
     /**
      * @param args the command line arguments
@@ -109,6 +120,6 @@ PanelArbol panelnuevo;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private Vista.PanelArbol panelArbol1;
+    private javax.swing.JButton btnarbol;
     // End of variables declaration//GEN-END:variables
 }
