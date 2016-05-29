@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.Stack;
 import javax.swing.JPanel;
 import Vista.*;
+import Modelo.*;
 
 /**
  * Creado por hadexexplade el 01 de febrero del 2016
@@ -33,19 +34,8 @@ public class Escena extends JPanel {
         
     }
 
-    public ArbolGeneral<String> Escena() {
+    public ArbolGeneral<String> Escena(LinkedList<Nodo> nodos) {
         this.arbolGeneral = new ArbolGeneral<String>();
-        LinkedList<Nodo> nodos = new LinkedList<>();
-        nodos.add(new Nodo("0", "1", "Ambrosio"));
-        nodos.add(new Nodo("1", "2", "D"));
-        nodos.add(new Nodo("1", "3", "C"));
-        nodos.add(new Nodo("1", "4", "C"));
-        nodos.add(new Nodo("3", "5", "C"));
-        nodos.add(new Nodo("5", "6", "C"));
-        nodos.add(new Nodo("4", "7", "C"));
-        nodos.add(new Nodo("1", "8", "C"));
-        nodos.add(new Nodo("8", "9", "C"));
-        
         return arbolGeneral=generarArbol(nodos);
 //        this.arbolGeneral = new ArbolGeneral<String>();
 //        Elemento<String> elemento = arbolGeneral.insertarRaiz(nodos.get(0).getDato());

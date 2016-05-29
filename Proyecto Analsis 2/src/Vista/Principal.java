@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Vista;
 
 import App5.Escena;
+import Modelo.QuickSort;
 import java.awt.Color;
 import javax.swing.JFrame;
 
@@ -15,21 +15,24 @@ import javax.swing.JFrame;
  * @author Andres
  */
 public class Principal extends javax.swing.JFrame {
-Escena e = new Escena();
-Panelprueba p;
+
+    Escena e = new Escena();
+    QuickSort q = new QuickSort();
+    int[] arreglo = {5,7,8,5,4,1,3,6,8,10,35};
+    Panelprueba p;
+
     /**
      * Creates new form Principal
      */
     public Principal() {
         initComponents();
+        p = new Panelprueba();
+        p.setVisible(true);
+        p.setBounds(this.getLocation().x + 250, this.getLocation().y, 250, 500);
+        p.setBackground(Color.red);
+        this.add(p);
         
-        //this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setBounds(0, 0, 800, 600);
-        //panelArbol1.setarbol(e.Escena());
-        //this.add(panelArbol1);
-        //this.setLocationRelativeTo(null);
-       // this.setVisible(true);
-        
         
     }
 
@@ -75,12 +78,22 @@ Panelprueba p;
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnarbolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnarbolActionPerformed
+        for (int i = 0; i < arreglo.length; i++) {
+            System.out.print(" "+arreglo[i]);
+            
+        }
+       
+        System.out.println("\n");
         
-        p = new Panelprueba(e.Escena());
-        p.setVisible(true);
-        p.setBounds(this.getLocation().x+250,this.getLocation().y,250,500);
-        p.setBackground(Color.red);
-        this.add(p);
+        q.QuickSort(arreglo);
+        
+        for (int i = 0; i < arreglo.length; i++) {
+            System.out.print(" "+arreglo[i]);
+            
+        }
+       
+        p.setarbol(e.Escena(q.generarNodos(q.getRegistroAmbientes())));
+        
         this.repaint();
     }//GEN-LAST:event_btnarbolActionPerformed
 
