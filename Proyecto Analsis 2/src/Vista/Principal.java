@@ -6,6 +6,8 @@
 package Vista;
 
 import App5.Escena;
+import Modelo.InsertSort;
+import Modelo.MetodosVarios;
 import Modelo.QuickSort;
 import java.awt.Color;
 import java.io.BufferedReader;
@@ -26,9 +28,11 @@ import javax.swing.JFrame;
  */
 public class Principal extends javax.swing.JFrame {
 
+    MetodosVarios metodos = new MetodosVarios();
     LinkedList<String> algoritmo;
     Escena e = new Escena();
     QuickSort q = new QuickSort();
+    InsertSort i = new InsertSort();
     int[] arreglo = {5, 7, 8, 5, 4, 1, 3, 6, 8, 10, 35};
     Panelprueba p;
 
@@ -125,20 +129,20 @@ public class Principal extends javax.swing.JFrame {
 
         System.out.println("\n");
 
-        q.QuickSort(arreglo);
+        i.Sort(arreglo);
 
         for (int i = 0; i < arreglo.length; i++) {
             System.out.print(" " + arreglo[i]);
 
         }
 
-        panelprueba1.setarbol(e.Escena(q.generarNodos(q.getRegistroAmbientes())));
+        panelprueba1.setarbol(e.Escena(metodos.generarNodos(i.getRegistroAmbientes())));
 
         this.repaint();
     }//GEN-LAST:event_btnarbolActionPerformed
 
     private void btncargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncargarActionPerformed
-        
+
         DefaultListModel modelo = new DefaultListModel();
         JFileChooser fc = new JFileChooser();
         int respuesta = fc.showOpenDialog(this);
@@ -151,7 +155,7 @@ public class Principal extends javax.swing.JFrame {
                 BufferedReader br = new BufferedReader(fr);
                 String linea;
                 while ((linea = br.readLine()) != null) {
-                   modelo.addElement(linea);
+                    modelo.addElement(linea);
                 }
                 listaalgoritmos.setModel(modelo);
             } catch (FileNotFoundException ex) {

@@ -1,0 +1,11 @@
+int InsertSort(array[], maxIndex)
+    if maxIndex <= 1 then
+        return maxIndex    
+    maxIndex <- InsertSort(array, maxIndex - 1)
+    int key <- array[maxIndex]
+    int i <- maxIndex - 1
+    while ((i >= 0) && (array[i] > key)) do
+        array[i + 1] <- array[i]
+        i-1
+    array[i + 1] <- key
+    return maxIndex + 1
