@@ -82,6 +82,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        listaalgoritmos.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 14)); // NOI18N
         jScrollPane1.setViewportView(listaalgoritmos);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
