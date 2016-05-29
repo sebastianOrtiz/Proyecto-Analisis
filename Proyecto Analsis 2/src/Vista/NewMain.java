@@ -6,6 +6,7 @@
 package Vista;
 
 import Modelo.*;
+import java.util.LinkedList;
 
 /**
  *
@@ -36,16 +37,19 @@ public class NewMain {
             
         }
         
-        HeapSort q = new HeapSort();
+        QuickSort q = new QuickSort();
         System.out.println("\n");
         
-        q.Sort(arreglo);
+        q.QuickSort(arreglo);
         
         for (int i = 0; i < arreglo.length; i++) {
             System.out.print(" "+arreglo[i]);
             
         }
         
+        System.out.println("\n"+q.getRegistroAmbientes().toString());
+
+        System.out.println(q.generarNodos(q.getRegistroAmbientes()));
     }
     
 
