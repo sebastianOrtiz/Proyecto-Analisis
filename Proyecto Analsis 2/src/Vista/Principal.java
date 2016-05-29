@@ -8,6 +8,16 @@ package Vista;
 import App5.Escena;
 import Modelo.QuickSort;
 import java.awt.Color;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 
 /**
@@ -16,9 +26,10 @@ import javax.swing.JFrame;
  */
 public class Principal extends javax.swing.JFrame {
 
+    LinkedList<String> algoritmo;
     Escena e = new Escena();
     QuickSort q = new QuickSort();
-    int[] arreglo = {5,7,8,5,4,1,3,6,8,10,35};
+    int[] arreglo = {5, 7, 8, 5, 4, 1, 3, 6, 8, 10, 35};
     Panelprueba p;
 
     /**
@@ -26,10 +37,7 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
-        
-        
-        
-        
+
     }
 
     /**
@@ -43,6 +51,9 @@ public class Principal extends javax.swing.JFrame {
 
         btnarbol = new javax.swing.JButton();
         panelprueba1 = new Vista.Panelprueba();
+        btncargar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        listaalgoritmos = new javax.swing.JList();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -64,22 +75,41 @@ public class Principal extends javax.swing.JFrame {
             .addGap(0, 258, Short.MAX_VALUE)
         );
 
+        btncargar.setText("Cargar entrada de datos");
+        btncargar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btncargarActionPerformed(evt);
+            }
+        });
+
+        jScrollPane1.setViewportView(listaalgoritmos);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(panelprueba1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(855, Short.MAX_VALUE)
+                .addGap(188, 188, 188)
+                .addComponent(btncargar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 516, Short.MAX_VALUE)
                 .addComponent(btnarbol)
                 .addGap(592, 592, 592))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(panelprueba1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 511, Short.MAX_VALUE)
-                .addComponent(btnarbol)
+                .addGap(43, 43, 43)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnarbol)
+                    .addComponent(btncargar))
                 .addGap(46, 46, 46))
         );
 
@@ -88,23 +118,50 @@ public class Principal extends javax.swing.JFrame {
 
     private void btnarbolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnarbolActionPerformed
         for (int i = 0; i < arreglo.length; i++) {
-            System.out.print(" "+arreglo[i]);
-            
+            System.out.print(" " + arreglo[i]);
+
         }
-       
+
         System.out.println("\n");
-        
+
         q.QuickSort(arreglo);
-        
+
         for (int i = 0; i < arreglo.length; i++) {
-            System.out.print(" "+arreglo[i]);
-            
+            System.out.print(" " + arreglo[i]);
+
         }
-       
+
         panelprueba1.setarbol(e.Escena(q.generarNodos(q.getRegistroAmbientes())));
-        
+
         this.repaint();
     }//GEN-LAST:event_btnarbolActionPerformed
+
+    private void btncargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncargarActionPerformed
+        
+        DefaultListModel modelo = new DefaultListModel();
+        JFileChooser fc = new JFileChooser();
+        int respuesta = fc.showOpenDialog(this);
+
+        if (respuesta == JFileChooser.APPROVE_OPTION) {
+            File a = fc.getSelectedFile();
+            FileReader fr;
+            try {
+                fr = new FileReader(a);
+                BufferedReader br = new BufferedReader(fr);
+                String linea;
+                while ((linea = br.readLine()) != null) {
+                   modelo.addElement(linea);
+                }
+                listaalgoritmos.setModel(modelo);
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+
+    }//GEN-LAST:event_btncargarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -143,6 +200,9 @@ public class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnarbol;
+    private javax.swing.JButton btncargar;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JList listaalgoritmos;
     private Vista.Panelprueba panelprueba1;
     // End of variables declaration//GEN-END:variables
 }
