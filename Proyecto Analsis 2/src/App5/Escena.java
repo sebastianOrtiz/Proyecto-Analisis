@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.util.LinkedList;
 import java.util.Stack;
 import javax.swing.JPanel;
+import Vista.*;
 
 /**
  * Creado por hadexexplade el 01 de febrero del 2016
@@ -11,9 +12,9 @@ import javax.swing.JPanel;
 public class Escena extends JPanel {
 
     private ArbolGeneral<String> arbolGeneral;
-    private PanelArbol<String> vista;
+    
 
-    public void generarArbol(LinkedList<Nodo> nodos) {
+    public ArbolGeneral<String> generarArbol(LinkedList<Nodo> nodos) {
         this.arbolGeneral = new ArbolGeneral<String>();
 
         Stack<Elemento<String>> pila = new Stack<>();
@@ -28,12 +29,12 @@ public class Escena extends JPanel {
             }
         }
         
-        this.vista = new PanelArbol<String>(arbolGeneral);
-        this.setLayout(new BorderLayout());
-        add(vista, BorderLayout.CENTER);
+        return arbolGeneral;
+        
     }
 
-    public Escena() {
+    public ArbolGeneral<String> Escena() {
+        this.arbolGeneral = new ArbolGeneral<String>();
         LinkedList<Nodo> nodos = new LinkedList<>();
         nodos.add(new Nodo("0", "1", "Ambrosio"));
         nodos.add(new Nodo("1", "2", "D"));
@@ -45,7 +46,7 @@ public class Escena extends JPanel {
         nodos.add(new Nodo("1", "8", "C"));
         nodos.add(new Nodo("8", "9", "C"));
         
-        generarArbol(nodos);
+        return arbolGeneral=generarArbol(nodos);
 //        this.arbolGeneral = new ArbolGeneral<String>();
 //        Elemento<String> elemento = arbolGeneral.insertarRaiz(nodos.get(0).getDato());
 //        arbolGeneral.insertarHijo(elemento, nodos.get(1).getDato());
