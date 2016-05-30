@@ -8,6 +8,7 @@ package Vista;
 import App5.ArbolGeneral;
 import App5.Elemento;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.util.ArrayList;
@@ -77,6 +78,8 @@ public class Panelprueba extends javax.swing.JPanel {
         int yy2 = (int) (y2 + radio * (y1 - y2) / d);
 
         g.drawLine(xx1, yy1, xx2, yy2);
+        this.setPreferredSize(new Dimension(2000, 2000));
+        this.revalidate();
 
     }
 

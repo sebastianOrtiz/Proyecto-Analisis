@@ -84,7 +84,6 @@ public class Principal extends javax.swing.JFrame {
     private void initComponents() {
 
         btnarbol = new javax.swing.JButton();
-        panelprueba1 = new Vista.Panelprueba();
         btncargar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         listaalgoritmos = new javax.swing.JList();
@@ -95,6 +94,8 @@ public class Principal extends javax.swing.JFrame {
         listVariables = new javax.swing.JList();
         txtEntradaDAtos = new javax.swing.JTextField();
         btnEntradaDatos = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        panelprueba1 = new Vista.Panelprueba();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -104,19 +105,6 @@ public class Principal extends javax.swing.JFrame {
                 btnarbolActionPerformed(evt);
             }
         });
-
-        panelprueba1.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout panelprueba1Layout = new javax.swing.GroupLayout(panelprueba1);
-        panelprueba1.setLayout(panelprueba1Layout);
-        panelprueba1Layout.setHorizontalGroup(
-            panelprueba1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        panelprueba1Layout.setVerticalGroup(
-            panelprueba1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 258, Short.MAX_VALUE)
-        );
 
         btncargar.setText("Cargar algoritmo");
         btncargar.addActionListener(new java.awt.event.ActionListener() {
@@ -171,48 +159,65 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        panelprueba1.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout panelprueba1Layout = new javax.swing.GroupLayout(panelprueba1);
+        panelprueba1.setLayout(panelprueba1Layout);
+        panelprueba1Layout.setHorizontalGroup(
+            panelprueba1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1815, Short.MAX_VALUE)
+        );
+        panelprueba1Layout.setVerticalGroup(
+            panelprueba1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 335, Short.MAX_VALUE)
+        );
+
+        jScrollPane3.setViewportView(panelprueba1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelprueba1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(188, 188, 188)
                 .addComponent(btncargar)
                 .addGap(104, 104, 104)
                 .addComponent(btnEjecutarAlg)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 155, Short.MAX_VALUE)
                 .addComponent(btnarbol)
                 .addGap(592, 592, 592))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(364, 364, 364)
+                        .addComponent(txtEntradaDAtos, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnEntradaDatos)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(scrollTableExcecution, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(364, 364, 364)
-                        .addComponent(txtEntradaDAtos, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnEntradaDatos)))
-                .addContainerGap(141, Short.MAX_VALUE))
+                        .addComponent(jScrollPane2)))
+                .addContainerGap())
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(panelprueba1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(4, 4, 4)
+                .addGap(34, 34, 34)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtEntradaDAtos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEntradaDatos))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE)
-                    .addComponent(scrollTableExcecution)
-                    .addComponent(jScrollPane2))
+                    .addComponent(jScrollPane2)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 328, Short.MAX_VALUE)
+                    .addComponent(scrollTableExcecution, javax.swing.GroupLayout.DEFAULT_SIZE, 328, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnarbol)
@@ -346,6 +351,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton btncargar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JList listVariables;
     private javax.swing.JList listaalgoritmos;
     private Vista.Panelprueba panelprueba1;
