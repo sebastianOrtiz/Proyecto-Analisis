@@ -15,33 +15,63 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Andres
  */
 public class Principal extends javax.swing.JFrame {
-
+    
     MetodosVarios metodos = new MetodosVarios();
     LinkedList<String> algoritmo;
     Escena e = new Escena();
     QuickSort q = new QuickSort();
-    InsertSort i = new InsertSort();
+    InsertSort insertSort = new InsertSort();
     int[] arreglo = {5, 7, 8, 5, 4, 1, 3, 6, 8, 10, 35};
     Panelprueba p;
+    int lineaActual = -1;
+    int indexEjecucion = 0;
+    DefaultTableModel modelTableExcecution;
+    DefaultListModel<String> modelListVariables;
 
     /**
      * Creates new form Principal
      */
     public Principal() {
         initComponents();
+        inicializarTableModel();
+        inicializarListVariableModel();
+        
+    }
+    
+    private LinkedList<String> listarVariablesRegistro(HashMap<String, String> variables) {
+        LinkedList<String> vars = new LinkedList<>();
+        for (String llave : variables.keySet()) {
+            vars.add(llave + " = " + variables.get(llave));
+        }
+        return vars;
+    }
+    
+    private void inicializarListVariableModel() {
+        this.modelListVariables = new DefaultListModel<>();
+        this.listVariables.setModel(modelListVariables);
+    }
 
+    private void inicializarTableModel() {
+        modelTableExcecution = new DefaultTableModel();
+        modelTableExcecution.addColumn("Lineas ejecutadas");
+        modelTableExcecution.addColumn("Identificador ambiente");
+        modelTableExcecution.addColumn("Algoritmo");
+        this.tableEjecucion.setModel(modelTableExcecution);
+        
     }
 
     /**
@@ -58,6 +88,13 @@ public class Principal extends javax.swing.JFrame {
         btncargar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         listaalgoritmos = new javax.swing.JList();
+        btnEjecutarAlg = new javax.swing.JButton();
+        scrollTableExcecution = new javax.swing.JScrollPane();
+        tableEjecucion = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        listVariables = new javax.swing.JList();
+        txtEntradaDAtos = new javax.swing.JTextField();
+        btnEntradaDatos = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -67,6 +104,8 @@ public class Principal extends javax.swing.JFrame {
                 btnarbolActionPerformed(evt);
             }
         });
+
+        panelprueba1.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout panelprueba1Layout = new javax.swing.GroupLayout(panelprueba1);
         panelprueba1.setLayout(panelprueba1Layout);
@@ -79,7 +118,7 @@ public class Principal extends javax.swing.JFrame {
             .addGap(0, 258, Short.MAX_VALUE)
         );
 
-        btncargar.setText("Cargar entrada de datos");
+        btncargar.setText("Cargar algoritmo");
         btncargar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btncargarActionPerformed(evt);
@@ -89,6 +128,49 @@ public class Principal extends javax.swing.JFrame {
         listaalgoritmos.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 14)); // NOI18N
         jScrollPane1.setViewportView(listaalgoritmos);
 
+        btnEjecutarAlg.setText("Siguiente linea");
+        btnEjecutarAlg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEjecutarAlgActionPerformed(evt);
+            }
+        });
+
+        tableEjecucion.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "lineas ejecutadas", "id ambiente", "algoritmo"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tableEjecucion.getTableHeader().setReorderingAllowed(false);
+        scrollTableExcecution.setViewportView(tableEjecucion);
+
+        listVariables.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane2.setViewportView(listVariables);
+
+        btnEntradaDatos.setText("Procesar entrada de datos");
+        btnEntradaDatos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEntradaDatosActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -97,24 +179,45 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(188, 188, 188)
                 .addComponent(btncargar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 516, Short.MAX_VALUE)
+                .addGap(104, 104, 104)
+                .addComponent(btnEjecutarAlg)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnarbol)
                 .addGap(592, 592, 592))
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(scrollTableExcecution, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(364, 364, 364)
+                        .addComponent(txtEntradaDAtos, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnEntradaDatos)))
+                .addContainerGap(141, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(panelprueba1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
+                .addGap(4, 4, 4)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtEntradaDAtos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEntradaDatos))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE)
+                    .addComponent(scrollTableExcecution)
+                    .addComponent(jScrollPane2))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnarbol)
-                    .addComponent(btncargar))
+                    .addComponent(btncargar)
+                    .addComponent(btnEjecutarAlg))
                 .addGap(46, 46, 46))
         );
 
@@ -122,31 +225,29 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnarbolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnarbolActionPerformed
-        for (int i = 0; i < arreglo.length; i++) {
-            System.out.print(" " + arreglo[i]);
+//        for (int i = 0; i < arreglo.length; i++) {
+//            System.out.print(" " + arreglo[i]);
+//
+//        }
+//
+//        System.out.println("\n");
 
-        }
-
-        System.out.println("\n");
-
-        i.Sort(arreglo);
-
-        for (int i = 0; i < arreglo.length; i++) {
-            System.out.print(" " + arreglo[i]);
-
-        }
-
-        panelprueba1.setarbol(e.Escena(metodos.generarNodos(i.getRegistroAmbientes())));
-
+//        i.Sort(arreglo);
+//        for (int i = 0; i < arreglo.length; i++) {
+//            System.out.print(" " + arreglo[i]);
+//
+//        }
+        panelprueba1.setarbol(e.Escena(metodos.generarNodos(q.getRegistroAmbientes())));
+        
         this.repaint();
     }//GEN-LAST:event_btnarbolActionPerformed
 
     private void btncargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncargarActionPerformed
-
+        
         DefaultListModel modelo = new DefaultListModel();
         JFileChooser fc = new JFileChooser();
         int respuesta = fc.showOpenDialog(this);
-
+        
         if (respuesta == JFileChooser.APPROVE_OPTION) {
             File a = fc.getSelectedFile();
             FileReader fr;
@@ -163,10 +264,45 @@ public class Principal extends javax.swing.JFrame {
             } catch (IOException ex) {
                 Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
             }
-
         }
 
     }//GEN-LAST:event_btncargarActionPerformed
+
+    private void btnEjecutarAlgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEjecutarAlgActionPerformed
+        if (indexEjecucion == 0) {
+            panelprueba1.setarbol(e.Escena(metodos.generarNodos(q.getRegistroAmbientes())));
+        }
+        if (indexEjecucion < q.getRegistroAmbientes().size()) {
+            lineaActual = Integer.parseInt(q.getRegistroAmbientes().get(indexEjecucion).get(0).get("lineaSiguiente"));
+            modelTableExcecution.insertRow(0, new Object[]{indexEjecucion, q.getRegistroAmbientes().get(indexEjecucion).get(0).get("idMio"), q.getRegistroAmbientes().get(indexEjecucion).get(0).get("nombre")});
+            LinkedList<String> variables = this.listarVariablesRegistro(q.getRegistroAmbientes().get(indexEjecucion).get(1));
+            panelprueba1.setAmbiente(q.getRegistroAmbientes().get(indexEjecucion).get(0).get("idMio"));
+            panelprueba1.repaint();
+            modelListVariables.removeAllElements();
+            for (String variable : variables) {
+                modelListVariables.addElement(variable);
+            }
+            this.tableEjecucion.setRowSelectionInterval(0, 0);
+            
+            indexEjecucion++;
+            this.listaalgoritmos.setSelectedIndex(lineaActual);
+            
+        }
+
+    }//GEN-LAST:event_btnEjecutarAlgActionPerformed
+
+    private void btnEntradaDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntradaDatosActionPerformed
+        if (!txtEntradaDAtos.getText().equalsIgnoreCase("")) {
+            String[] stringArray = this.txtEntradaDAtos.getText().split(",");
+            arreglo = new int[stringArray.length];
+            for (int i = 0; i < stringArray.length; i++) {
+                arreglo[i] = Integer.parseInt(stringArray[i]);
+            }
+            q.QuickSort(arreglo);
+            lineaActual = 0;
+            this.listaalgoritmos.setSelectedIndex(lineaActual);
+        }
+    }//GEN-LAST:event_btnEntradaDatosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -204,10 +340,17 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnEjecutarAlg;
+    private javax.swing.JButton btnEntradaDatos;
     private javax.swing.JButton btnarbol;
     private javax.swing.JButton btncargar;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JList listVariables;
     private javax.swing.JList listaalgoritmos;
     private Vista.Panelprueba panelprueba1;
+    private javax.swing.JScrollPane scrollTableExcecution;
+    private javax.swing.JTable tableEjecucion;
+    private javax.swing.JTextField txtEntradaDAtos;
     // End of variables declaration//GEN-END:variables
 }

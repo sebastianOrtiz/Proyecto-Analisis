@@ -7,6 +7,7 @@ package Vista;
 
 import App5.ArbolGeneral;
 import App5.Elemento;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ import java.util.HashMap;
  * @author Andres
  */
 public class Panelprueba extends javax.swing.JPanel {
-
+    private String ambiente;
     public Panelprueba() {
         initComponents();
         this.coordenadas = new HashMap<Elemento<String>, Point>();
@@ -46,8 +47,18 @@ public class Panelprueba extends javax.swing.JPanel {
     }
 
     private void dibujar(Graphics g, Elemento<String> raiz, int x, int y, int espacioH) {
-        g.drawOval(x - radio, y - radio, 2 * radio, 2 * radio);
-        g.drawString(raiz.getElemento() + "", x - 4, y + 4);
+        if(ambiente!= null && ambiente.equalsIgnoreCase(raiz.getElemento())){
+            g.setColor(Color.black);
+            g.fillOval(x - radio, y - radio, 2 * radio, 2 * radio);
+            g.setColor(Color.white);
+            g.drawString(raiz.getElemento() + "", x - 4, y + 4);
+        }else{
+            g.setColor(Color.black);
+            g.drawOval(x - radio, y - radio, 2 * radio, 2 * radio);
+            g.drawString(raiz.getElemento() + "", x - 4, y + 4);
+        }
+        g.setColor(Color.black);
+        
         ArrayList<Elemento<String>> hijos = arbolGeneral.obtenerHijos(raiz);
         coordenadas.put(raiz, new Point(x, y));
         for (Elemento<String> hijo : hijos) {
@@ -90,4 +101,11 @@ public class Panelprueba extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
+
+    /**
+     * @param ambiente the ambiente to set
+     */
+    public void setAmbiente(String ambiente) {
+        this.ambiente = ambiente;
+    }
 }
