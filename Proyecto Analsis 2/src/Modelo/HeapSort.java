@@ -31,7 +31,10 @@ public class HeapSort {
     private void Sort(int[] array, int padre) {//0
 
         int idAmbiente = this.ambientes;
-
+        HashMap<String, String> variables = new HashMap<>();
+        variables.put("array", this.metodos.arrayToString(array));
+        this.getRegistroAmbientes().add(this.metodos.generarEstado("QuickSort", padre, idAmbiente, 0, 1, variables));
+        
         final int N = array.length;//1
         for (int nodo = N / 2; nodo >= 0; nodo--) {//2
             hacerMonticulo(array, nodo, N - 1, idAmbiente);//3
@@ -68,18 +71,18 @@ public class HeapSort {
         if (der > fin) {//15
             may = izq;//16
         } else {//17
-            if (array[izq] > array[der]) {
-                may = izq;
-            } else {
-                may = der;
+            if (array[izq] > array[der]) {//18
+                may = izq;//19
+            } else {//20
+                may = der;//21
             }
 
         }
-        if (array[nodo] < array[may]) {//19
-            int tmp = array[nodo];//20
-            array[nodo] = array[may];//21
-            array[may] = tmp;//22
-            hacerMonticulo(array, may, fin, idAmbiente);//23
+        if (array[nodo] < array[may]) {//22
+            int tmp = array[nodo];//23
+            array[nodo] = array[may];//24
+            array[may] = tmp;//25
+            hacerMonticulo(array, may, fin, idAmbiente);//26
         }
     }
 
@@ -102,4 +105,11 @@ public class HeapSort {
 //            hacerMonticulo(v, may, fin);
 //        }
 //    }
+
+    /**
+     * @return the registroAmbientes
+     */
+    public LinkedList<LinkedList<HashMap<String, String>>> getRegistroAmbientes() {
+        return registroAmbientes;
+    }
 }

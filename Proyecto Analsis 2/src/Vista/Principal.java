@@ -380,7 +380,8 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnInserSortActionPerformed
 
     private void btnHeapSortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHeapSortActionPerformed
-        // TODO add your handling code here:
+        seleccionarAlgoritmo("Algoritmos/HeapSort");
+        this.algoritmo = 3;
     }//GEN-LAST:event_btnHeapSortActionPerformed
 
     private void seleccionarAlgoritmo(String url) {

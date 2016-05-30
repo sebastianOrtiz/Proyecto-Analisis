@@ -84,7 +84,7 @@ this.metodos = new MetodosVarios();
             variables.put("array", this.metodos.arrayToString(array));
             variables.put("p", p + "");
             variables.put("r", r + "");
-            this.getRegistroAmbientes().add(this.metodos.generarEstado("QuickSort", padre, idAmbiente, 1, 6, variables));
+            this.getRegistroAmbientes().add(this.metodos.generarEstado("QuickSort", padre, idAmbiente, 1, 5, variables));
 
             this.ambientes++;
             int q = Partition(array, p, r, idAmbiente);
@@ -137,7 +137,7 @@ this.metodos = new MetodosVarios();
         variables.put("array", this.metodos.arrayToString(array));
         variables.put("p", p + "");
         variables.put("r", r + "");
-        this.getRegistroAmbientes().add(this.metodos.generarEstado("Partition", padre, idAmbiente, 6, 7, variables));
+        this.getRegistroAmbientes().add(this.metodos.generarEstado("Partition", padre, idAmbiente, 5, 6, variables));
 
         int pivot = array[p];//7
 
@@ -146,7 +146,7 @@ this.metodos = new MetodosVarios();
         variables.put("p", p + "");
         variables.put("r", r + "");
         variables.put("pivot", pivot + "");
-        this.getRegistroAmbientes().add(this.metodos.generarEstado("Partition", padre, idAmbiente, 7, 8, variables));
+        this.getRegistroAmbientes().add(this.metodos.generarEstado("Partition", padre, idAmbiente, 6, 7, variables));
 
         int i = p;//8
 
@@ -156,7 +156,7 @@ this.metodos = new MetodosVarios();
         variables.put("r", r + "");
         variables.put("pivot", pivot + "");
         variables.put("i", i + "");
-        this.getRegistroAmbientes().add(this.metodos.generarEstado("Partition", padre, idAmbiente, 8, 9, variables));
+        this.getRegistroAmbientes().add(this.metodos.generarEstado("Partition", padre, idAmbiente, 7, 8, variables));
 
         int j = r;//9
 
@@ -167,7 +167,7 @@ this.metodos = new MetodosVarios();
         variables.put("pivot", pivot + "");
         variables.put("i", i + "");
         variables.put("j", j + "");
-        this.getRegistroAmbientes().add(this.metodos.generarEstado("Partition", padre, idAmbiente, 9, 10, variables));
+        this.getRegistroAmbientes().add(this.metodos.generarEstado("Partition", padre, idAmbiente, 8, 9, variables));
 
         while (i < j) {//10
 
@@ -178,7 +178,7 @@ this.metodos = new MetodosVarios();
             variables.put("pivot", pivot + "");
             variables.put("i", i + "");
             variables.put("j", j + "");
-            this.getRegistroAmbientes().add(this.metodos.generarEstado("Partition", padre, idAmbiente, 10, 11, variables));
+            this.getRegistroAmbientes().add(this.metodos.generarEstado("Partition", padre, idAmbiente, 9, 10, variables));
 
             while (array[i] <= pivot && i < r) {//11
 
@@ -189,7 +189,7 @@ this.metodos = new MetodosVarios();
                 variables.put("pivot", pivot + "");
                 variables.put("i", i + "");
                 variables.put("j", j + "");
-                this.getRegistroAmbientes().add(this.metodos.generarEstado("Partition", padre, idAmbiente, 11, 12, variables));
+                this.getRegistroAmbientes().add(this.metodos.generarEstado("Partition", padre, idAmbiente, 10, 11, variables));
 
                 i++;//12
 
@@ -201,7 +201,7 @@ this.metodos = new MetodosVarios();
                     variables.put("pivot", pivot + "");
                     variables.put("i", i + "");
                     variables.put("j", j + "");
-                    this.getRegistroAmbientes().add(this.metodos.generarEstado("Partition", padre, idAmbiente, 12, 11, variables));
+                    this.getRegistroAmbientes().add(this.metodos.generarEstado("Partition", padre, idAmbiente, 11, 10, variables));
                 } else {
                     variables = new HashMap<>();
                     variables.put("array", this.metodos.arrayToString(array));
@@ -210,7 +210,7 @@ this.metodos = new MetodosVarios();
                     variables.put("pivot", pivot + "");
                     variables.put("i", i + "");
                     variables.put("j", j + "");
-                    this.getRegistroAmbientes().add(this.metodos.generarEstado("Partition", padre, idAmbiente, 12, 13, variables));
+                    this.getRegistroAmbientes().add(this.metodos.generarEstado("Partition", padre, idAmbiente, 11, 12, variables));
                 }
 
             }
@@ -223,7 +223,7 @@ this.metodos = new MetodosVarios();
                 variables.put("pivot", pivot + "");
                 variables.put("i", i + "");
                 variables.put("j", j + "");
-                this.getRegistroAmbientes().add(this.metodos.generarEstado("Partition", padre, idAmbiente, 13, 14, variables));
+                this.getRegistroAmbientes().add(this.metodos.generarEstado("Partition", padre, idAmbiente, 12, 13, variables));
 
                 j--;//14
 
@@ -235,7 +235,7 @@ this.metodos = new MetodosVarios();
                     variables.put("pivot", pivot + "");
                     variables.put("i", i + "");
                     variables.put("j", j + "");
-                    this.getRegistroAmbientes().add(this.metodos.generarEstado("Partition", padre, idAmbiente, 14, 13, variables));
+                    this.getRegistroAmbientes().add(this.metodos.generarEstado("Partition", padre, idAmbiente, 13, 12, variables));
                 } else {
                     variables = new HashMap<>();
                     variables.put("array", this.metodos.arrayToString(array));
@@ -244,7 +244,7 @@ this.metodos = new MetodosVarios();
                     variables.put("pivot", pivot + "");
                     variables.put("i", i + "");
                     variables.put("j", j + "");
-                    this.getRegistroAmbientes().add(this.metodos.generarEstado("Partition", padre, idAmbiente, 14, 15, variables));
+                    this.getRegistroAmbientes().add(this.metodos.generarEstado("Partition", padre, idAmbiente, 13, 14, variables));
                 }
             }
             if (i < j) {//15
@@ -256,7 +256,7 @@ this.metodos = new MetodosVarios();
                 variables.put("pivot", pivot + "");
                 variables.put("i", i + "");
                 variables.put("j", j + "");
-                this.getRegistroAmbientes().add(this.metodos.generarEstado("Partition", padre, idAmbiente, 15, 16, variables));
+                this.getRegistroAmbientes().add(this.metodos.generarEstado("Partition", padre, idAmbiente, 14, 15, variables));
 
                 int aux = array[i];//16
 
@@ -268,7 +268,7 @@ this.metodos = new MetodosVarios();
                 variables.put("i", i + "");
                 variables.put("j", j + "");
                 variables.put("aux", aux + "");
-                this.getRegistroAmbientes().add(this.metodos.generarEstado("Partition", padre, idAmbiente, 16, 17, variables));
+                this.getRegistroAmbientes().add(this.metodos.generarEstado("Partition", padre, idAmbiente, 15, 16, variables));
 
                 array[i] = array[j];//17
 
@@ -280,7 +280,7 @@ this.metodos = new MetodosVarios();
                 variables.put("i", i + "");
                 variables.put("j", j + "");
                 variables.put("aux", aux + "");
-                this.getRegistroAmbientes().add(this.metodos.generarEstado("Partition", padre, idAmbiente, 17, 18, variables));
+                this.getRegistroAmbientes().add(this.metodos.generarEstado("Partition", padre, idAmbiente, 16, 17, variables));
 
                 array[j] = aux;//18
 
@@ -293,7 +293,7 @@ this.metodos = new MetodosVarios();
                     variables.put("i", i + "");
                     variables.put("j", j + "");
                     variables.put("aux", aux + "");
-                    this.getRegistroAmbientes().add(this.metodos.generarEstado("Partition", padre, idAmbiente, 18, 10, variables));
+                    this.getRegistroAmbientes().add(this.metodos.generarEstado("Partition", padre, idAmbiente, 17, 9, variables));
                 } else {
                     variables = new HashMap<>();
                     variables.put("array", this.metodos.arrayToString(array));
@@ -303,7 +303,7 @@ this.metodos = new MetodosVarios();
                     variables.put("i", i + "");
                     variables.put("j", j + "");
                     variables.put("aux", aux + "");
-                    this.getRegistroAmbientes().add(this.metodos.generarEstado("Partition", padre, idAmbiente, 18, 19, variables));
+                    this.getRegistroAmbientes().add(this.metodos.generarEstado("Partition", padre, idAmbiente, 17, 18, variables));
                 }
 
             } else {
@@ -314,7 +314,7 @@ this.metodos = new MetodosVarios();
                 variables.put("pivot", pivot + "");
                 variables.put("i", i + "");
                 variables.put("j", j + "");
-                this.getRegistroAmbientes().add(this.metodos.generarEstado("Partition", padre, idAmbiente, 15, 19, variables));
+                this.getRegistroAmbientes().add(this.metodos.generarEstado("Partition", padre, idAmbiente, 14, 18, variables));
             }
         }
         int aux = array[p];//19
@@ -327,7 +327,7 @@ this.metodos = new MetodosVarios();
         variables.put("i", i + "");
         variables.put("j", j + "");
         variables.put("aux", aux + "");
-        this.getRegistroAmbientes().add(this.metodos.generarEstado("Partition", padre, idAmbiente, 19, 20, variables));
+        this.getRegistroAmbientes().add(this.metodos.generarEstado("Partition", padre, idAmbiente, 18, 19, variables));
 
         array[p] = array[j];//20
         
@@ -339,7 +339,7 @@ this.metodos = new MetodosVarios();
         variables.put("i", i + "");
         variables.put("j", j + "");
         variables.put("aux", aux + "");
-        this.getRegistroAmbientes().add(this.metodos.generarEstado("Partition", padre, idAmbiente, 20, 21, variables));
+        this.getRegistroAmbientes().add(this.metodos.generarEstado("Partition", padre, idAmbiente, 19, 20, variables));
         
         array[j] = aux;//21
         
@@ -351,7 +351,7 @@ this.metodos = new MetodosVarios();
         variables.put("i", i + "");
         variables.put("j", j + "");
         variables.put("aux", aux + "");
-        this.getRegistroAmbientes().add(this.metodos.generarEstado("Partition", padre, idAmbiente, 21, 2, variables));
+        this.getRegistroAmbientes().add(this.metodos.generarEstado("Partition", padre, idAmbiente, 20, 2, variables));
         
         return j;//22
     }

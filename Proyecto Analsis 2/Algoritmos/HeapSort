@@ -1,0 +1,28 @@
+HeapSort(array[]) 
+    N <- count(array[])
+    for(nodo <- N/2 nodo>=0 nodo--) do
+	    hacerMonticulo(v, nodo, N-1)
+    for(nodo <- N-1 nodo>=0 nodo--) do
+        tmp  <- v[0]
+        v[0] <- v[nodo]
+        v[nodo] <- tmp;
+        hacerMonticulo(v,0,nodo-1)
+hacerMonticulo(array[],nodo,fin) 
+    izq<-2*nodo+1
+    der<-izq+1
+    may
+    if(izq>fin) then
+        return
+	if(der>fin) then
+	    may <- izq
+	else
+        if (array[izq] > array[der]) then
+            may <- izq;
+        else 
+            may <- der;
+    if(v[nodo] < v[may]) then
+        tmp <- v[nodo]
+        v[nodo] <- v[may]
+        v[may]  <- tmp
+        hacerMonticulo(v, may, fin)
+        

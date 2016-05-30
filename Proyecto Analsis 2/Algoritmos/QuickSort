@@ -1,23 +1,22 @@
-Quicksort(array[],p,r)
-	if p < r
-		q <- Partition(array,l,rr)
-		Quicksort(array,p,q-1)
-		Quicksort(array,q+1,r)
-
-Partition(array[],p,r)
-	pivot <- array[p]
-	i <- p
-	j <-r
-	while i < j do
-		while (array[i] <= pivot & i < r) do
-			i <- i+1
-		while (array[j] > pivot & j >= p) do
-			j <- j-1
-		if i < j then 
-			aux <- array[p]
-			array[p] <- array[j]
-			array[j] <- aux    	 
-	aux <- array[p]
-	array[p] <- array[j]
-	rray[j] <- aux 
-	return j
+QuickSort(array[],p,r,padre) 
+    if (p < r) then
+        int q = Partition(array, p, r, 0)
+        QuickSort(array, p, q - 1, 0)
+        QuickSort(array, q + 1, r, 0)        
+Partition(array[],p,r,padre) 
+        pivot <- array[p]
+        i <- p
+        j <- r
+        while (i < j) do
+            while (array[i] <= pivot && i < r) do
+                i++
+            while (array[j] > pivot && j >= p) do
+                j--
+            if (i < j) then
+                aux <- array[i]
+                array[i] <- array[j]
+                array[j] <- aux
+        aux <- array[p]
+        array[p] <- array[j]
+        array[j] <- aux
+        return j
