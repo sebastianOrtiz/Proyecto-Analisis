@@ -47,10 +47,17 @@ public class HeapSort {
             variables = new HashMap<>();
             variables.put("array", this.metodos.arrayToString(array));
             variables.put("N", N + "");
-            this.getRegistroAmbientes().add(this.metodos.generarEstado("QuickSort", padre, idAmbiente, 2, 3, variables));
+            variables.put("nodo", nodo + "");
+            this.getRegistroAmbientes().add(this.metodos.generarEstado("QuickSort", padre, idAmbiente, 2, 9, variables));
 
             this.ambientes++;
             hacerMonticulo(array, nodo, N - 1, idAmbiente);//3
+            
+            if(nodo >= 0){
+                
+            }else{
+                
+            }
         }
         for (int nodo = N - 1; nodo >= 0; nodo--) {//4
             int tmp = array[0];//5
