@@ -6,8 +6,10 @@
 package Vista;
 
 import App5.Escena;
+import Modelo.HeapSort;
 import Modelo.InsertSort;
 import Modelo.MetodosVarios;
+import Modelo.Mmatriz;
 import Modelo.QuickSort;
 import java.awt.Color;
 import java.io.BufferedReader;
@@ -32,8 +34,10 @@ public class Principal extends javax.swing.JFrame {
 
     MetodosVarios metodos = new MetodosVarios();
     Escena e = new Escena();
-    QuickSort q = new QuickSort();
+    QuickSort quickSort = new QuickSort();
     InsertSort insertSort = new InsertSort();
+    HeapSort heapsort = new HeapSort();
+    Mmatriz multMatriz = new Mmatriz();
     int[] arreglo = {5, 7, 8, 5, 4, 1, 3, 6, 8, 10, 35};
     Panelprueba p;
     int lineaActual = -1;
@@ -293,11 +297,11 @@ public class Principal extends javax.swing.JFrame {
 
     private void btnEjecutarAlgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEjecutarAlgActionPerformed
         if (this.algoritmo == 1) {
-            if (indexEjecucion < q.getRegistroAmbientes().size()) {
-                lineaActual = Integer.parseInt(q.getRegistroAmbientes().get(indexEjecucion).get(0).get("lineaSiguiente"));
-                modelTableExcecution.insertRow(0, new Object[]{indexEjecucion, q.getRegistroAmbientes().get(indexEjecucion).get(0).get("idMio"), q.getRegistroAmbientes().get(indexEjecucion).get(0).get("nombre")});
-                LinkedList<String> variables = this.listarVariablesRegistro(q.getRegistroAmbientes().get(indexEjecucion).get(1));
-                panelprueba1.setAmbiente(q.getRegistroAmbientes().get(indexEjecucion).get(0).get("idMio"));
+            if (indexEjecucion < quickSort.getRegistroAmbientes().size()) {
+                lineaActual = Integer.parseInt(quickSort.getRegistroAmbientes().get(indexEjecucion).get(0).get("lineaSiguiente"));
+                modelTableExcecution.insertRow(0, new Object[]{indexEjecucion, quickSort.getRegistroAmbientes().get(indexEjecucion).get(0).get("idMio"), quickSort.getRegistroAmbientes().get(indexEjecucion).get(0).get("nombre")});
+                LinkedList<String> variables = this.listarVariablesRegistro(quickSort.getRegistroAmbientes().get(indexEjecucion).get(1));
+                panelprueba1.setAmbiente(quickSort.getRegistroAmbientes().get(indexEjecucion).get(0).get("idMio"));
                 panelprueba1.repaint();
                 modelListVariables.removeAllElements();
                 for (String variable : variables) {
@@ -326,6 +330,40 @@ public class Principal extends javax.swing.JFrame {
                 this.listaalgoritmos.setSelectedIndex(lineaActual);
 
             }
+        } else if (this.algoritmo == 3) {
+            if (indexEjecucion < this.heapsort.getRegistroAmbientes().size()) {
+                lineaActual = Integer.parseInt(this.heapsort.getRegistroAmbientes().get(indexEjecucion).get(0).get("lineaSiguiente"));
+                modelTableExcecution.insertRow(0, new Object[]{indexEjecucion, this.heapsort.getRegistroAmbientes().get(indexEjecucion).get(0).get("idMio"), this.heapsort.getRegistroAmbientes().get(indexEjecucion).get(0).get("nombre")});
+                LinkedList<String> variables = this.listarVariablesRegistro(this.heapsort.getRegistroAmbientes().get(indexEjecucion).get(1));
+                panelprueba1.setAmbiente(this.heapsort.getRegistroAmbientes().get(indexEjecucion).get(0).get("idMio"));
+                panelprueba1.repaint();
+                modelListVariables.removeAllElements();
+                for (String variable : variables) {
+                    modelListVariables.addElement(variable);
+                }
+                this.tableEjecucion.setRowSelectionInterval(0, 0);
+
+                indexEjecucion++;
+                this.listaalgoritmos.setSelectedIndex(lineaActual);
+
+            }
+        } else if (this.algoritmo == 4) {
+            if (indexEjecucion < this.multMatriz.getRegistroAmbientes().size()) {
+                lineaActual = Integer.parseInt(this.multMatriz.getRegistroAmbientes().get(indexEjecucion).get(0).get("lineaSiguiente"));
+                modelTableExcecution.insertRow(0, new Object[]{indexEjecucion, this.multMatriz.getRegistroAmbientes().get(indexEjecucion).get(0).get("idMio"), this.multMatriz.getRegistroAmbientes().get(indexEjecucion).get(0).get("nombre")});
+                LinkedList<String> variables = this.listarVariablesRegistro(this.multMatriz.getRegistroAmbientes().get(indexEjecucion).get(1));
+                panelprueba1.setAmbiente(this.multMatriz.getRegistroAmbientes().get(indexEjecucion).get(0).get("idMio"));
+                panelprueba1.repaint();
+                modelListVariables.removeAllElements();
+                for (String variable : variables) {
+                    modelListVariables.addElement(variable);
+                }
+                this.tableEjecucion.setRowSelectionInterval(0, 0);
+
+                indexEjecucion++;
+                this.listaalgoritmos.setSelectedIndex(lineaActual);
+
+            }
         }
 
 
@@ -339,11 +377,11 @@ public class Principal extends javax.swing.JFrame {
                 for (int i = 0; i < stringArray.length; i++) {
                     arreglo[i] = Integer.parseInt(stringArray[i]);
                 }
-                q.QuickSort(arreglo);
+                quickSort.QuickSort(arreglo);
 
                 this.listaalgoritmos.setSelectedIndex(lineaActual);
 
-                panelprueba1.setarbol(e.Escena(metodos.generarNodos(q.getRegistroAmbientes())));
+                panelprueba1.setarbol(e.Escena(metodos.generarNodos(quickSort.getRegistroAmbientes())));
                 this.listVariables.setEnabled(true);
                 this.btnEjecutarAlg.setEnabled(true);
 
@@ -358,6 +396,32 @@ public class Principal extends javax.swing.JFrame {
                 this.listaalgoritmos.setSelectedIndex(lineaActual);
 
                 panelprueba1.setarbol(e.Escena(metodos.generarNodos(this.insertSort.getRegistroAmbientes())));
+                this.listVariables.setEnabled(true);
+                this.btnEjecutarAlg.setEnabled(true);
+            } else if (this.algoritmo == 3) {
+                String[] stringArray = this.txtEntradaDAtos.getText().split(",");
+                this.arreglo = new int[stringArray.length];
+                for (int i = 0; i < stringArray.length; i++) {
+                    arreglo[i] = Integer.parseInt(stringArray[i]);
+                }
+                this.heapsort.heapSort(arreglo);
+
+                this.listaalgoritmos.setSelectedIndex(lineaActual);
+
+                panelprueba1.setarbol(e.Escena(metodos.generarNodos(this.heapsort.getRegistroAmbientes())));
+                this.listVariables.setEnabled(true);
+                this.btnEjecutarAlg.setEnabled(true);
+            } else if (this.algoritmo == 4) {
+                String[] stringArray = this.txtEntradaDAtos.getText().split(",");
+                this.arreglo = new int[stringArray.length];
+                for (int i = 0; i < stringArray.length; i++) {
+                    arreglo[i] = Integer.parseInt(stringArray[i]);
+                }
+                this.multMatriz.mult(arreglo);
+
+                this.listaalgoritmos.setSelectedIndex(lineaActual);
+
+                panelprueba1.setarbol(e.Escena(metodos.generarNodos(this.multMatriz.getRegistroAmbientes())));
                 this.listVariables.setEnabled(true);
                 this.btnEjecutarAlg.setEnabled(true);
             }

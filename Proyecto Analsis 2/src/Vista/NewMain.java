@@ -43,9 +43,9 @@ public class NewMain {
         Mmatriz m = new Mmatriz();
         System.out.println("\n");
         
-        System.out.println(m.multiplicaionmatrices(arreglo));
+        System.out.println(m.mult(arreglo));
         
-//        q.heapSort(arreglo);
+        //q.heapSort(arreglo);
 //        
 //        for (int i = 0; i < arreglo.length; i++) {
 //            System.out.print(" "+arreglo[i]);
