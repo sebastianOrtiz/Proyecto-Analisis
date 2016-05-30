@@ -16,9 +16,10 @@ public class QuickSort {
 
     int ambientes;
     private LinkedList<LinkedList<HashMap<String, String>>> registroAmbientes;
+    private MetodosVarios metodos;
 
     public QuickSort() {
-
+this.metodos = new MetodosVarios();
     }
     
     public LinkedList<Nodo> generarNodos(LinkedList<LinkedList<HashMap<String, String>>> estados){
@@ -36,32 +37,32 @@ public class QuickSort {
     }
     
     
-    private LinkedList<HashMap<String, String>> generarEstado(String nombreMetodo, int padre, int mio, int linea, int lineaSiguiente, HashMap<String, String> variables) {
-        HashMap<String, String> datos = new HashMap<>();
-        datos.put("nombre", nombreMetodo);
-        datos.put("idPadre", "" + padre);
-        datos.put("idMio", "" + mio);
-        datos.put("linea", "" + linea);
-        datos.put("lineaSiguiente", "" + lineaSiguiente);
-        LinkedList<HashMap<String, String>> estado = new LinkedList<>();
-        estado.add(datos);
-        estado.add(variables);
-        return estado;
-    }
+//    private LinkedList<HashMap<String, String>> generarEstado(String nombreMetodo, int padre, int mio, int linea, int lineaSiguiente, HashMap<String, String> variables) {
+//        HashMap<String, String> datos = new HashMap<>();
+//        datos.put("nombre", nombreMetodo);
+//        datos.put("idPadre", "" + padre);
+//        datos.put("idMio", "" + mio);
+//        datos.put("linea", "" + linea);
+//        datos.put("lineaSiguiente", "" + lineaSiguiente);
+//        LinkedList<HashMap<String, String>> estado = new LinkedList<>();
+//        estado.add(datos);
+//        estado.add(variables);
+//        return estado;
+//    }
 
-    private String arrayToString(int[] array) {
-        String salida = "[";
-        for (int i = 0; i < array.length; i++) {
-            if (i != array.length - 1) {
-                salida += array[i] + ", ";
-            } else {
-                salida += array[i] + "";
-            }
-
-        }
-        salida += "]";
-        return salida;
-    }
+//    private String arrayToString(int[] array) {
+//        String salida = "[";
+//        for (int i = 0; i < array.length; i++) {
+//            if (i != array.length - 1) {
+//                salida += array[i] + ", ";
+//            } else {
+//                salida += array[i] + "";
+//            }
+//
+//        }
+//        salida += "]";
+//        return salida;
+//    }
 
     public void QuickSort(int[] array) {
         this.ambientes = 1;
@@ -72,54 +73,54 @@ public class QuickSort {
     public void QuickSort(int[] array, int p, int r, int padre) {
         int idAmbiente = this.ambientes;
         HashMap<String, String> variables = new HashMap<>();
-        variables.put("array", arrayToString(array));
+        variables.put("array", this.metodos.arrayToString(array));
         variables.put("p", p + "");
         variables.put("r", r + "");
-        this.getRegistroAmbientes().add(generarEstado("QuickSort", padre, idAmbiente, 0, 1, variables));
+        this.getRegistroAmbientes().add(this.metodos.generarEstado("QuickSort", padre, idAmbiente, 0, 1, variables));
 
         if (p < r) {
 
             variables = new HashMap<>();
-            variables.put("array", arrayToString(array));
+            variables.put("array", this.metodos.arrayToString(array));
             variables.put("p", p + "");
             variables.put("r", r + "");
-            this.getRegistroAmbientes().add(generarEstado("QuickSort", padre, idAmbiente, 1, 6, variables));
+            this.getRegistroAmbientes().add(this.metodos.generarEstado("QuickSort", padre, idAmbiente, 1, 6, variables));
 
             this.ambientes++;
             int q = Partition(array, p, r, idAmbiente);
 
             variables = new HashMap<>();
-            variables.put("array", arrayToString(array));
+            variables.put("array", this.metodos.arrayToString(array));
             variables.put("p", p + "");
             variables.put("r", r + "");
             variables.put("q", q + "");
-            this.getRegistroAmbientes().add(generarEstado("QuickSort", padre, idAmbiente, 2, 3, variables));
+            this.getRegistroAmbientes().add(this.metodos.generarEstado("QuickSort", padre, idAmbiente, 2, 3, variables));
 
             this.ambientes++;
             QuickSort(array, p, q - 1, idAmbiente);
 
             variables = new HashMap<>();
-            variables.put("array", arrayToString(array));
+            variables.put("array", this.metodos.arrayToString(array));
             variables.put("p", p + "");
             variables.put("r", r + "");
             variables.put("q", q + "");
-            this.getRegistroAmbientes().add(generarEstado("QuickSort", padre, idAmbiente, 3, 4, variables));
+            this.getRegistroAmbientes().add(this.metodos.generarEstado("QuickSort", padre, idAmbiente, 3, 4, variables));
 
             this.ambientes++;
             QuickSort(array, q + 1, r, idAmbiente);
 
             variables = new HashMap<>();
-            variables.put("array", arrayToString(array));
+            variables.put("array", this.metodos.arrayToString(array));
             variables.put("p", p + "");
             variables.put("r", r + "");
             variables.put("q", q + "");
-            this.getRegistroAmbientes().add(generarEstado("QuickSort", padre, idAmbiente, 4, 0, variables));
+            this.getRegistroAmbientes().add(this.metodos.generarEstado("QuickSort", padre, idAmbiente, 4, 0, variables));
         }else{
             variables = new HashMap<>();
-            variables.put("array", arrayToString(array));
+            variables.put("array", this.metodos.arrayToString(array));
             variables.put("p", p + "");
             variables.put("r", r + "");
-            this.getRegistroAmbientes().add(generarEstado("QuickSort", padre, idAmbiente, 0, 0, variables));
+            this.getRegistroAmbientes().add(this.metodos.generarEstado("QuickSort", padre, idAmbiente, 0, 0, variables));
         }
     }
 
@@ -133,224 +134,224 @@ public class QuickSort {
     public int Partition(int[] array, int p, int r, int padre) {//6
         int idAmbiente = this.ambientes;
         HashMap<String, String> variables = new HashMap<>();
-        variables.put("array", arrayToString(array));
+        variables.put("array", this.metodos.arrayToString(array));
         variables.put("p", p + "");
         variables.put("r", r + "");
-        this.getRegistroAmbientes().add(generarEstado("Partition", padre, idAmbiente, 6, 7, variables));
+        this.getRegistroAmbientes().add(this.metodos.generarEstado("Partition", padre, idAmbiente, 6, 7, variables));
 
         int pivot = array[p];//7
 
         variables = new HashMap<>();
-        variables.put("array", arrayToString(array));
+        variables.put("array", this.metodos.arrayToString(array));
         variables.put("p", p + "");
         variables.put("r", r + "");
         variables.put("pivot", pivot + "");
-        this.getRegistroAmbientes().add(generarEstado("Partition", padre, idAmbiente, 7, 8, variables));
+        this.getRegistroAmbientes().add(this.metodos.generarEstado("Partition", padre, idAmbiente, 7, 8, variables));
 
         int i = p;//8
 
         variables = new HashMap<>();
-        variables.put("array", arrayToString(array));
+        variables.put("array", this.metodos.arrayToString(array));
         variables.put("p", p + "");
         variables.put("r", r + "");
         variables.put("pivot", pivot + "");
         variables.put("i", i + "");
-        this.getRegistroAmbientes().add(generarEstado("Partition", padre, idAmbiente, 8, 9, variables));
+        this.getRegistroAmbientes().add(this.metodos.generarEstado("Partition", padre, idAmbiente, 8, 9, variables));
 
         int j = r;//9
 
         variables = new HashMap<>();
-        variables.put("array", arrayToString(array));
+        variables.put("array", this.metodos.arrayToString(array));
         variables.put("p", p + "");
         variables.put("r", r + "");
         variables.put("pivot", pivot + "");
         variables.put("i", i + "");
         variables.put("j", j + "");
-        this.getRegistroAmbientes().add(generarEstado("Partition", padre, idAmbiente, 9, 10, variables));
+        this.getRegistroAmbientes().add(this.metodos.generarEstado("Partition", padre, idAmbiente, 9, 10, variables));
 
         while (i < j) {//10
 
             variables = new HashMap<>();
-            variables.put("array", arrayToString(array));
+            variables.put("array", this.metodos.arrayToString(array));
             variables.put("p", p + "");
             variables.put("r", r + "");
             variables.put("pivot", pivot + "");
             variables.put("i", i + "");
             variables.put("j", j + "");
-            this.getRegistroAmbientes().add(generarEstado("Partition", padre, idAmbiente, 10, 11, variables));
+            this.getRegistroAmbientes().add(this.metodos.generarEstado("Partition", padre, idAmbiente, 10, 11, variables));
 
             while (array[i] <= pivot && i < r) {//11
 
                 variables = new HashMap<>();
-                variables.put("array", arrayToString(array));
+                variables.put("array", this.metodos.arrayToString(array));
                 variables.put("p", p + "");
                 variables.put("r", r + "");
                 variables.put("pivot", pivot + "");
                 variables.put("i", i + "");
                 variables.put("j", j + "");
-                this.getRegistroAmbientes().add(generarEstado("Partition", padre, idAmbiente, 11, 12, variables));
+                this.getRegistroAmbientes().add(this.metodos.generarEstado("Partition", padre, idAmbiente, 11, 12, variables));
 
                 i++;//12
 
                 if (array[i] <= pivot && i < r) {
                     variables = new HashMap<>();
-                    variables.put("array", arrayToString(array));
+                    variables.put("array", this.metodos.arrayToString(array));
                     variables.put("p", p + "");
                     variables.put("r", r + "");
                     variables.put("pivot", pivot + "");
                     variables.put("i", i + "");
                     variables.put("j", j + "");
-                    this.getRegistroAmbientes().add(generarEstado("Partition", padre, idAmbiente, 12, 11, variables));
+                    this.getRegistroAmbientes().add(this.metodos.generarEstado("Partition", padre, idAmbiente, 12, 11, variables));
                 } else {
                     variables = new HashMap<>();
-                    variables.put("array", arrayToString(array));
+                    variables.put("array", this.metodos.arrayToString(array));
                     variables.put("p", p + "");
                     variables.put("r", r + "");
                     variables.put("pivot", pivot + "");
                     variables.put("i", i + "");
                     variables.put("j", j + "");
-                    this.getRegistroAmbientes().add(generarEstado("Partition", padre, idAmbiente, 12, 13, variables));
+                    this.getRegistroAmbientes().add(this.metodos.generarEstado("Partition", padre, idAmbiente, 12, 13, variables));
                 }
 
             }
             while (array[j] > pivot && j >= p) {//13
 
                 variables = new HashMap<>();
-                variables.put("array", arrayToString(array));
+                variables.put("array", this.metodos.arrayToString(array));
                 variables.put("p", p + "");
                 variables.put("r", r + "");
                 variables.put("pivot", pivot + "");
                 variables.put("i", i + "");
                 variables.put("j", j + "");
-                this.getRegistroAmbientes().add(generarEstado("Partition", padre, idAmbiente, 13, 14, variables));
+                this.getRegistroAmbientes().add(this.metodos.generarEstado("Partition", padre, idAmbiente, 13, 14, variables));
 
                 j--;//14
 
                 if (array[j] > pivot && j >= p) {
                     variables = new HashMap<>();
-                    variables.put("array", arrayToString(array));
+                    variables.put("array", this.metodos.arrayToString(array));
                     variables.put("p", p + "");
                     variables.put("r", r + "");
                     variables.put("pivot", pivot + "");
                     variables.put("i", i + "");
                     variables.put("j", j + "");
-                    this.getRegistroAmbientes().add(generarEstado("Partition", padre, idAmbiente, 14, 13, variables));
+                    this.getRegistroAmbientes().add(this.metodos.generarEstado("Partition", padre, idAmbiente, 14, 13, variables));
                 } else {
                     variables = new HashMap<>();
-                    variables.put("array", arrayToString(array));
+                    variables.put("array", this.metodos.arrayToString(array));
                     variables.put("p", p + "");
                     variables.put("r", r + "");
                     variables.put("pivot", pivot + "");
                     variables.put("i", i + "");
                     variables.put("j", j + "");
-                    this.getRegistroAmbientes().add(generarEstado("Partition", padre, idAmbiente, 14, 15, variables));
+                    this.getRegistroAmbientes().add(this.metodos.generarEstado("Partition", padre, idAmbiente, 14, 15, variables));
                 }
             }
             if (i < j) {//15
 
                 variables = new HashMap<>();
-                variables.put("array", arrayToString(array));
+                variables.put("array", this.metodos.arrayToString(array));
                 variables.put("p", p + "");
                 variables.put("r", r + "");
                 variables.put("pivot", pivot + "");
                 variables.put("i", i + "");
                 variables.put("j", j + "");
-                this.getRegistroAmbientes().add(generarEstado("Partition", padre, idAmbiente, 15, 16, variables));
+                this.getRegistroAmbientes().add(this.metodos.generarEstado("Partition", padre, idAmbiente, 15, 16, variables));
 
                 int aux = array[i];//16
 
                 variables = new HashMap<>();
-                variables.put("array", arrayToString(array));
+                variables.put("array", this.metodos.arrayToString(array));
                 variables.put("p", p + "");
                 variables.put("r", r + "");
                 variables.put("pivot", pivot + "");
                 variables.put("i", i + "");
                 variables.put("j", j + "");
                 variables.put("aux", aux + "");
-                this.getRegistroAmbientes().add(generarEstado("Partition", padre, idAmbiente, 16, 17, variables));
+                this.getRegistroAmbientes().add(this.metodos.generarEstado("Partition", padre, idAmbiente, 16, 17, variables));
 
                 array[i] = array[j];//17
 
                 variables = new HashMap<>();
-                variables.put("array", arrayToString(array));
+                variables.put("array", this.metodos.arrayToString(array));
                 variables.put("p", p + "");
                 variables.put("r", r + "");
                 variables.put("pivot", pivot + "");
                 variables.put("i", i + "");
                 variables.put("j", j + "");
                 variables.put("aux", aux + "");
-                this.getRegistroAmbientes().add(generarEstado("Partition", padre, idAmbiente, 17, 18, variables));
+                this.getRegistroAmbientes().add(this.metodos.generarEstado("Partition", padre, idAmbiente, 17, 18, variables));
 
                 array[j] = aux;//18
 
                 if (i < j) {
                     variables = new HashMap<>();
-                    variables.put("array", arrayToString(array));
+                    variables.put("array", this.metodos.arrayToString(array));
                     variables.put("p", p + "");
                     variables.put("r", r + "");
                     variables.put("pivot", pivot + "");
                     variables.put("i", i + "");
                     variables.put("j", j + "");
                     variables.put("aux", aux + "");
-                    this.getRegistroAmbientes().add(generarEstado("Partition", padre, idAmbiente, 18, 10, variables));
+                    this.getRegistroAmbientes().add(this.metodos.generarEstado("Partition", padre, idAmbiente, 18, 10, variables));
                 } else {
                     variables = new HashMap<>();
-                    variables.put("array", arrayToString(array));
+                    variables.put("array", this.metodos.arrayToString(array));
                     variables.put("p", p + "");
                     variables.put("r", r + "");
                     variables.put("pivot", pivot + "");
                     variables.put("i", i + "");
                     variables.put("j", j + "");
                     variables.put("aux", aux + "");
-                    this.getRegistroAmbientes().add(generarEstado("Partition", padre, idAmbiente, 18, 19, variables));
+                    this.getRegistroAmbientes().add(this.metodos.generarEstado("Partition", padre, idAmbiente, 18, 19, variables));
                 }
 
             } else {
                 variables = new HashMap<>();
-                variables.put("array", arrayToString(array));
+                variables.put("array", this.metodos.arrayToString(array));
                 variables.put("p", p + "");
                 variables.put("r", r + "");
                 variables.put("pivot", pivot + "");
                 variables.put("i", i + "");
                 variables.put("j", j + "");
-                this.getRegistroAmbientes().add(generarEstado("Partition", padre, idAmbiente, 15, 19, variables));
+                this.getRegistroAmbientes().add(this.metodos.generarEstado("Partition", padre, idAmbiente, 15, 19, variables));
             }
         }
         int aux = array[p];//19
 
         variables = new HashMap<>();
-        variables.put("array", arrayToString(array));
+        variables.put("array", this.metodos.arrayToString(array));
         variables.put("p", p + "");
         variables.put("r", r + "");
         variables.put("pivot", pivot + "");
         variables.put("i", i + "");
         variables.put("j", j + "");
         variables.put("aux", aux + "");
-        this.getRegistroAmbientes().add(generarEstado("Partition", padre, idAmbiente, 19, 20, variables));
+        this.getRegistroAmbientes().add(this.metodos.generarEstado("Partition", padre, idAmbiente, 19, 20, variables));
 
         array[p] = array[j];//20
         
         variables = new HashMap<>();
-        variables.put("array", arrayToString(array));
+        variables.put("array", this.metodos.arrayToString(array));
         variables.put("p", p + "");
         variables.put("r", r + "");
         variables.put("pivot", pivot + "");
         variables.put("i", i + "");
         variables.put("j", j + "");
         variables.put("aux", aux + "");
-        this.getRegistroAmbientes().add(generarEstado("Partition", padre, idAmbiente, 20, 21, variables));
+        this.getRegistroAmbientes().add(this.metodos.generarEstado("Partition", padre, idAmbiente, 20, 21, variables));
         
         array[j] = aux;//21
         
         variables = new HashMap<>();
-        variables.put("array", arrayToString(array));
+        variables.put("array", this.metodos.arrayToString(array));
         variables.put("p", p + "");
         variables.put("r", r + "");
         variables.put("pivot", pivot + "");
         variables.put("i", i + "");
         variables.put("j", j + "");
         variables.put("aux", aux + "");
-        this.getRegistroAmbientes().add(generarEstado("Partition", padre, idAmbiente, 21, 2, variables));
+        this.getRegistroAmbientes().add(this.metodos.generarEstado("Partition", padre, idAmbiente, 21, 2, variables));
         
         return j;//22
     }

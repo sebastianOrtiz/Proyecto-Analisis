@@ -29,9 +29,8 @@ import javax.swing.table.DefaultTableModel;
  * @author Andres
  */
 public class Principal extends javax.swing.JFrame {
-    
+
     MetodosVarios metodos = new MetodosVarios();
-    LinkedList<String> algoritmo;
     Escena e = new Escena();
     QuickSort q = new QuickSort();
     InsertSort insertSort = new InsertSort();
@@ -41,6 +40,7 @@ public class Principal extends javax.swing.JFrame {
     int indexEjecucion = 0;
     DefaultTableModel modelTableExcecution;
     DefaultListModel<String> modelListVariables;
+    private int algoritmo = 0;
 
     /**
      * Creates new form Principal
@@ -49,9 +49,9 @@ public class Principal extends javax.swing.JFrame {
         initComponents();
         inicializarTableModel();
         inicializarListVariableModel();
-        
+
     }
-    
+
     private LinkedList<String> listarVariablesRegistro(HashMap<String, String> variables) {
         LinkedList<String> vars = new LinkedList<>();
         for (String llave : variables.keySet()) {
@@ -59,7 +59,7 @@ public class Principal extends javax.swing.JFrame {
         }
         return vars;
     }
-    
+
     private void inicializarListVariableModel() {
         this.modelListVariables = new DefaultListModel<>();
         this.listVariables.setModel(modelListVariables);
@@ -71,7 +71,7 @@ public class Principal extends javax.swing.JFrame {
         modelTableExcecution.addColumn("Identificador ambiente");
         modelTableExcecution.addColumn("Algoritmo");
         this.tableEjecucion.setModel(modelTableExcecution);
-        
+
     }
 
     /**
@@ -83,7 +83,6 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnarbol = new javax.swing.JButton();
         btncargar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         listaalgoritmos = new javax.swing.JList();
@@ -96,17 +95,15 @@ public class Principal extends javax.swing.JFrame {
         btnEntradaDatos = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         panelprueba1 = new Vista.Panelprueba();
+        btnQuickSort = new javax.swing.JButton();
+        btnInserSort = new javax.swing.JButton();
+        btnHeapSort = new javax.swing.JButton();
+        btnMultMatrix = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        btnarbol.setText("Generar arbol");
-        btnarbol.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnarbolActionPerformed(evt);
-            }
-        });
-
         btncargar.setText("Cargar algoritmo");
+        btncargar.setEnabled(false);
         btncargar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btncargarActionPerformed(evt);
@@ -114,6 +111,7 @@ public class Principal extends javax.swing.JFrame {
         });
 
         listaalgoritmos.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 14)); // NOI18N
+        listaalgoritmos.setEnabled(false);
         jScrollPane1.setViewportView(listaalgoritmos);
 
         btnEjecutarAlg.setText("Siguiente linea");
@@ -142,6 +140,7 @@ public class Principal extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tableEjecucion.setEnabled(false);
         tableEjecucion.getTableHeader().setReorderingAllowed(false);
         scrollTableExcecution.setViewportView(tableEjecucion);
 
@@ -150,9 +149,13 @@ public class Principal extends javax.swing.JFrame {
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
+        listVariables.setEnabled(false);
         jScrollPane2.setViewportView(listVariables);
 
+        txtEntradaDAtos.setEnabled(false);
+
         btnEntradaDatos.setText("Procesar entrada de datos");
+        btnEntradaDatos.setEnabled(false);
         btnEntradaDatos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEntradaDatosActionPerformed(evt);
@@ -174,85 +177,99 @@ public class Principal extends javax.swing.JFrame {
 
         jScrollPane3.setViewportView(panelprueba1);
 
+        btnQuickSort.setText("QuickSort");
+        btnQuickSort.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQuickSortActionPerformed(evt);
+            }
+        });
+
+        btnInserSort.setText("InsertSort");
+        btnInserSort.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInserSortActionPerformed(evt);
+            }
+        });
+
+        btnHeapSort.setText("HeapSort");
+        btnHeapSort.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHeapSortActionPerformed(evt);
+            }
+        });
+
+        btnMultMatrix.setText("Multiplicacion de matrices");
+        btnMultMatrix.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMultMatrixActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(188, 188, 188)
-                .addComponent(btncargar)
-                .addGap(104, 104, 104)
-                .addComponent(btnEjecutarAlg)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 155, Short.MAX_VALUE)
-                .addComponent(btnarbol)
-                .addGap(592, 592, 592))
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(364, 364, 364)
-                        .addComponent(txtEntradaDAtos, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnEntradaDatos)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(scrollTableExcecution, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(scrollTableExcecution, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(btnQuickSort)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2)))
+                        .addComponent(btnInserSort)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnHeapSort)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnMultMatrix)
+                        .addGap(76, 76, 76)
+                        .addComponent(txtEntradaDAtos, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnEntradaDatos)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnEjecutarAlg)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btncargar))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE))
                 .addContainerGap())
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(34, 34, 34)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(4, 4, 4)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnQuickSort)
+                    .addComponent(btnInserSort)
+                    .addComponent(btnHeapSort)
+                    .addComponent(btnMultMatrix)
                     .addComponent(txtEntradaDAtos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEntradaDatos))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 328, Short.MAX_VALUE)
-                    .addComponent(scrollTableExcecution, javax.swing.GroupLayout.DEFAULT_SIZE, 328, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnarbol)
-                    .addComponent(btncargar)
-                    .addComponent(btnEjecutarAlg))
-                .addGap(46, 46, 46))
+                    .addComponent(btnEntradaDatos)
+                    .addComponent(btnEjecutarAlg)
+                    .addComponent(btncargar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(scrollTableExcecution, javax.swing.GroupLayout.DEFAULT_SIZE, 457, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane2))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnarbolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnarbolActionPerformed
-//        for (int i = 0; i < arreglo.length; i++) {
-//            System.out.print(" " + arreglo[i]);
-//
-//        }
-//
-//        System.out.println("\n");
-
-//        i.Sort(arreglo);
-//        for (int i = 0; i < arreglo.length; i++) {
-//            System.out.print(" " + arreglo[i]);
-//
-//        }
-        panelprueba1.setarbol(e.Escena(metodos.generarNodos(q.getRegistroAmbientes())));
-        
-        this.repaint();
-    }//GEN-LAST:event_btnarbolActionPerformed
-
     private void btncargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncargarActionPerformed
-        
+
         DefaultListModel modelo = new DefaultListModel();
         JFileChooser fc = new JFileChooser();
         int respuesta = fc.showOpenDialog(this);
-        
+
         if (respuesta == JFileChooser.APPROVE_OPTION) {
             File a = fc.getSelectedFile();
             FileReader fr;
@@ -274,9 +291,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btncargarActionPerformed
 
     private void btnEjecutarAlgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEjecutarAlgActionPerformed
-        if (indexEjecucion == 0) {
-            panelprueba1.setarbol(e.Escena(metodos.generarNodos(q.getRegistroAmbientes())));
-        }
+
         if (indexEjecucion < q.getRegistroAmbientes().size()) {
             lineaActual = Integer.parseInt(q.getRegistroAmbientes().get(indexEjecucion).get(0).get("lineaSiguiente"));
             modelTableExcecution.insertRow(0, new Object[]{indexEjecucion, q.getRegistroAmbientes().get(indexEjecucion).get(0).get("idMio"), q.getRegistroAmbientes().get(indexEjecucion).get(0).get("nombre")});
@@ -288,26 +303,72 @@ public class Principal extends javax.swing.JFrame {
                 modelListVariables.addElement(variable);
             }
             this.tableEjecucion.setRowSelectionInterval(0, 0);
-            
+
             indexEjecucion++;
             this.listaalgoritmos.setSelectedIndex(lineaActual);
-            
+
         }
 
     }//GEN-LAST:event_btnEjecutarAlgActionPerformed
 
     private void btnEntradaDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntradaDatosActionPerformed
         if (!txtEntradaDAtos.getText().equalsIgnoreCase("")) {
-            String[] stringArray = this.txtEntradaDAtos.getText().split(",");
-            arreglo = new int[stringArray.length];
-            for (int i = 0; i < stringArray.length; i++) {
-                arreglo[i] = Integer.parseInt(stringArray[i]);
+            if (this.algoritmo == 1) {
+                String[] stringArray = this.txtEntradaDAtos.getText().split(",");
+                this.arreglo = new int[stringArray.length];
+                for (int i = 0; i < stringArray.length; i++) {
+                    arreglo[i] = Integer.parseInt(stringArray[i]);
+                }
+                q.QuickSort(arreglo);
+                lineaActual = 0;
+                this.listaalgoritmos.setSelectedIndex(lineaActual);
+
+                panelprueba1.setarbol(e.Escena(metodos.generarNodos(q.getRegistroAmbientes())));
+                this.listVariables.setEnabled(true);
+
             }
-            q.QuickSort(arreglo);
-            lineaActual = 0;
-            this.listaalgoritmos.setSelectedIndex(lineaActual);
+
         }
     }//GEN-LAST:event_btnEntradaDatosActionPerformed
+
+    private void btnMultMatrixActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMultMatrixActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnMultMatrixActionPerformed
+
+    private void btnQuickSortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuickSortActionPerformed
+        seleccionarAlgoritmo("Algoritmos/QuickSort");
+        this.algoritmo = 1;
+    }//GEN-LAST:event_btnQuickSortActionPerformed
+
+    private void btnInserSortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInserSortActionPerformed
+        seleccionarAlgoritmo("Algoritmos/InsertSort");
+    }//GEN-LAST:event_btnInserSortActionPerformed
+
+    private void btnHeapSortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHeapSortActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnHeapSortActionPerformed
+
+    private void seleccionarAlgoritmo(String url) {
+        DefaultListModel modelo = new DefaultListModel();
+        File a = new File(url);
+        FileReader fr;
+        try {
+            fr = new FileReader(a);
+            BufferedReader br = new BufferedReader(fr);
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                modelo.addElement(linea);
+            }
+            this.listaalgoritmos.setModel(modelo);
+            this.listaalgoritmos.setEnabled(true);
+            this.txtEntradaDAtos.setEnabled(true);
+            this.btnEntradaDatos.setEnabled(true);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -347,7 +408,10 @@ public class Principal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEjecutarAlg;
     private javax.swing.JButton btnEntradaDatos;
-    private javax.swing.JButton btnarbol;
+    private javax.swing.JButton btnHeapSort;
+    private javax.swing.JButton btnInserSort;
+    private javax.swing.JButton btnMultMatrix;
+    private javax.swing.JButton btnQuickSort;
     private javax.swing.JButton btncargar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

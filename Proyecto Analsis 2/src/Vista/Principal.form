@@ -23,77 +23,74 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace min="-2" pref="188" max="-2" attributes="0"/>
-              <Component id="btncargar" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="104" max="-2" attributes="0"/>
-              <Component id="btnEjecutarAlg" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="155" max="32767" attributes="0"/>
-              <Component id="btnarbol" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="592" max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" attributes="0">
+          <Component id="jScrollPane3" alignment="0" pref="0" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="364" max="-2" attributes="0"/>
-                      <Component id="txtEntradaDAtos" min="-2" pref="349" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnEntradaDatos" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jScrollPane1" min="-2" pref="528" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="scrollTableExcecution" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                      <Component id="btnQuickSort" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane2" max="32767" attributes="0"/>
+                      <Component id="btnInserSort" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnHeapSort" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnMultMatrix" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
+                      <Component id="txtEntradaDAtos" min="-2" pref="349" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnEntradaDatos" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="btnEjecutarAlg" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="btncargar" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="jScrollPane2" pref="313" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
-          <Component id="jScrollPane3" alignment="0" pref="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
               <Component id="jScrollPane3" min="-2" pref="339" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btnQuickSort" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnInserSort" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnHeapSort" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnMultMatrix" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtEntradaDAtos" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnEntradaDatos" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane2" max="32767" attributes="0"/>
-                  <Component id="jScrollPane1" pref="328" max="32767" attributes="0"/>
-                  <Component id="scrollTableExcecution" pref="328" max="32767" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnarbol" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btncargar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnEjecutarAlg" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btncargar" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="scrollTableExcecution" pref="457" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" max="32767" attributes="0"/>
+                  <Component id="jScrollPane2" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JButton" name="btnarbol">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Generar arbol"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnarbolActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JButton" name="btncargar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Cargar algoritmo"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btncargarActionPerformed"/>
@@ -114,6 +111,7 @@
             <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
               <StringArray count="0"/>
             </Property>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
       </SubComponents>
@@ -142,6 +140,7 @@
                 <Column editable="false" title="algoritmo" type="java.lang.Object"/>
               </Table>
             </Property>
+            <Property name="enabled" type="boolean" value="false"/>
             <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
               <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
             </Property>
@@ -167,15 +166,20 @@
                 <StringItem index="4" value="Item 5"/>
               </StringArray>
             </Property>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
       </SubComponents>
     </Container>
     <Component class="javax.swing.JTextField" name="txtEntradaDAtos">
+      <Properties>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnEntradaDatos">
       <Properties>
         <Property name="text" type="java.lang.String" value="Procesar entrada de datos"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEntradaDatosActionPerformed"/>
@@ -207,5 +211,37 @@
         </Container>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JButton" name="btnQuickSort">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="QuickSort"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnQuickSortActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnInserSort">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="InsertSort"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnInserSortActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnHeapSort">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="HeapSort"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnHeapSortActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnMultMatrix">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Multiplicacion de matrices"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMultMatrixActionPerformed"/>
+      </Events>
+    </Component>
   </SubComponents>
 </Form>
