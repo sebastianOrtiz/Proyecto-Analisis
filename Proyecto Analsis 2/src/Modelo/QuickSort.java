@@ -22,19 +22,19 @@ public class QuickSort {
 this.metodos = new MetodosVarios();
     }
     
-    public LinkedList<Nodo> generarNodos(LinkedList<LinkedList<HashMap<String, String>>> estados){
-        LinkedList<Nodo> nodos = new LinkedList<>();
-        LinkedList<String> guardados = new LinkedList<>();
-        for (LinkedList<HashMap<String, String>> estado : estados) {
-           if(!guardados.contains(estado.getFirst().get("idMio"))){
-               guardados.add(estado.getFirst().get("idMio"));
-               nodos.add(new Nodo(estado.getFirst().get("idPadre"), estado.getFirst().get("idMio"), estado.getFirst().get("nombre")));
-               
-           }
-        }
-        
-        return nodos;
-    }
+//    public LinkedList<Nodo> generarNodos(LinkedList<LinkedList<HashMap<String, String>>> estados){
+//        LinkedList<Nodo> nodos = new LinkedList<>();
+//        LinkedList<String> guardados = new LinkedList<>();
+//        for (LinkedList<HashMap<String, String>> estado : estados) {
+//           if(!guardados.contains(estado.getFirst().get("idMio"))){
+//               guardados.add(estado.getFirst().get("idMio"));
+//               nodos.add(new Nodo(estado.getFirst().get("idPadre"), estado.getFirst().get("idMio"), estado.getFirst().get("nombre")));
+//               
+//           }
+//        }
+//        
+//        return nodos;
+//    }
     
     
 //    private LinkedList<HashMap<String, String>> generarEstado(String nombreMetodo, int padre, int mio, int linea, int lineaSiguiente, HashMap<String, String> variables) {

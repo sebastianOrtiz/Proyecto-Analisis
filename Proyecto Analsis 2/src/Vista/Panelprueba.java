@@ -78,7 +78,7 @@ public class Panelprueba extends javax.swing.JPanel {
         int yy2 = (int) (y2 + radio * (y1 - y2) / d);
 
         g.drawLine(xx1, yy1, xx2, yy2);
-        this.setPreferredSize(new Dimension(2000, 2000));
+        this.setPreferredSize(new Dimension(2000, 1000));
         this.revalidate();
 
     }

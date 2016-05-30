@@ -32,24 +32,25 @@ public class NewMain {
         arreglo[8]=1;
         arreglo[9]=9;
         
+        MetodosVarios metodos= new MetodosVarios();
         for (int i = 0; i < arreglo.length; i++) {
             System.out.print(" "+arreglo[i]);
             
         }
         
-        QuickSort q = new QuickSort();
+        HeapSort q = new HeapSort();
         System.out.println("\n");
         
-        q.QuickSort(arreglo);
+        q.heapSort(arreglo);
         
         for (int i = 0; i < arreglo.length; i++) {
             System.out.print(" "+arreglo[i]);
             
         }
-        
-        System.out.println("\n"+q.getRegistroAmbientes().toString());
-
-        System.out.println(q.generarNodos(q.getRegistroAmbientes()));
+//        
+//        System.out.println("\n"+q.getRegistroAmbientes().toString());
+//
+//        System.out.println(metodos.generarNodos(q.getRegistroAmbientes()));
     }
     
 
