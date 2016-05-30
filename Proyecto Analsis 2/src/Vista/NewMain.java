@@ -6,6 +6,7 @@
 package Vista;
 
 import Modelo.*;
+import java.math.MathContext;
 import java.util.LinkedList;
 
 /**
@@ -20,18 +21,18 @@ public class NewMain {
     
 
     public static void main(String[] args) {
-        int[] arreglo = new int[10];
-        arreglo[0]=10;
-        arreglo[1]=8;
-        arreglo[2]=5;
-        arreglo[3]=3;
-        arreglo[4]=14;
-        arreglo[5]=12;
-        arreglo[6]=5;
-        arreglo[7]=18;
-        arreglo[8]=1;
-        arreglo[9]=9;
-        
+        int[] arreglo = {2,3,4,2};
+//        arreglo[0]=2;
+//        arreglo[1]=3;
+//        arreglo[2]=5;
+//        arreglo[3]=3;
+//        arreglo[4]=14;
+//        arreglo[5]=12;
+//        arreglo[6]=5;
+//        arreglo[7]=18;
+//        arreglo[8]=1;
+//        arreglo[9]=9;
+//        
         MetodosVarios metodos= new MetodosVarios();
         for (int i = 0; i < arreglo.length; i++) {
             System.out.print(" "+arreglo[i]);
@@ -39,14 +40,17 @@ public class NewMain {
         }
         
         HeapSort q = new HeapSort();
+        Mmatriz m = new Mmatriz();
         System.out.println("\n");
         
-        q.heapSort(arreglo);
+        System.out.println(m.multiplicaionmatrices(arreglo));
         
-        for (int i = 0; i < arreglo.length; i++) {
-            System.out.print(" "+arreglo[i]);
-            
-        }
+//        q.heapSort(arreglo);
+//        
+//        for (int i = 0; i < arreglo.length; i++) {
+//            System.out.print(" "+arreglo[i]);
+//            
+//        }
 //        
 //        System.out.println("\n"+q.getRegistroAmbientes().toString());
 //

@@ -366,7 +366,8 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEntradaDatosActionPerformed
 
     private void btnMultMatrixActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMultMatrixActionPerformed
-        // TODO add your handling code here:
+        seleccionarAlgoritmo("Algoritmos/Multiplicaionmatrices");
+        this.algoritmo = 4;
     }//GEN-LAST:event_btnMultMatrixActionPerformed
 
     private void btnQuickSortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuickSortActionPerformed
