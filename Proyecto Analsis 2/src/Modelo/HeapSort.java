@@ -34,15 +34,30 @@ public class HeapSort {
         HashMap<String, String> variables = new HashMap<>();
         variables.put("array", this.metodos.arrayToString(array));
         this.getRegistroAmbientes().add(this.metodos.generarEstado("QuickSort", padre, idAmbiente, 0, 1, variables));
-        
+
         final int N = array.length;//1
+
+        variables = new HashMap<>();
+        variables.put("array", this.metodos.arrayToString(array));
+        variables.put("N", N + "");
+        this.getRegistroAmbientes().add(this.metodos.generarEstado("QuickSort", padre, idAmbiente, 1, 2, variables));
+
         for (int nodo = N / 2; nodo >= 0; nodo--) {//2
+
+            variables = new HashMap<>();
+            variables.put("array", this.metodos.arrayToString(array));
+            variables.put("N", N + "");
+            this.getRegistroAmbientes().add(this.metodos.generarEstado("QuickSort", padre, idAmbiente, 2, 3, variables));
+
+            this.ambientes++;
             hacerMonticulo(array, nodo, N - 1, idAmbiente);//3
         }
         for (int nodo = N - 1; nodo >= 0; nodo--) {//4
             int tmp = array[0];//5
             array[0] = array[nodo];//6
             array[nodo] = tmp;//7
+
+            this.ambientes++;
             hacerMonticulo(array, 0, nodo - 1, idAmbiente);//8
         }
     }
@@ -82,6 +97,8 @@ public class HeapSort {
             int tmp = array[nodo];//23
             array[nodo] = array[may];//24
             array[may] = tmp;//25
+
+            this.ambientes++;
             hacerMonticulo(array, may, fin, idAmbiente);//26
         }
     }
@@ -105,7 +122,6 @@ public class HeapSort {
 //            hacerMonticulo(v, may, fin);
 //        }
 //    }
-
     /**
      * @return the registroAmbientes
      */
