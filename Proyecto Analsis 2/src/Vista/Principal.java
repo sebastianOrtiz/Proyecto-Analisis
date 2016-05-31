@@ -5,14 +5,8 @@
  */
 package Vista;
 
-import App5.Escena;
-import Modelo.HeapSort;
-import Modelo.InsertSort;
-import Modelo.MetodosVarios;
-import Modelo.Mmatriz;
-import Modelo.Nodo;
-import Modelo.QuickSort;
-import java.awt.Color;
+import App5.*;
+import Modelo.*;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -303,7 +297,7 @@ public class Principal extends javax.swing.JFrame {
                 modelTableExcecution.insertRow(0, new Object[]{indexEjecucion, quickSort.getRegistroAmbientes().get(indexEjecucion).get(0).get("idMio"), quickSort.getRegistroAmbientes().get(indexEjecucion).get(0).get("nombre")});
                 LinkedList<String> variables = this.listarVariablesRegistro(quickSort.getRegistroAmbientes().get(indexEjecucion).get(1));
                 
-                //panelprueba1.setAmbiente(quickSort.getRegistroAmbientes().get(indexEjecucion).get(0).get("idMio"));
+                panelprueba1.setAmbiente(quickSort.getRegistroAmbientes().get(indexEjecucion).get(0).get("idMio"));
                 this.graficarArbol(metodos.generarNodos(quickSort.getRegistroAmbientes()), Integer.parseInt(quickSort.getRegistroAmbientes().get(indexEjecucion).get(0).get("idMio")));
                 panelprueba1.repaint();
                 
@@ -388,7 +382,7 @@ public class Principal extends javax.swing.JFrame {
 
                 this.listaalgoritmos.setSelectedIndex(lineaActual);
                 
-                //panelprueba1.setarbol(e.Escena(metodos.generarNodos(quickSort.getRegistroAmbientes())));
+                panelprueba1.setarbol(e.Escena(metodos.generarNodos(quickSort.getRegistroAmbientes())));
                 this.graficarArbol(metodos.generarNodos(quickSort.getRegistroAmbientes()), 1);
                 this.listVariables.setEnabled(true);
                 this.btnEjecutarAlg.setEnabled(true);
@@ -458,13 +452,13 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHeapSortActionPerformed
     
     private void graficarArbol(LinkedList<Nodo> nodos, int idAmbiente){
-        
+        Arbol a = new Arbol();
         for (int i = 0; i < nodos.size(); i++) {
-            
+            a.insertarNodo(Integer.parseInt(nodos.get(i).getIdPropio()), Integer.parseInt(nodos.get(i).getIdPadre()));
             //arbil.insertarhijo(Integer.parseInt(nodos.get(i).getidPropio()),Integer.parseInt(nodos.get(i).getidPadre()))
             
         }
-        //arbol.grafigararbol
+        a.graficarArbol(a);
     }
     
     private void seleccionarAlgoritmo(String url) {
