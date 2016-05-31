@@ -10,6 +10,7 @@ import Modelo.HeapSort;
 import Modelo.InsertSort;
 import Modelo.MetodosVarios;
 import Modelo.Mmatriz;
+import Modelo.Nodo;
 import Modelo.QuickSort;
 import java.awt.Color;
 import java.io.BufferedReader;
@@ -301,8 +302,11 @@ public class Principal extends javax.swing.JFrame {
                 lineaActual = Integer.parseInt(quickSort.getRegistroAmbientes().get(indexEjecucion).get(0).get("lineaSiguiente"));
                 modelTableExcecution.insertRow(0, new Object[]{indexEjecucion, quickSort.getRegistroAmbientes().get(indexEjecucion).get(0).get("idMio"), quickSort.getRegistroAmbientes().get(indexEjecucion).get(0).get("nombre")});
                 LinkedList<String> variables = this.listarVariablesRegistro(quickSort.getRegistroAmbientes().get(indexEjecucion).get(1));
-                panelprueba1.setAmbiente(quickSort.getRegistroAmbientes().get(indexEjecucion).get(0).get("idMio"));
+                
+                //panelprueba1.setAmbiente(quickSort.getRegistroAmbientes().get(indexEjecucion).get(0).get("idMio"));
+                this.graficarArbol(metodos.generarNodos(quickSort.getRegistroAmbientes()), Integer.parseInt(quickSort.getRegistroAmbientes().get(indexEjecucion).get(0).get("idMio")));
                 panelprueba1.repaint();
+                
                 modelListVariables.removeAllElements();
                 for (String variable : variables) {
                     modelListVariables.addElement(variable);
@@ -318,8 +322,11 @@ public class Principal extends javax.swing.JFrame {
                 lineaActual = Integer.parseInt(this.insertSort.getRegistroAmbientes().get(indexEjecucion).get(0).get("lineaSiguiente"));
                 modelTableExcecution.insertRow(0, new Object[]{indexEjecucion, this.insertSort.getRegistroAmbientes().get(indexEjecucion).get(0).get("idMio"), this.insertSort.getRegistroAmbientes().get(indexEjecucion).get(0).get("nombre")});
                 LinkedList<String> variables = this.listarVariablesRegistro(this.insertSort.getRegistroAmbientes().get(indexEjecucion).get(1));
+                
                 panelprueba1.setAmbiente(this.insertSort.getRegistroAmbientes().get(indexEjecucion).get(0).get("idMio"));
+                
                 panelprueba1.repaint();
+                
                 modelListVariables.removeAllElements();
                 for (String variable : variables) {
                     modelListVariables.addElement(variable);
@@ -380,8 +387,9 @@ public class Principal extends javax.swing.JFrame {
                 quickSort.QuickSort(arreglo);
 
                 this.listaalgoritmos.setSelectedIndex(lineaActual);
-
-                panelprueba1.setarbol(e.Escena(metodos.generarNodos(quickSort.getRegistroAmbientes())));
+                
+                //panelprueba1.setarbol(e.Escena(metodos.generarNodos(quickSort.getRegistroAmbientes())));
+                this.graficarArbol(metodos.generarNodos(quickSort.getRegistroAmbientes()), 1);
                 this.listVariables.setEnabled(true);
                 this.btnEjecutarAlg.setEnabled(true);
 
@@ -448,7 +456,17 @@ public class Principal extends javax.swing.JFrame {
         seleccionarAlgoritmo("Algoritmos/HeapSort");
         this.algoritmo = 3;
     }//GEN-LAST:event_btnHeapSortActionPerformed
-
+    
+    private void graficarArbol(LinkedList<Nodo> nodos, int idAmbiente){
+        
+        for (int i = 0; i < nodos.size(); i++) {
+            
+            //arbil.insertarhijo(Integer.parseInt(nodos.get(i).getidPropio()),Integer.parseInt(nodos.get(i).getidPadre()))
+            
+        }
+        //arbol.grafigararbol
+    }
+    
     private void seleccionarAlgoritmo(String url) {
         DefaultListModel modelo = new DefaultListModel();
         File a = new File(url);
