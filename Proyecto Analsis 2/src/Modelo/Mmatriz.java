@@ -21,6 +21,10 @@ public class Mmatriz {
     public Mmatriz() {
         this.metodos = new MetodosVarios();
     }
+    
+    public String determinarComplejidad() {
+        return "Θ(k^n) con 1,4 < k < 3 y n >= 2";
+    }
 
     public int mult(int[] array) {//
         this.ambientes = 0;

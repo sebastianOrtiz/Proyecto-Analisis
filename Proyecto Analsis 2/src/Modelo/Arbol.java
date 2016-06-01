@@ -26,10 +26,97 @@ public class Arbol {
         this.setRaiz(new NodoArbol(nodos.get(0).getIdPropio()));
         this.insertarHijos(raiz, nodos);
     }
+    LinkedList<Integer> ps;
+
+    public int profundidadPromedio() {
+        ps = new LinkedList<>();
+        if (!raiz.esHoja()) {
+            llenarProfundidades(raiz, 1);
+            int sum = 0;
+            for (Integer p : ps) {
+                sum += p;
+            }
+            return sum / ps.size();
+        } else {
+            return 0;
+        }
+
+    }
     
-    public void resetxMax(){
+    public LinkedList<Integer> obtenerProfundidades(){
+        ps = new LinkedList<>();
+        if(!raiz.esHoja()){
+            llenarProfundidades(raiz, 1);
+        }
+        return ps;
+    }
+    
+    public LinkedList<Integer> obtenerProfundidadesQuickSort(){
+        ps = new LinkedList<>();
+        if(!raiz.esHoja()){
+            llenarProfundidadesQuickSort(raiz, 1);
+        }
+        return ps;
+    }
+
+    private void llenarProfundidades(NodoArbol nodo, int altura) {
+        if (nodo.esHoja()) {
+            this.ps.add(altura);
+        }else{
+            for (NodoArbol nodo1 : nodo.getHijos()) {
+                llenarProfundidades(nodo1, altura+1);
+            }
+        }
+    }
+    
+    private void llenarProfundidadesQuickSort(NodoArbol nodo, int altura) {
+        if (nodo.esHoja()) {
+            this.ps.add(altura);
+        }else{
+            for (int i = 1; i < nodo.getHijos().size(); i++) {
+                llenarProfundidadesQuickSort(nodo.getHijos().get(i), altura+1);
+            }
+        }
+    }
+
+    public int profundidadMaxima(NodoArbol nodo, int altura) {
+        if (nodo.esHoja()) {
+            return altura;
+        } else {
+            int mayor = 0;
+            for (NodoArbol nodo1 : nodo.getHijos()) {
+                int temp = profundidadMaxima(nodo1, altura + 1);
+                mayor = mayor < temp ? temp : mayor;
+            }
+            return mayor;
+        }
+    }
+    
+    public int profundidadMinima(){
+        if(raiz.esHoja()){
+            return 0;
+        }else{
+            return profundidadMinima(raiz, Integer.MAX_VALUE);
+        }
+        
+    }
+    private int profundidadMinima(NodoArbol nodo, int minima) {
+        if (nodo.esHoja()) {
+            return minima;
+        } else {
+            int menor = 0;
+            for (NodoArbol nodo1 : nodo.getHijos()) {
+                int temp = profundidadMaxima(nodo1, minima + 1);
+                menor = menor > temp ? temp : menor;
+            }
+            return menor;
+        }
+    }
+
+    public void resetxMax() {
         this.xMax = 30;
     }
+
     private void insertarHijos(NodoArbol nodo, LinkedList<Nodo> nodos) {
         for (int i = 1; i < nodos.size(); i++) {
             if (nodos.get(i).getIdPadre().equalsIgnoreCase(nodo.getIdMio())) {
@@ -59,15 +146,15 @@ public class Arbol {
     public String toString() {
         return this.imprimirArbol(getRaiz()); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    public void reajustarPosiciones(int pivote){
+
+    public void reajustarPosiciones(int pivote) {
         int cantidad = pivote - raiz.getX();
         reajustar(cantidad, raiz);
     }
-    
-    private void reajustar(int cantidad, NodoArbol nodo){
-        nodo.setX(nodo.getX()+cantidad);
-        if(!nodo.esHoja()){
+
+    private void reajustar(int cantidad, NodoArbol nodo) {
+        nodo.setX(nodo.getX() + cantidad);
+        if (!nodo.esHoja()) {
             for (NodoArbol nodo1 : nodo.getHijos()) {
                 reajustar(cantidad, nodo1);
             }
@@ -75,10 +162,10 @@ public class Arbol {
     }
 
     public void darPosiciones(NodoArbol nodo, int y) {
-        if(y> getyMax()){
+        if (y > getyMax()) {
             yMax = y;
         }
-        
+
         if (nodo.esHoja()) {
             nodo.setX(this.getxMax());
             nodo.setY(y);
@@ -89,7 +176,7 @@ public class Arbol {
             }
             int maxXHijo = nodo.getHijos().getLast().getX();
             int minXHijo = nodo.getHijos().getFirst().getX();
-            int xPadre = minXHijo+(maxXHijo-minXHijo)/2;
+            int xPadre = minXHijo + (maxXHijo - minXHijo) / 2;
             nodo.setX(xPadre);
             nodo.setY(y);
         }

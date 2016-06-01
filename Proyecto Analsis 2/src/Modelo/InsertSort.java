@@ -8,18 +8,40 @@ public class InsertSort {
     private int ambientes;
     private LinkedList<LinkedList<HashMap<String, String>>> registroAmbientes;
     private MetodosVarios metodos;
+    private int ejecuciones;
+    private int tamañoEntradaDeDatos;
 
     public InsertSort() {
         this.metodos = new MetodosVarios();
+        this.ejecuciones = 0;
+    }
+
+    public String determinarComplejidad() {
+        String complejidad = "";
+        if (ejecuciones == tamañoEntradaDeDatos) {
+            complejidad = "O(n)";
+        } else {
+            double pivote = ((((tamañoEntradaDeDatos * tamañoEntradaDeDatos) / 2) + (tamañoEntradaDeDatos / 2)) / 2) - (tamañoEntradaDeDatos / 2);
+            if (ejecuciones <= pivote) {
+                complejidad = "O(n)";
+            } else {
+                complejidad = "O(n^2)";
+            }
+        }
+
+        return complejidad;
     }
 
     public void Sort(int[] array) {
+        this.ejecuciones = 0;
+        this.tamañoEntradaDeDatos = array.length;
         this.ambientes = 1;
         this.registroAmbientes = new LinkedList<>();
         Sort(array, array.length, 0);
     }
 
     public int Sort(int[] array, int maxIndex, int padre) {//0
+        this.ejecuciones++;
         int idAmbiente = this.ambientes;
         HashMap<String, String> variables = new HashMap<>();
         variables.put("array", metodos.arrayToString(array));
@@ -47,8 +69,8 @@ public class InsertSort {
         variables.put("array", metodos.arrayToString(array));
         variables.put("maxIndex", maxIndex + "");
         this.getRegistroAmbientes().add(metodos.generarEstado("InsertSort", padre, idAmbiente, 3, 4, variables));
-         //guarda una copia del valor que esta en la variable 'key'.
-         //este valor sera posicionado en la posicion correcta.
+        //guarda una copia del valor que esta en la variable 'key'.
+        //este valor sera posicionado en la posicion correcta.
 
         int key = array[maxIndex];  //4
 
@@ -67,10 +89,10 @@ public class InsertSort {
         variables.put("i", i + "");
         this.getRegistroAmbientes().add(metodos.generarEstado("InsertSort", padre, idAmbiente, 5, 6, variables));
 
-         //compara el valor de 'key' con todos los elementos del arreglo
-         //que van despues del elemento
+        //compara el valor de 'key' con todos los elementos del arreglo
+        //que van despues del elemento
         while ((i >= 0) && (array[i] > key)) { //6
-
+            this.ejecuciones++;
             variables = new HashMap<>();
             variables.put("array", metodos.arrayToString(array));
             variables.put("maxIndex", maxIndex + "");
@@ -116,7 +138,7 @@ public class InsertSort {
 
         return maxIndex + 1;//10
     }
-    
+
 ////    public int Sort2(int[] array, int maxIndex, int padre) {//0
 ////        int idAmbiente = this.ambientes;
 ////
@@ -147,7 +169,6 @@ public class InsertSort {
 ////
 ////        return maxIndex + 1;//10
 ////    }
-
     /**
      * @return the registroAmbientes
      */

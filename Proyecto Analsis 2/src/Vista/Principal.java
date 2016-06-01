@@ -24,6 +24,7 @@ import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -112,6 +113,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         btnpausa = new javax.swing.JButton();
         btncontinuar = new javax.swing.JButton();
         btnautomatico = new javax.swing.JButton();
+        btnComplejidad = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -268,6 +270,13 @@ public class Principal extends javax.swing.JFrame implements Runnable {
             }
         });
 
+        btnComplejidad.setText("Complejidad");
+        btnComplejidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnComplejidadActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -279,50 +288,60 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(scrollTableExcecution, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(btnQuickSort)
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnInserSort)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnMultMatrix))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnQuickSort)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnHeapSort, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnInserSort)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnEntradaDatos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtEntradaDAtos))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnHeapSort)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnLineaAnterior, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnEjecutarAlg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnautomatico, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addComponent(btnpausa, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btncontinuar)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnMultMatrix)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtEntradaDAtos)
-                .addGap(18, 18, 18)
-                .addComponent(btnEntradaDatos)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnEjecutarAlg)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnLineaAnterior)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnautomatico, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnpausa)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btncontinuar)
-                .addGap(20, 20, 20))
+                .addComponent(btnComplejidad)
+                .addGap(234, 234, 234))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(4, 4, 4)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(3, 3, 3)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnQuickSort)
-                    .addComponent(btnInserSort)
                     .addComponent(btnHeapSort)
-                    .addComponent(btnMultMatrix)
                     .addComponent(txtEntradaDAtos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEntradaDatos)
                     .addComponent(btnEjecutarAlg)
+                    .addComponent(btnautomatico)
+                    .addComponent(btnComplejidad))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnInserSort)
+                    .addComponent(btnMultMatrix)
+                    .addComponent(btnEntradaDatos)
                     .addComponent(btnLineaAnterior)
                     .addComponent(btnpausa)
-                    .addComponent(btncontinuar)
-                    .addComponent(btnautomatico))
+                    .addComponent(btncontinuar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(scrollTableExcecution, javax.swing.GroupLayout.DEFAULT_SIZE, 457, Short.MAX_VALUE)
@@ -397,11 +416,12 @@ public class Principal extends javax.swing.JFrame implements Runnable {
 
                 this.listaalgoritmos.setSelectedIndex(lineaActual);
                 panel1.pintarArbol(metodos.generarNodos(quickSort.getRegistroAmbientes()));
+                quickSort.setArbol(panel1.getA());
                 //panelprueba1.setarbol(e.Escena(metodos.generarNodos(quickSort.getRegistroAmbientes())));
                 //this.graficarArbol(metodos.generarNodos(quickSort.getRegistroAmbientes()), 1);
                 this.listVariables.setEnabled(true);
                 this.btnEjecutarAlg.setEnabled(true);
-                
+
                 btnautomatico.setEnabled(true);
 
             } else if (this.algoritmo == 2) {
@@ -417,7 +437,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                 //panelprueba1.setarbol(e.Escena(metodos.generarNodos(this.insertSort.getRegistroAmbientes())));
                 this.listVariables.setEnabled(true);
                 this.btnEjecutarAlg.setEnabled(true);
-                
+
                 btnautomatico.setEnabled(true);
             } else if (this.algoritmo == 3) {
                 String[] stringArray = this.txtEntradaDAtos.getText().split(",");
@@ -432,7 +452,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                 //panelprueba1.setarbol(e.Escena(metodos.generarNodos(this.heapsort.getRegistroAmbientes())));
                 this.listVariables.setEnabled(true);
                 this.btnEjecutarAlg.setEnabled(true);
-                
+
                 btnautomatico.setEnabled(true);
             } else if (this.algoritmo == 4) {
                 String[] stringArray = this.txtEntradaDAtos.getText().split(",");
@@ -447,7 +467,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                 //panelprueba1.setarbol(e.Escena(metodos.generarNodos(this.multMatriz.getRegistroAmbientes())));
                 this.listVariables.setEnabled(true);
                 this.btnEjecutarAlg.setEnabled(true);
-                
+
                 btnautomatico.setEnabled(true);
             }
 
@@ -462,7 +482,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         btnautomatico.setEnabled(false);
         btnpausa.setEnabled(false);
         btncontinuar.setEnabled(false);
-        controlmulti=true;
+        controlmulti = true;
         controlinsertsort = false;
         controlquicksort = false;
         controlheapsort = false;
@@ -477,7 +497,8 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         btnLineaAnterior.setEnabled(false);
         btnautomatico.setEnabled(false);
         btnpausa.setEnabled(false);
-        btncontinuar.setEnabled(false);controlquicksort=true;
+        btncontinuar.setEnabled(false);
+        controlquicksort = true;
         controlheapsort = false;
         controlinsertsort = false;
         controlmulti = false;
@@ -492,7 +513,8 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         btnLineaAnterior.setEnabled(false);
         btnautomatico.setEnabled(false);
         btnpausa.setEnabled(false);
-        btncontinuar.setEnabled(false);controlinsertsort = true;
+        btncontinuar.setEnabled(false);
+        controlinsertsort = true;
         controlquicksort = false;
         controlheapsort = false;
         controlmulti = false;
@@ -508,7 +530,8 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         btnLineaAnterior.setEnabled(false);
         btnautomatico.setEnabled(false);
         btnpausa.setEnabled(false);
-        btncontinuar.setEnabled(false);controlheapsort = true;
+        btncontinuar.setEnabled(false);
+        controlheapsort = true;
         controlinsertsort = false;
         controlquicksort = false;
         controlmulti = false;
@@ -587,6 +610,19 @@ public class Principal extends javax.swing.JFrame implements Runnable {
 
     private void jScrollPane3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane3MousePressed
         this.panel1.repaint();    }//GEN-LAST:event_jScrollPane3MousePressed
+
+    private void btnComplejidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComplejidadActionPerformed
+        if (this.algoritmo == 1) {
+            JOptionPane.showMessageDialog(rootPane, quickSort.determinarComplejidad());
+        } else if (this.algoritmo == 2) {
+            JOptionPane.showMessageDialog(rootPane, insertSort.determinarComplejidad());
+        } else if (this.algoritmo == 3) {
+            JOptionPane.showMessageDialog(rootPane, heapsort.determinarComplejidad());
+        } else if (this.algoritmo == 4) {
+
+        }
+
+    }//GEN-LAST:event_btnComplejidadActionPerformed
 
     private void graficarArbol(LinkedList<Nodo> nodos, int idAmbiente) {
 
@@ -672,6 +708,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnComplejidad;
     private javax.swing.JButton btnEjecutarAlg;
     private javax.swing.JButton btnEntradaDatos;
     private javax.swing.JButton btnHeapSort;
@@ -715,7 +752,6 @@ public class Principal extends javax.swing.JFrame implements Runnable {
 
                 }
 
-                
                 break;
 
             case 2:
@@ -735,7 +771,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                     }
 
                 }
-                
+
                 break;
 
             case 3:
@@ -755,7 +791,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                     }
 
                 }
-                
+
                 break;
 
             case 4:
@@ -775,7 +811,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                     }
 
                 }
-                
+
                 break;
 
         }

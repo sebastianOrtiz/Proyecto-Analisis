@@ -21,7 +21,10 @@ public class HeapSort {
     public HeapSort() {
         this.metodos = new MetodosVarios();
     }
-
+    
+    public String determinarComplejidad() {
+        return "Θ(n log n)";
+    }
     public void heapSort(int[] array) {
         this.ambientes = 1;
         this.registroAmbientes = new LinkedList<>();

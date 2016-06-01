@@ -14,52 +14,45 @@ import java.util.LinkedList;
  */
 public class QuickSort {
 
-    int ambientes;
+    private int ambientes;
     private LinkedList<LinkedList<HashMap<String, String>>> registroAmbientes;
     private MetodosVarios metodos;
+    private Arbol arbol;
+    
 
     public QuickSort() {
         this.metodos = new MetodosVarios();
     }
 
-//    public LinkedList<Nodo> generarNodos(LinkedList<LinkedList<HashMap<String, String>>> estados){
-//        LinkedList<Nodo> nodos = new LinkedList<>();
-//        LinkedList<String> guardados = new LinkedList<>();
-//        for (LinkedList<HashMap<String, String>> estado : estados) {
-//           if(!guardados.contains(estado.getFirst().get("idMio"))){
-//               guardados.add(estado.getFirst().get("idMio"));
-//               nodos.add(new Nodo(estado.getFirst().get("idPadre"), estado.getFirst().get("idMio"), estado.getFirst().get("nombre")));
-//               
-//           }
-//        }
-//        
-//        return nodos;
-//    }
-//    private LinkedList<HashMap<String, String>> generarEstado(String nombreMetodo, int padre, int mio, int linea, int lineaSiguiente, HashMap<String, String> variables) {
-//        HashMap<String, String> datos = new HashMap<>();
-//        datos.put("nombre", nombreMetodo);
-//        datos.put("idPadre", "" + padre);
-//        datos.put("idMio", "" + mio);
-//        datos.put("linea", "" + linea);
-//        datos.put("lineaSiguiente", "" + lineaSiguiente);
-//        LinkedList<HashMap<String, String>> estado = new LinkedList<>();
-//        estado.add(datos);
-//        estado.add(variables);
-//        return estado;
-//    }
-//    private String arrayToString(int[] array) {
-//        String salida = "[";
-//        for (int i = 0; i < array.length; i++) {
-//            if (i != array.length - 1) {
-//                salida += array[i] + ", ";
-//            } else {
-//                salida += array[i] + "";
-//            }
-//
-//        }
-//        salida += "]";
-//        return salida;
-//    }
+    public String determinarComplejidad() {
+        LinkedList<Integer> alturas = arbol.obtenerProfundidadesQuickSort();
+        String complejidad = "Constante";
+        if (!alturas.isEmpty()) {
+            int max = 0;
+            int min = Integer.MAX_VALUE;
+            int sum = 0;
+            for (Integer altura : alturas) {
+                if(altura > max){
+                    max = altura;
+                }
+                if(altura < min){
+                    min = altura;
+                }
+                sum+=altura;
+            }
+            double prom = sum/alturas.size();
+            if(max == min){
+                complejidad = ("Θ(n log n)");
+            }else if (max - min >= prom){
+                complejidad = ("Θ(n^2)");
+            }else if(max - min < prom){
+                complejidad = ("Θ(n)");
+            }
+            
+        }
+        return complejidad;
+    }
+
     public void QuickSort(int[] array) {
         this.ambientes = 1;
         this.registroAmbientes = new LinkedList<>();
@@ -379,5 +372,12 @@ public class QuickSort {
      */
     public LinkedList<LinkedList<HashMap<String, String>>> getRegistroAmbientes() {
         return registroAmbientes;
+    }
+
+    /**
+     * @param arbol the arbol to set
+     */
+    public void setArbol(Arbol arbol) {
+        this.arbol = arbol;
     }
 }

@@ -27,9 +27,9 @@ public class Panel extends javax.swing.JPanel {
      * Creates new form Panel
      */
     public void pintarArbol(LinkedList<Nodo> nodos) {
-        a.resetxMax();
-        a.armarArbolDesdeListaDeNodos(nodos);
-        a.darPosiciones(a.getRaiz(), 10);
+        getA().resetxMax();
+        getA().armarArbolDesdeListaDeNodos(nodos);
+        getA().darPosiciones(getA().getRaiz(), 10);
         this.redimencionar();
         this.repaint();
     }
@@ -40,11 +40,11 @@ public class Panel extends javax.swing.JPanel {
     }
     
     private void redimencionar(){
-        if(a.getxMax() > 1254){
-            this.setPreferredSize(new Dimension(a.getxMax() + 10, a.getyMax()+40));
+        if(getA().getxMax() > 1254){
+            this.setPreferredSize(new Dimension(getA().getxMax() + 10, getA().getyMax()+40));
         }else{
-            this.setPreferredSize(new Dimension(1254, a.getyMax()+40));
-            a.reajustarPosiciones(1254/2);
+            this.setPreferredSize(new Dimension(1254, getA().getyMax()+40));
+            getA().reajustarPosiciones(1254/2);
         }
         
         this.revalidate();
@@ -53,8 +53,8 @@ public class Panel extends javax.swing.JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g); //To change body of generated methods, choose Tools | Templates.
-        if (a.getRaiz() != null) {
-            pintarArbol(a.getRaiz(), g);
+        if (getA().getRaiz() != null) {
+            pintarArbol(getA().getRaiz(), g);
         }
 
     }
@@ -160,5 +160,12 @@ public class Panel extends javax.swing.JPanel {
     public void setEstadoActual(String estadoActual) {
         this.estadoActual = estadoActual;
         this.repaint();
+    }
+
+    /**
+     * @return the a
+     */
+    public Arbol getA() {
+        return a;
     }
 }
