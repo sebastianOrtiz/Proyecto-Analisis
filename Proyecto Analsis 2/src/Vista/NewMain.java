@@ -38,6 +38,7 @@ public class NewMain {
         s.cargarSudoku();
         s.imprimir(s.getTablero());
         s.resolver(s.getTablero());
+        s.imprimir(s.getTablero());
 //        
 //        MetodosVarios metodos= new MetodosVarios();
 //        for (int i = 0; i < arreglo.length; i++) {

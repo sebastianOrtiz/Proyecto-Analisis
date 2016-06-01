@@ -33,6 +33,20 @@ public class Sudoku {
         this.metodos = new MetodosVarios();
     }
 
+    public int[][] cadenaToMatriz(String cadena) {
+        String[] elementos = cadena.split(",");
+        int[][] mat = new int[DIMENSION][DIMENSION];
+        int k = 0;
+        for (int i = 0; i < DIMENSION; i++) {
+            for (int j = 0; j < DIMENSION; j++) {
+                mat[i][j] = Integer.parseInt(elementos[k]);
+                k++;
+            }
+
+        }
+        return mat;
+    }
+
     public void cargarSudoku() {
         this.setTablero(new int[DIMENSION][DIMENSION]);
         File a = new File("Sudoku.txt");
@@ -75,170 +89,204 @@ public class Sudoku {
     public boolean resolver(int[][] tablero) {
         this.ambientes = 1;
         this.registroAmbientes = new LinkedList<>();
+        HashMap<String, String> variables = new HashMap<>();
+        variables.put("tablero", this.lineaDeTablero(tablero));
+        this.getRegistroAmbientes().add(this.metodos.generarEstado("resolver", 0, 1, 0, 7, variables));
         return resolver(tablero, 0);
     }
 
     public String lineaDeTablero(int[][] tablero) {
         String salida = "";
         for (int i = 0; i < tablero.length; i++) {
-            if (i == tablero.length - 1) {
-                salida += tablero[i] + "";
-            } else {
-                salida += tablero[i] + ",";
+            for (int j = 0; j < tablero.length; j++) {
+                if (j == tablero.length - 1 && i == tablero.length - 1) {
+                    salida += tablero[i][j] + "";
+                } else {
+                    salida += tablero[i][j] + ",";
+                }
             }
 
         }
         return salida;
     }
 
+//    public boolean resolver(int[][] tablero, int padre) {//0
+//        int idAmbiente = this.ambientes;
+//        HashMap<String, String> variables = new HashMap<>();
+//        variables.put("tablero", this.lineaDeTablero(tablero));
+//        this.getRegistroAmbientes().add(this.metodos.generarEstado("resolver", padre, idAmbiente, 0, 1, variables));
+//
+//        for (int i = 0; i < DIMENSION; i++) {//1
+//
+//            variables = new HashMap<>();
+//            variables.put("tablero", this.lineaDeTablero(tablero));
+//            variables.put("i", i + "");
+//            this.getRegistroAmbientes().add(this.metodos.generarEstado("resolver", padre, idAmbiente, 1, 2, variables));
+//
+//            for (int j = 0; j < DIMENSION; j++) {//2
+//
+//                variables = new HashMap<>();
+//                variables.put("tablero", this.lineaDeTablero(tablero));
+//                variables.put("i", i + "");
+//                variables.put("j", j + "");
+//                this.getRegistroAmbientes().add(this.metodos.generarEstado("resolver", padre, idAmbiente, 2, 3, variables));
+//
+//                if (tablero[i][j] != 0) {//3
+//
+//                    variables = new HashMap<>();
+//                    variables.put("tablero", this.lineaDeTablero(tablero));
+//                    variables.put("i", i + "");
+//                    variables.put("j", j + "");
+//                    this.getRegistroAmbientes().add(this.metodos.generarEstado("resolver", padre, idAmbiente, 3, 5, variables));
+//
+//                    continue;//4
+//
+//                } else {
+//                    variables = new HashMap<>();
+//                    variables.put("tablero", this.lineaDeTablero(tablero));
+//                    variables.put("i", i + "");
+//                    variables.put("j", j + "");
+//                    this.getRegistroAmbientes().add(this.metodos.generarEstado("resolver", padre, idAmbiente, 3, 5, variables));
+//                }
+//                for (int k = 1; k <= 9; k++) {//5
+//
+//                    variables = new HashMap<>();
+//                    variables.put("tablero", this.lineaDeTablero(tablero));
+//                    variables.put("i", i + "");
+//                    variables.put("j", j + "");
+//                    variables.put("k", k + "");
+//                    this.getRegistroAmbientes().add(this.metodos.generarEstado("resolver", padre, idAmbiente, 5, 6, variables));
+//
+//                    if (esPosibleInsertar(tablero, i, j, k)) {//6
+//
+//                        variables = new HashMap<>();
+//                        variables.put("tablero", this.lineaDeTablero(tablero));
+//                        variables.put("i", i + "");
+//                        variables.put("j", j + "");
+//                        variables.put("k", k + "");
+//                        variables.put("esPosibleInsertar", "true");
+//                        this.getRegistroAmbientes().add(this.metodos.generarEstado("resolver", padre, idAmbiente, 6, 7, variables));
+//
+//                        tablero[i][j] = k;//7
+//
+//                        variables = new HashMap<>();
+//                        variables.put("tablero", this.lineaDeTablero(tablero));
+//                        variables.put("i", i + "");
+//                        variables.put("j", j + "");
+//                        variables.put("k", k + "");
+//                        variables.put("esPosibleInsertar", "true");
+//                        variables.put("tablero[i][j]", tablero[i][j] + "");
+//                        this.getRegistroAmbientes().add(this.metodos.generarEstado("resolver", padre, idAmbiente, 7, 0, variables));
+//
+//                        boolean b = resolver(tablero, idAmbiente);//8
+//
+//                        variables = new HashMap<>();
+//                        variables.put("tablero", this.lineaDeTablero(tablero));
+//                        variables.put("i", i + "");
+//                        variables.put("j", j + "");
+//                        variables.put("k", k + "");
+//                        variables.put("esPosibleInsertar", "true");
+//                        variables.put("tablero[i][j]", tablero[i][j] + "");
+//                        variables.put("b", b + "");
+//                        this.getRegistroAmbientes().add(this.metodos.generarEstado("resolver", padre, idAmbiente, 8, 9, variables));
+//
+//                        if (b) {//9
+//
+//                            variables = new HashMap<>();
+//                            variables.put("tablero", this.lineaDeTablero(tablero));
+//                            variables.put("i", i + "");
+//                            variables.put("j", j + "");
+//                            variables.put("k", k + "");
+//                            variables.put("esPosibleInsertar", "true");
+//                            variables.put("tablero[i][j]", tablero[i][j] + "");
+//                            variables.put("b", b + "");
+//                            this.getRegistroAmbientes().add(this.metodos.generarEstado("resolver", padre, idAmbiente, 9, 8, variables));
+//
+//                            return true;//10
+//                        } else {
+//                            variables = new HashMap<>();
+//                            variables.put("tablero", this.lineaDeTablero(tablero));
+//                            variables.put("i", i + "");
+//                            variables.put("j", j + "");
+//                            variables.put("k", k + "");
+//                            variables.put("esPosibleInsertar", "true");
+//                            variables.put("tablero[i][j]", tablero[i][j] + "");
+//                            variables.put("b", b + "");
+//                            this.getRegistroAmbientes().add(this.metodos.generarEstado("resolver", padre, idAmbiente, 9, 11, variables));
+//                        }
+//                        tablero[i][j] = 0;//11
+//
+//                    }
+//
+//                    if (k <= 9) {
+//                        variables = new HashMap<>();
+//                        variables.put("tablero", this.lineaDeTablero(tablero));
+//                        variables.put("i", i + "");
+//                        variables.put("j", j + "");
+//                        variables.put("k", k + "");
+//                        variables.put("esPosibleInsertar", "true");
+//                        variables.put("tablero[i][j]", tablero[i][j] + "");
+//                        this.getRegistroAmbientes().add(this.metodos.generarEstado("resolver", padre, idAmbiente, 11, 5, variables));
+//                    } else {
+//                        variables = new HashMap<>();
+//                        variables.put("tablero", this.lineaDeTablero(tablero));
+//                        variables.put("i", i + "");
+//                        variables.put("j", j + "");
+//                        variables.put("k", k + "");
+//                        variables.put("esPosibleInsertar", "true");
+//                        variables.put("tablero[i][j]", tablero[i][j] + "");
+//                        this.getRegistroAmbientes().add(this.metodos.generarEstado("resolver", padre, idAmbiente, 11, 8, variables));
+//                    }
+//                }
+//                return false;//12
+//            }
+//            if (i < DIMENSION) {
+//                variables = new HashMap<>();
+//                variables.put("tablero", this.lineaDeTablero(tablero));
+//                this.getRegistroAmbientes().add(this.metodos.generarEstado("resolver", padre, idAmbiente, 11, 1, variables));
+//            }
+//
+//        }
+//        variables = new HashMap<>();
+//        variables.put("tablero", this.lineaDeTablero(tablero));
+//        this.getRegistroAmbientes().add(this.metodos.generarEstado("resolver", padre, idAmbiente, 11, 8, variables));
+//
+//        return true;//15
+//    }
     public boolean resolver(int[][] tablero, int padre) {//0
         int idAmbiente = this.ambientes;
-        HashMap<String, String> variables = new HashMap<>();
-        variables.put("tablero", this.lineaDeTablero(tablero));
-        this.getRegistroAmbientes().add(this.metodos.generarEstado("resolver", padre, idAmbiente, 0, 1, variables));
 
         for (int i = 0; i < DIMENSION; i++) {//1
-
-            variables = new HashMap<>();
-            variables.put("tablero", this.lineaDeTablero(tablero));
-            variables.put("i", i + "");
-            this.getRegistroAmbientes().add(this.metodos.generarEstado("resolver", padre, idAmbiente, 1, 2, variables));
-
             for (int j = 0; j < DIMENSION; j++) {//2
-
-                variables = new HashMap<>();
-                variables.put("tablero", this.lineaDeTablero(tablero));
-                variables.put("i", i + "");
-                variables.put("j", j + "");
-                this.getRegistroAmbientes().add(this.metodos.generarEstado("resolver", padre, idAmbiente, 2, 3, variables));
-
                 if (tablero[i][j] != 0) {//3
-
-                    variables = new HashMap<>();
-                    variables.put("tablero", this.lineaDeTablero(tablero));
-                    variables.put("i", i + "");
-                    variables.put("j", j + "");
-                    this.getRegistroAmbientes().add(this.metodos.generarEstado("resolver", padre, idAmbiente, 3, 5, variables));
-
                     continue;//4
 
-                } else {
-                    variables = new HashMap<>();
-                    variables.put("tablero", this.lineaDeTablero(tablero));
-                    variables.put("i", i + "");
-                    variables.put("j", j + "");
-                    this.getRegistroAmbientes().add(this.metodos.generarEstado("resolver", padre, idAmbiente, 3, 5, variables));
                 }
                 for (int k = 1; k <= 9; k++) {//5
-
-                    variables = new HashMap<>();
-                    variables.put("tablero", this.lineaDeTablero(tablero));
-                    variables.put("i", i + "");
-                    variables.put("j", j + "");
-                    variables.put("k", k + "");
-                    this.getRegistroAmbientes().add(this.metodos.generarEstado("resolver", padre, idAmbiente, 5, 6, variables));
-
                     if (esPosibleInsertar(tablero, i, j, k)) {//6
-
-                        variables = new HashMap<>();
-                        variables.put("tablero", this.lineaDeTablero(tablero));
-                        variables.put("i", i + "");
-                        variables.put("j", j + "");
-                        variables.put("k", k + "");
-                        variables.put("esPosibleInsertar", "true");
-                        this.getRegistroAmbientes().add(this.metodos.generarEstado("resolver", padre, idAmbiente, 6, 7, variables));
-
                         tablero[i][j] = k;//7
-
-                        variables = new HashMap<>();
+                        HashMap<String, String>variables = new HashMap<>();
                         variables.put("tablero", this.lineaDeTablero(tablero));
-                        variables.put("i", i + "");
-                        variables.put("j", j + "");
-                        variables.put("k", k + "");
-                        variables.put("esPosibleInsertar", "true");
                         variables.put("tablero[i][j]", tablero[i][j] + "");
+                        variables.put("k", k+"");
+                        variables.put("j", j+"");
+                        variables.put("i", i+"");
+                        
                         this.getRegistroAmbientes().add(this.metodos.generarEstado("resolver", padre, idAmbiente, 7, 0, variables));
-
+                        this.ambientes++;
                         boolean b = resolver(tablero, idAmbiente);//8
-
-                        variables = new HashMap<>();
-                        variables.put("tablero", this.lineaDeTablero(tablero));
-                        variables.put("i", i + "");
-                        variables.put("j", j + "");
-                        variables.put("k", k + "");
-                        variables.put("esPosibleInsertar", "true");
-                        variables.put("tablero[i][j]", tablero[i][j] + "");
-                        variables.put("b", b + "");
-                        this.getRegistroAmbientes().add(this.metodos.generarEstado("resolver", padre, idAmbiente, 8, 9, variables));
-
                         if (b) {//9
-
-                            variables = new HashMap<>();
-                            variables.put("tablero", this.lineaDeTablero(tablero));
-                            variables.put("i", i + "");
-                            variables.put("j", j + "");
-                            variables.put("k", k + "");
-                            variables.put("esPosibleInsertar", "true");
-                            variables.put("tablero[i][j]", tablero[i][j] + "");
-                            variables.put("b", b + "");
-                            this.getRegistroAmbientes().add(this.metodos.generarEstado("resolver", padre, idAmbiente, 9, 8, variables));
-
                             return true;//10
-                        } else {
-                            variables = new HashMap<>();
-                            variables.put("tablero", this.lineaDeTablero(tablero));
-                            variables.put("i", i + "");
-                            variables.put("j", j + "");
-                            variables.put("k", k + "");
-                            variables.put("esPosibleInsertar", "true");
-                            variables.put("tablero[i][j]", tablero[i][j] + "");
-                            variables.put("b", b + "");
-                            this.getRegistroAmbientes().add(this.metodos.generarEstado("resolver", padre, idAmbiente, 9, 11, variables));
                         }
                         tablero[i][j] = 0;//11
-
-                    }
-
-                    if (k <= 9) {
-                        variables = new HashMap<>();
-                        variables.put("tablero", this.lineaDeTablero(tablero));
-                        variables.put("i", i + "");
-                        variables.put("j", j + "");
-                        variables.put("k", k + "");
-                        variables.put("esPosibleInsertar", "true");
-                        variables.put("tablero[i][j]", tablero[i][j] + "");
-                        this.getRegistroAmbientes().add(this.metodos.generarEstado("resolver", padre, idAmbiente, 11, 5, variables));
-                    } else {
-                        variables = new HashMap<>();
-                        variables.put("tablero", this.lineaDeTablero(tablero));
-                        variables.put("i", i + "");
-                        variables.put("j", j + "");
-                        variables.put("k", k + "");
-                        variables.put("esPosibleInsertar", "true");
-                        variables.put("tablero[i][j]", tablero[i][j] + "");
-                        this.getRegistroAmbientes().add(this.metodos.generarEstado("resolver", padre, idAmbiente, 11, 8, variables));
                     }
                 }
                 return false;//12
             }
-            if (i < DIMENSION) {
-                variables = new HashMap<>();
-                variables.put("tablero", this.lineaDeTablero(tablero));
-                this.getRegistroAmbientes().add(this.metodos.generarEstado("resolver", padre, idAmbiente, 11, 1, variables));
-            }
-
         }
-        System.out.println("Encontrada solución:");//13
-        imprimir(tablero);//14
-
-        variables = new HashMap<>();
-        variables.put("tablero", this.lineaDeTablero(tablero));
-        this.getRegistroAmbientes().add(this.metodos.generarEstado("resolver", padre, idAmbiente, 11, 8, variables));
-
         return true;//15
     }
-
-//    public boolean resolver(int[][] tablero, int padre) {//0
+//    public boolean resolver(int[][] tablero) {//0
 //        for (int i = 0; i < DIMENSION; i++) {//1
 //            for (int j = 0; j < DIMENSION; j++) {//2
 //                if (tablero[i][j] != 0) {//3
@@ -248,7 +296,7 @@ public class Sudoku {
 //                for (int k = 1; k <= 9; k++) {//5
 //                    if (esPosibleInsertar(tablero, i, j, k)) {//6
 //                        tablero[i][j] = k;//7
-//                        boolean b = resolver(tablero,sdfr);//8
+//                        boolean b = resolver(tablero);//8
 //                        if (b) {//9
 //                            return true;//10
 //                        }
@@ -258,10 +306,9 @@ public class Sudoku {
 //                return false;//12
 //            }
 //        }
-//        System.out.println("Encontrada solución:");//13
-//        imprimir(tablero);//14
 //        return true;//15
 //    }
+
     public boolean esPosibleInsertar(int[][] tablero,
             int i, int j, int valor) {
 //Comprueba columna

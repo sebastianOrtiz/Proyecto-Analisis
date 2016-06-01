@@ -11,6 +11,7 @@ import Modelo.MetodosVarios;
 import Modelo.Mmatriz;
 import Modelo.Nodo;
 import Modelo.QuickSort;
+import Modelo.Sudoku;
 import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.File;
@@ -38,6 +39,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
     InsertSort insertSort = new InsertSort();
     HeapSort heapsort = new HeapSort();
     Mmatriz multMatriz = new Mmatriz();
+    Sudoku sudoku = new Sudoku();
     int[] arreglo = {5, 7, 8, 5, 4, 1, 3, 6, 8, 10, 35};
     int lineaActual = -1;
     int indexEjecucion = -1;
@@ -114,6 +116,9 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         btncontinuar = new javax.swing.JButton();
         btnautomatico = new javax.swing.JButton();
         btnComplejidad = new javax.swing.JButton();
+        btnSudoku = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tableSUdoku = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -278,6 +283,28 @@ public class Principal extends javax.swing.JFrame implements Runnable {
             }
         });
 
+        btnSudoku.setText("Sudoku");
+        btnSudoku.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSudokuActionPerformed(evt);
+            }
+        });
+
+        tableSUdoku.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tableSUdoku.getTableHeader().setResizingAllowed(false);
+        tableSUdoku.getTableHeader().setReorderingAllowed(false);
+        jScrollPane4.setViewportView(tableSUdoku);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -287,7 +314,9 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrollTableExcecution, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(scrollTableExcecution, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE)
                 .addContainerGap())
@@ -301,7 +330,9 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnQuickSort)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnHeapSort, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(btnHeapSort)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnSudoku, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnEntradaDatos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -334,7 +365,8 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                     .addComponent(txtEntradaDAtos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEjecutarAlg)
                     .addComponent(btnautomatico)
-                    .addComponent(btnComplejidad))
+                    .addComponent(btnComplejidad)
+                    .addComponent(btnSudoku))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnInserSort)
@@ -344,10 +376,13 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                     .addComponent(btnpausa)
                     .addComponent(btncontinuar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(scrollTableExcecution, javax.swing.GroupLayout.DEFAULT_SIZE, 457, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1)
-                    .addComponent(jScrollPane2))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(scrollTableExcecution, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane4)))
                 .addContainerGap())
         );
 
@@ -371,6 +406,27 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         }
         this.tableEjecucion.setRowSelectionInterval(0, 0);
 
+        this.listaalgoritmos.setSelectedIndex(lineaActual);
+    }
+
+    private void ejecutarEstadoSudoku(LinkedList<LinkedList<HashMap<String, String>>> estados) {
+        lineaActual = Integer.parseInt(estados.get(indexEjecucion).get(0).get("lineaSiguiente"));
+
+        modelTableExcecution.insertRow(0, new Object[]{indexEjecucion, estados.get(indexEjecucion).get(0).get("idMio"), estados.get(indexEjecucion).get(0).get("nombre")});
+        LinkedList<String> variables = this.listarVariablesRegistro(estados.get(indexEjecucion).get(1));
+
+        //panel1.setEstadoActual(estados.get(indexEjecucion).get(0).get("idMio"));
+        //panelprueba1.setAmbiente(estados.get(indexEjecucion).get(0).get("idMio"));
+        //this.graficarArbol(metodos.generarNodos(estados), Integer.parseInt(estados.get(indexEjecucion).get(0).get("idMio")));
+        //panelprueba1.repaint();
+
+        modelListVariables.removeAllElements();
+        for (String variable : variables) {
+            modelListVariables.addElement(variable);
+        }
+        this.tableEjecucion.setRowSelectionInterval(0, 0);
+        String tablero = estados.get(indexEjecucion).get(1).get("tablero");
+        this.generarModeloMatrizSudoku(this.sudoku.cadenaToMatriz(tablero));
         this.listaalgoritmos.setSelectedIndex(lineaActual);
     }
 
@@ -402,6 +458,12 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                 this.btnLineaAnterior.setEnabled(true);
             }
 
+        }else if(this.algoritmo == 5){
+            if (indexEjecucion < sudoku.getRegistroAmbientes().size() - 1) {
+                indexEjecucion++;
+                this.ejecutarEstadoSudoku(sudoku.getRegistroAmbientes());
+                //this.btnLineaAnterior.setEnabled(true);
+            }
         }
     }//GEN-LAST:event_btnEjecutarAlgActionPerformed
 
@@ -475,6 +537,17 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                 btnautomatico.setEnabled(true);
             }
 
+        } else {
+            if (this.algoritmo == 5) {
+                this.sudoku.resolver(this.sudoku.getTablero());
+                this.listaalgoritmos.setSelectedIndex(lineaActual);
+                sudoku.imprimir(sudoku.getTablero());
+                //this.generarModeloMatrizSudoku(sudoku.getTablero());
+                //metodos.generarNodos(this.sudoku.getRegistroAmbientes());
+                //panel1.pintarArbol(metodos.generarNodos(this.sudoku.getRegistroAmbientes()));
+                //panelprueba1.setarbol(e.Escena(metodos.generarNodos(this.multMatriz.getRegistroAmbientes())));
+                this.listVariables.setEnabled(true);
+            }
         }
     }//GEN-LAST:event_btnEntradaDatosActionPerformed
 
@@ -625,8 +698,52 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         } else if (this.algoritmo == 4) {
             JOptionPane.showMessageDialog(rootPane, multMatriz.determinarComplejidad());
         }
-          btnComplejidad.setEnabled(false);
+        btnComplejidad.setEnabled(false);
     }//GEN-LAST:event_btnComplejidadActionPerformed
+
+    private void btnSudokuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSudokuActionPerformed
+        //txtEntradaDAtos.setEnabled(true);
+        //btnEntradaDatos.setEnabled(true);
+        //btnEjecutarAlg.setEnabled(false);
+        //btnLineaAnterior.setEnabled(false);
+        //btnautomatico.setEnabled(false);
+        //btnpausa.setEnabled(false);
+        //btncontinuar.setEnabled(false);
+        this.btnEjecutarAlg.setEnabled(true);
+        controlheapsort = false;
+        controlinsertsort = false;
+        controlquicksort = false;
+        controlmulti = false;
+        seleccionarAlgoritmo("Algoritmos/Sudoku");
+        this.algoritmo = 5;
+        this.sudoku.cargarSudoku();
+        
+        this.generarModeloMatrizSudoku(this.sudoku.getTablero());
+        this.sudoku.resolver(sudoku.getTablero());
+    }//GEN-LAST:event_btnSudokuActionPerformed
+
+    public void generarModeloMatrizSudoku(int[][] tablero) {
+        DefaultTableModel model = new DefaultTableModel();
+
+        model.setRowCount(9);
+        //model.setColumnCount(9);
+        model.addColumn("0");
+        model.addColumn("1");
+        model.addColumn("2");
+        model.addColumn("3");
+        model.addColumn("4");
+        model.addColumn("5");
+        model.addColumn("6");
+        model.addColumn("7");
+        model.addColumn("8");
+        for (int i = 0; i < tablero.length; i++) {
+            for (int j = 0; j < tablero.length; j++) {
+                model.setValueAt(tablero[i][j], i, j);
+            }
+        }
+        this.tableSUdoku.setModel(model);
+        this.tableSUdoku.setEnabled(false);
+    }
 
     private void graficarArbol(LinkedList<Nodo> nodos, int idAmbiente) {
 
@@ -720,17 +837,20 @@ public class Principal extends javax.swing.JFrame implements Runnable {
     private javax.swing.JButton btnLineaAnterior;
     private javax.swing.JButton btnMultMatrix;
     private javax.swing.JButton btnQuickSort;
+    private javax.swing.JButton btnSudoku;
     private javax.swing.JButton btnautomatico;
     private javax.swing.JButton btncontinuar;
     private javax.swing.JButton btnpausa;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JList listVariables;
     private javax.swing.JList listaalgoritmos;
     private Vista.Panel panel1;
     private javax.swing.JScrollPane scrollTableExcecution;
     private javax.swing.JTable tableEjecucion;
+    private javax.swing.JTable tableSUdoku;
     private javax.swing.JTextField txtEntradaDAtos;
     // End of variables declaration//GEN-END:variables
 
