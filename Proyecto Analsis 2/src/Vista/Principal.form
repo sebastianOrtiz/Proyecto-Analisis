@@ -253,6 +253,7 @@
     <Component class="javax.swing.JButton" name="btnLineaAnterior">
       <Properties>
         <Property name="text" type="java.lang.String" value="Anterior"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLineaAnteriorActionPerformed"/>
@@ -261,6 +262,7 @@
     <Component class="javax.swing.JButton" name="btnpausa">
       <Properties>
         <Property name="text" type="java.lang.String" value="Pausa"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnpausaActionPerformed"/>
@@ -269,6 +271,7 @@
     <Component class="javax.swing.JButton" name="btncontinuar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Continuar"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btncontinuarActionPerformed"/>
@@ -283,6 +286,7 @@
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
         <Property name="text" type="java.lang.String" value="automatico"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnautomaticoActionPerformed"/>
