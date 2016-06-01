@@ -168,6 +168,22 @@ public class Principal extends javax.swing.JFrame implements Runnable {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 jScrollPane3MouseDragged(evt);
             }
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jScrollPane3MouseMoved(evt);
+            }
+        });
+        jScrollPane3.addMouseWheelListener(new java.awt.event.MouseWheelListener() {
+            public void mouseWheelMoved(java.awt.event.MouseWheelEvent evt) {
+                jScrollPane3MouseWheelMoved(evt);
+            }
+        });
+        jScrollPane3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jScrollPane3MouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jScrollPane3MousePressed(evt);
+            }
         });
 
         panel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -482,6 +498,19 @@ public class Principal extends javax.swing.JFrame implements Runnable {
     private void jScrollPane3MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane3MouseDragged
         this.panel1.repaint();
     }//GEN-LAST:event_jScrollPane3MouseDragged
+
+    private void jScrollPane3MouseWheelMoved(java.awt.event.MouseWheelEvent evt) {//GEN-FIRST:event_jScrollPane3MouseWheelMoved
+        this.panel1.repaint();
+    }//GEN-LAST:event_jScrollPane3MouseWheelMoved
+
+    private void jScrollPane3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane3MouseClicked
+        this.panel1.repaint();    }//GEN-LAST:event_jScrollPane3MouseClicked
+
+    private void jScrollPane3MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane3MouseMoved
+        this.panel1.repaint();    }//GEN-LAST:event_jScrollPane3MouseMoved
+
+    private void jScrollPane3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane3MousePressed
+        this.panel1.repaint();    }//GEN-LAST:event_jScrollPane3MousePressed
 
     private void graficarArbol(LinkedList<Nodo> nodos, int idAmbiente) {
 

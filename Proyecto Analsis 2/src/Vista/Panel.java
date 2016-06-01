@@ -30,12 +30,23 @@ public class Panel extends javax.swing.JPanel {
         a.resetxMax();
         a.armarArbolDesdeListaDeNodos(nodos);
         a.darPosiciones(a.getRaiz(), 10);
+        this.redimencionar();
         this.repaint();
     }
-
+    
     public Panel() {
         initComponents();
-        this.setPreferredSize(new Dimension(a.getxMax() + 30, 1000));
+        
+    }
+    
+    private void redimencionar(){
+        if(a.getxMax() > 1254){
+            this.setPreferredSize(new Dimension(a.getxMax() + 10, a.getyMax()+40));
+        }else{
+            this.setPreferredSize(new Dimension(1254, a.getyMax()+40));
+            a.reajustarPosiciones(1254/2);
+        }
+        
         this.revalidate();
     }
 

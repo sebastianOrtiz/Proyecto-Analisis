@@ -15,6 +15,7 @@ public class Arbol {
 
     private NodoArbol raiz;
     private int xMax = 30;
+    private int yMax = 0;
 
     public Arbol() {
         this.raiz = null;
@@ -58,8 +59,26 @@ public class Arbol {
     public String toString() {
         return this.imprimirArbol(getRaiz()); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    public void reajustarPosiciones(int pivote){
+        int cantidad = pivote - raiz.getX();
+        reajustar(cantidad, raiz);
+    }
+    
+    private void reajustar(int cantidad, NodoArbol nodo){
+        nodo.setX(nodo.getX()+cantidad);
+        if(!nodo.esHoja()){
+            for (NodoArbol nodo1 : nodo.getHijos()) {
+                reajustar(cantidad, nodo1);
+            }
+        }
+    }
 
     public void darPosiciones(NodoArbol nodo, int y) {
+        if(y> getyMax()){
+            yMax = y;
+        }
+        
         if (nodo.esHoja()) {
             nodo.setX(this.getxMax());
             nodo.setY(y);
@@ -95,6 +114,13 @@ public class Arbol {
      */
     public int getxMax() {
         return xMax;
+    }
+
+    /**
+     * @return the yMax
+     */
+    public int getyMax() {
+        return yMax;
     }
 
 }
