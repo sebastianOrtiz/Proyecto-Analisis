@@ -31,7 +31,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Andres
  */
-public class Principal extends javax.swing.JFrame {
+public class Principal extends javax.swing.JFrame implements Runnable {
 
     MetodosVarios metodos = new MetodosVarios();
     Escena e = new Escena();
@@ -46,6 +46,9 @@ public class Principal extends javax.swing.JFrame {
     DefaultTableModel modelTableExcecution;
     DefaultListModel<String> modelListVariables;
     private int algoritmo = 0;
+    boolean pausar = false;
+    private final Object GUI_INITIALIZATION_MONITOR = new Object();
+    Thread thagl = new Thread(this);
 
     /**
      * Creates new form Principal
@@ -105,6 +108,9 @@ public class Principal extends javax.swing.JFrame {
         btnHeapSort = new javax.swing.JButton();
         btnMultMatrix = new javax.swing.JButton();
         btnLineaAnterior = new javax.swing.JButton();
+        btnpausa = new javax.swing.JButton();
+        btncontinuar = new javax.swing.JButton();
+        btnautomatico = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -112,7 +118,7 @@ public class Principal extends javax.swing.JFrame {
         listaalgoritmos.setEnabled(false);
         jScrollPane1.setViewportView(listaalgoritmos);
 
-        btnEjecutarAlg.setText("Siguiente linea");
+        btnEjecutarAlg.setText("Siguiente");
         btnEjecutarAlg.setEnabled(false);
         btnEjecutarAlg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -204,10 +210,33 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        btnLineaAnterior.setText("Linea anterior");
+        btnLineaAnterior.setText("Anterior");
         btnLineaAnterior.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLineaAnteriorActionPerformed(evt);
+            }
+        });
+
+        btnpausa.setText("Pausa");
+        btnpausa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnpausaActionPerformed(evt);
+            }
+        });
+
+        btncontinuar.setText("Continuar");
+        btncontinuar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btncontinuarActionPerformed(evt);
+            }
+        });
+
+        btnautomatico.setBackground(new java.awt.Color(102, 0, 0));
+        btnautomatico.setForeground(new java.awt.Color(255, 255, 255));
+        btnautomatico.setText("automatico");
+        btnautomatico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnautomaticoActionPerformed(evt);
             }
         });
 
@@ -215,14 +244,14 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(scrollTableExcecution, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(23, 23, 23)
@@ -233,15 +262,21 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(btnHeapSort)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnMultMatrix)
-                .addGap(76, 76, 76)
-                .addComponent(txtEntradaDAtos, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnEntradaDatos)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtEntradaDAtos)
                 .addGap(18, 18, 18)
-                .addComponent(btnLineaAnterior)
+                .addComponent(btnEntradaDatos)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnEjecutarAlg)
-                .addContainerGap(105, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnLineaAnterior)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnautomatico, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnpausa)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btncontinuar)
+                .addGap(20, 20, 20))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -256,7 +291,10 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(txtEntradaDAtos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEntradaDatos)
                     .addComponent(btnEjecutarAlg)
-                    .addComponent(btnLineaAnterior))
+                    .addComponent(btnLineaAnterior)
+                    .addComponent(btnpausa)
+                    .addComponent(btncontinuar)
+                    .addComponent(btnautomatico))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(scrollTableExcecution, javax.swing.GroupLayout.DEFAULT_SIZE, 457, Short.MAX_VALUE)
@@ -270,7 +308,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void ejecutarEstado(LinkedList<LinkedList<HashMap<String, String>>> estados) {
         lineaActual = Integer.parseInt(estados.get(indexEjecucion).get(0).get("lineaSiguiente"));
-      
+
         modelTableExcecution.insertRow(0, new Object[]{indexEjecucion, estados.get(indexEjecucion).get(0).get("idMio"), estados.get(indexEjecucion).get(0).get("nombre")});
         LinkedList<String> variables = this.listarVariablesRegistro(estados.get(indexEjecucion).get(1));
 
@@ -284,73 +322,34 @@ public class Principal extends javax.swing.JFrame {
         }
         this.tableEjecucion.setRowSelectionInterval(0, 0);
 
-        
         this.listaalgoritmos.setSelectedIndex(lineaActual);
     }
 
     private void btnEjecutarAlgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEjecutarAlgActionPerformed
         if (this.algoritmo == 1) {
-            if (indexEjecucion < quickSort.getRegistroAmbientes().size()-1) {
+            if (indexEjecucion < quickSort.getRegistroAmbientes().size() - 1) {
                 indexEjecucion++;
                 this.ejecutarEstado(quickSort.getRegistroAmbientes());
             }
         } else if (this.algoritmo == 2) {
-            if (indexEjecucion < this.insertSort.getRegistroAmbientes().size()-1) {
-                lineaActual = Integer.parseInt(this.insertSort.getRegistroAmbientes().get(indexEjecucion).get(0).get("lineaSiguiente"));
-                modelTableExcecution.insertRow(0, new Object[]{indexEjecucion, this.insertSort.getRegistroAmbientes().get(indexEjecucion).get(0).get("idMio"), this.insertSort.getRegistroAmbientes().get(indexEjecucion).get(0).get("nombre")});
-                LinkedList<String> variables = this.listarVariablesRegistro(this.insertSort.getRegistroAmbientes().get(indexEjecucion).get(1));
-
-                panelprueba1.setAmbiente(this.insertSort.getRegistroAmbientes().get(indexEjecucion).get(0).get("idMio"));
-
-                panelprueba1.repaint();
-
-                modelListVariables.removeAllElements();
-                for (String variable : variables) {
-                    modelListVariables.addElement(variable);
-                }
-                this.tableEjecucion.setRowSelectionInterval(0, 0);
-
+            if (indexEjecucion < insertSort.getRegistroAmbientes().size() - 1) {
                 indexEjecucion++;
-                this.listaalgoritmos.setSelectedIndex(lineaActual);
+                this.ejecutarEstado(insertSort.getRegistroAmbientes());
 
             }
         } else if (this.algoritmo == 3) {
-            if (indexEjecucion < this.heapsort.getRegistroAmbientes().size()-1) {
-                lineaActual = Integer.parseInt(this.heapsort.getRegistroAmbientes().get(indexEjecucion).get(0).get("lineaSiguiente"));
-                modelTableExcecution.insertRow(0, new Object[]{indexEjecucion, this.heapsort.getRegistroAmbientes().get(indexEjecucion).get(0).get("idMio"), this.heapsort.getRegistroAmbientes().get(indexEjecucion).get(0).get("nombre")});
-                LinkedList<String> variables = this.listarVariablesRegistro(this.heapsort.getRegistroAmbientes().get(indexEjecucion).get(1));
-                panelprueba1.setAmbiente(this.heapsort.getRegistroAmbientes().get(indexEjecucion).get(0).get("idMio"));
-                panelprueba1.repaint();
-                modelListVariables.removeAllElements();
-                for (String variable : variables) {
-                    modelListVariables.addElement(variable);
-                }
-                this.tableEjecucion.setRowSelectionInterval(0, 0);
-
+            if (indexEjecucion < heapsort.getRegistroAmbientes().size() - 1) {
                 indexEjecucion++;
-                this.listaalgoritmos.setSelectedIndex(lineaActual);
-
+                this.ejecutarEstado(heapsort.getRegistroAmbientes());
             }
+
         } else if (this.algoritmo == 4) {
-            if (indexEjecucion < this.multMatriz.getRegistroAmbientes().size()-1) {
-                lineaActual = Integer.parseInt(this.multMatriz.getRegistroAmbientes().get(indexEjecucion).get(0).get("lineaSiguiente"));
-                modelTableExcecution.insertRow(0, new Object[]{indexEjecucion, this.multMatriz.getRegistroAmbientes().get(indexEjecucion).get(0).get("idMio"), this.multMatriz.getRegistroAmbientes().get(indexEjecucion).get(0).get("nombre")});
-                LinkedList<String> variables = this.listarVariablesRegistro(this.multMatriz.getRegistroAmbientes().get(indexEjecucion).get(1));
-                panelprueba1.setAmbiente(this.multMatriz.getRegistroAmbientes().get(indexEjecucion).get(0).get("idMio"));
-                panelprueba1.repaint();
-                modelListVariables.removeAllElements();
-                for (String variable : variables) {
-                    modelListVariables.addElement(variable);
-                }
-                this.tableEjecucion.setRowSelectionInterval(0, 0);
-
+            if (indexEjecucion < multMatriz.getRegistroAmbientes().size() - 1) {
                 indexEjecucion++;
-                this.listaalgoritmos.setSelectedIndex(lineaActual);
-
+                this.ejecutarEstado(multMatriz.getRegistroAmbientes());
             }
+
         }
-
-
     }//GEN-LAST:event_btnEjecutarAlgActionPerformed
 
     private void btnEntradaDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntradaDatosActionPerformed
@@ -435,13 +434,45 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHeapSortActionPerformed
 
     private void btnLineaAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLineaAnteriorActionPerformed
-        if(this.algoritmo == 1){
-            if(indexEjecucion > 0){
+        if (this.algoritmo == 1) {
+            if (indexEjecucion > 0) {
                 indexEjecucion--;
                 this.ejecutarEstado(this.quickSort.getRegistroAmbientes());
             }
+        } else if (this.algoritmo == 2) {
+            if (indexEjecucion > 0) {
+                indexEjecucion--;
+                this.ejecutarEstado(this.insertSort.getRegistroAmbientes());
+            }
+        } else if (this.algoritmo == 3) {
+            if (indexEjecucion > 0) {
+                indexEjecucion--;
+                this.ejecutarEstado(this.heapsort.getRegistroAmbientes());
+            }
+        } else if (this.algoritmo == 4) {
+            if (indexEjecucion > 0) {
+                indexEjecucion--;
+                this.ejecutarEstado(this.multMatriz.getRegistroAmbientes());
+            }
         }
     }//GEN-LAST:event_btnLineaAnteriorActionPerformed
+
+    private void btnpausaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnpausaActionPerformed
+
+        try {
+            pausa();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnpausaActionPerformed
+
+    private void btncontinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncontinuarActionPerformed
+        continuar();
+    }//GEN-LAST:event_btncontinuarActionPerformed
+
+    private void btnautomaticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnautomaticoActionPerformed
+        thagl.start();
+    }//GEN-LAST:event_btnautomaticoActionPerformed
 
     private void graficarArbol(LinkedList<Nodo> nodos, int idAmbiente) {
 
@@ -521,6 +552,7 @@ public class Principal extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Principal().setVisible(true);
+
             }
         });
     }
@@ -533,6 +565,9 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton btnLineaAnterior;
     private javax.swing.JButton btnMultMatrix;
     private javax.swing.JButton btnQuickSort;
+    private javax.swing.JButton btnautomatico;
+    private javax.swing.JButton btncontinuar;
+    private javax.swing.JButton btnpausa;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -543,4 +578,92 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JTable tableEjecucion;
     private javax.swing.JTextField txtEntradaDAtos;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void run() {
+        while (true) {
+            switch (algoritmo) {
+                case 1:
+
+                   
+
+                    while (indexEjecucion < quickSort.getRegistroAmbientes().size() - 1) {
+                        checkForPaused();
+                        indexEjecucion++;
+                        this.ejecutarEstado(quickSort.getRegistroAmbientes());
+                        try {
+                            Thread.sleep(500);
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+
+                    }
+
+                case 2:
+                    checkForPaused();
+                    while (indexEjecucion < insertSort.getRegistroAmbientes().size() - 1) {
+                        checkForPaused();
+                        indexEjecucion++;
+                        this.ejecutarEstado(insertSort.getRegistroAmbientes());
+                        try {
+                            Thread.sleep(500);
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+
+                    }
+
+                case 3:
+                    
+                    while (indexEjecucion < heapsort.getRegistroAmbientes().size() - 1) {
+                        checkForPaused();
+                        indexEjecucion++;
+                        this.ejecutarEstado(heapsort.getRegistroAmbientes());
+                        try {
+                            Thread.sleep(500);
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+
+                    }
+
+                case 4:
+                    
+                    while (indexEjecucion < multMatriz.getRegistroAmbientes().size() - 1) {
+                        checkForPaused();
+                        indexEjecucion++;
+                        this.ejecutarEstado(multMatriz.getRegistroAmbientes());
+                        try {
+                            Thread.sleep(500);
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+
+                    }
+
+            }
+        }
+    }
+
+    public synchronized void pausa() throws InterruptedException {
+        pausar = true;
+    }
+
+    public synchronized void continuar() {
+        synchronized (GUI_INITIALIZATION_MONITOR) {
+            pausar = false;
+            GUI_INITIALIZATION_MONITOR.notify();
+        }
+    }
+
+    private void checkForPaused() {
+        synchronized (GUI_INITIALIZATION_MONITOR) {
+            while (pausar) {
+                try {
+                    GUI_INITIALIZATION_MONITOR.wait();
+                } catch (Exception e) {
+                }
+            }
+        }
+    }
 }
