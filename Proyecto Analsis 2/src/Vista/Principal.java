@@ -271,6 +271,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         });
 
         btnComplejidad.setText("Complejidad");
+        btnComplejidad.setEnabled(false);
         btnComplejidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnComplejidadActionPerformed(evt);
@@ -421,7 +422,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                 //this.graficarArbol(metodos.generarNodos(quickSort.getRegistroAmbientes()), 1);
                 this.listVariables.setEnabled(true);
                 this.btnEjecutarAlg.setEnabled(true);
-
+                this.btnComplejidad.setEnabled(true);
                 btnautomatico.setEnabled(true);
 
             } else if (this.algoritmo == 2) {
@@ -436,6 +437,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                 panel1.pintarArbol(metodos.generarNodos(this.insertSort.getRegistroAmbientes()));
                 //panelprueba1.setarbol(e.Escena(metodos.generarNodos(this.insertSort.getRegistroAmbientes())));
                 this.listVariables.setEnabled(true);
+                this.btnComplejidad.setEnabled(true);
                 this.btnEjecutarAlg.setEnabled(true);
 
                 btnautomatico.setEnabled(true);
@@ -451,6 +453,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                 panel1.pintarArbol(metodos.generarNodos(this.heapsort.getRegistroAmbientes()));
                 //panelprueba1.setarbol(e.Escena(metodos.generarNodos(this.heapsort.getRegistroAmbientes())));
                 this.listVariables.setEnabled(true);
+                this.btnComplejidad.setEnabled(true);
                 this.btnEjecutarAlg.setEnabled(true);
 
                 btnautomatico.setEnabled(true);
@@ -466,6 +469,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                 panel1.pintarArbol(metodos.generarNodos(this.multMatriz.getRegistroAmbientes()));
                 //panelprueba1.setarbol(e.Escena(metodos.generarNodos(this.multMatriz.getRegistroAmbientes())));
                 this.listVariables.setEnabled(true);
+                this.btnComplejidad.setEnabled(true);
                 this.btnEjecutarAlg.setEnabled(true);
 
                 btnautomatico.setEnabled(true);
@@ -621,7 +625,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         } else if (this.algoritmo == 4) {
             JOptionPane.showMessageDialog(rootPane, multMatriz.determinarComplejidad());
         }
-
+          btnComplejidad.setEnabled(false);
     }//GEN-LAST:event_btnComplejidadActionPerformed
 
     private void graficarArbol(LinkedList<Nodo> nodos, int idAmbiente) {
@@ -751,7 +755,8 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                     }
 
                 }
-
+                btnpausa.setEnabled(false);
+                btncontinuar.setEnabled(false);
                 break;
 
             case 2:
@@ -771,7 +776,8 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                     }
 
                 }
-
+                btnpausa.setEnabled(false);
+                btncontinuar.setEnabled(false);
                 break;
 
             case 3:
@@ -791,7 +797,8 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                     }
 
                 }
-
+                btnpausa.setEnabled(false);
+                btncontinuar.setEnabled(false);
                 break;
 
             case 4:
@@ -811,7 +818,8 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                     }
 
                 }
-
+                btnpausa.setEnabled(false);
+                btncontinuar.setEnabled(false);
                 break;
 
         }
