@@ -42,7 +42,7 @@ public class Principal extends javax.swing.JFrame {
     int[] arreglo = {5, 7, 8, 5, 4, 1, 3, 6, 8, 10, 35};
     Panelprueba p;
     int lineaActual = -1;
-    int indexEjecucion = 0;
+    int indexEjecucion = -1;
     DefaultTableModel modelTableExcecution;
     DefaultListModel<String> modelListVariables;
     private int algoritmo = 0;
@@ -89,7 +89,6 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btncargar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         listaalgoritmos = new javax.swing.JList();
         btnEjecutarAlg = new javax.swing.JButton();
@@ -105,16 +104,9 @@ public class Principal extends javax.swing.JFrame {
         btnInserSort = new javax.swing.JButton();
         btnHeapSort = new javax.swing.JButton();
         btnMultMatrix = new javax.swing.JButton();
+        btnLineaAnterior = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        btncargar.setText("Cargar algoritmo");
-        btncargar.setEnabled(false);
-        btncargar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btncargarActionPerformed(evt);
-            }
-        });
 
         listaalgoritmos.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 14)); // NOI18N
         listaalgoritmos.setEnabled(false);
@@ -212,38 +204,44 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        btnLineaAnterior.setText("Linea anterior");
+        btnLineaAnterior.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLineaAnteriorActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(jScrollPane3)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(btnQuickSort)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnInserSort)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnHeapSort)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnMultMatrix)
-                        .addGap(76, 76, 76)
-                        .addComponent(txtEntradaDAtos, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnEntradaDatos)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnEjecutarAlg)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
-                        .addComponent(btncargar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(scrollTableExcecution, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2)))
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(scrollTableExcecution, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2)
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(btnQuickSort)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnInserSort)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnHeapSort)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnMultMatrix)
+                .addGap(76, 76, 76)
+                .addComponent(txtEntradaDAtos, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnEntradaDatos)
+                .addGap(18, 18, 18)
+                .addComponent(btnLineaAnterior)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnEjecutarAlg)
+                .addContainerGap(105, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -258,7 +256,7 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(txtEntradaDAtos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEntradaDatos)
                     .addComponent(btnEjecutarAlg)
-                    .addComponent(btncargar))
+                    .addComponent(btnLineaAnterior))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(scrollTableExcecution, javax.swing.GroupLayout.DEFAULT_SIZE, 457, Short.MAX_VALUE)
@@ -270,63 +268,42 @@ public class Principal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btncargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncargarActionPerformed
+    private void ejecutarEstado(LinkedList<LinkedList<HashMap<String, String>>> estados) {
+        lineaActual = Integer.parseInt(estados.get(indexEjecucion).get(0).get("lineaSiguiente"));
+      
+        modelTableExcecution.insertRow(0, new Object[]{indexEjecucion, estados.get(indexEjecucion).get(0).get("idMio"), estados.get(indexEjecucion).get(0).get("nombre")});
+        LinkedList<String> variables = this.listarVariablesRegistro(estados.get(indexEjecucion).get(1));
 
-        DefaultListModel modelo = new DefaultListModel();
-        JFileChooser fc = new JFileChooser();
-        int respuesta = fc.showOpenDialog(this);
+        panelprueba1.setAmbiente(estados.get(indexEjecucion).get(0).get("idMio"));
+        //this.graficarArbol(metodos.generarNodos(estados), Integer.parseInt(estados.get(indexEjecucion).get(0).get("idMio")));
+        panelprueba1.repaint();
 
-        if (respuesta == JFileChooser.APPROVE_OPTION) {
-            File a = fc.getSelectedFile();
-            FileReader fr;
-            try {
-                fr = new FileReader(a);
-                BufferedReader br = new BufferedReader(fr);
-                String linea;
-                while ((linea = br.readLine()) != null) {
-                    modelo.addElement(linea);
-                }
-                listaalgoritmos.setModel(modelo);
-            } catch (FileNotFoundException ex) {
-                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IOException ex) {
-                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        modelListVariables.removeAllElements();
+        for (String variable : variables) {
+            modelListVariables.addElement(variable);
         }
+        this.tableEjecucion.setRowSelectionInterval(0, 0);
 
-    }//GEN-LAST:event_btncargarActionPerformed
+        
+        this.listaalgoritmos.setSelectedIndex(lineaActual);
+    }
 
     private void btnEjecutarAlgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEjecutarAlgActionPerformed
         if (this.algoritmo == 1) {
-            if (indexEjecucion < quickSort.getRegistroAmbientes().size()) {
-                lineaActual = Integer.parseInt(quickSort.getRegistroAmbientes().get(indexEjecucion).get(0).get("lineaSiguiente"));
-                modelTableExcecution.insertRow(0, new Object[]{indexEjecucion, quickSort.getRegistroAmbientes().get(indexEjecucion).get(0).get("idMio"), quickSort.getRegistroAmbientes().get(indexEjecucion).get(0).get("nombre")});
-                LinkedList<String> variables = this.listarVariablesRegistro(quickSort.getRegistroAmbientes().get(indexEjecucion).get(1));
-                
-                //panelprueba1.setAmbiente(quickSort.getRegistroAmbientes().get(indexEjecucion).get(0).get("idMio"));
-                this.graficarArbol(metodos.generarNodos(quickSort.getRegistroAmbientes()), Integer.parseInt(quickSort.getRegistroAmbientes().get(indexEjecucion).get(0).get("idMio")));
-                panelprueba1.repaint();
-                
-                modelListVariables.removeAllElements();
-                for (String variable : variables) {
-                    modelListVariables.addElement(variable);
-                }
-                this.tableEjecucion.setRowSelectionInterval(0, 0);
-
+            if (indexEjecucion < quickSort.getRegistroAmbientes().size()-1) {
                 indexEjecucion++;
-                this.listaalgoritmos.setSelectedIndex(lineaActual);
-
+                this.ejecutarEstado(quickSort.getRegistroAmbientes());
             }
         } else if (this.algoritmo == 2) {
-            if (indexEjecucion < this.insertSort.getRegistroAmbientes().size()) {
+            if (indexEjecucion < this.insertSort.getRegistroAmbientes().size()-1) {
                 lineaActual = Integer.parseInt(this.insertSort.getRegistroAmbientes().get(indexEjecucion).get(0).get("lineaSiguiente"));
                 modelTableExcecution.insertRow(0, new Object[]{indexEjecucion, this.insertSort.getRegistroAmbientes().get(indexEjecucion).get(0).get("idMio"), this.insertSort.getRegistroAmbientes().get(indexEjecucion).get(0).get("nombre")});
                 LinkedList<String> variables = this.listarVariablesRegistro(this.insertSort.getRegistroAmbientes().get(indexEjecucion).get(1));
-                
+
                 panelprueba1.setAmbiente(this.insertSort.getRegistroAmbientes().get(indexEjecucion).get(0).get("idMio"));
-                
+
                 panelprueba1.repaint();
-                
+
                 modelListVariables.removeAllElements();
                 for (String variable : variables) {
                     modelListVariables.addElement(variable);
@@ -338,7 +315,7 @@ public class Principal extends javax.swing.JFrame {
 
             }
         } else if (this.algoritmo == 3) {
-            if (indexEjecucion < this.heapsort.getRegistroAmbientes().size()) {
+            if (indexEjecucion < this.heapsort.getRegistroAmbientes().size()-1) {
                 lineaActual = Integer.parseInt(this.heapsort.getRegistroAmbientes().get(indexEjecucion).get(0).get("lineaSiguiente"));
                 modelTableExcecution.insertRow(0, new Object[]{indexEjecucion, this.heapsort.getRegistroAmbientes().get(indexEjecucion).get(0).get("idMio"), this.heapsort.getRegistroAmbientes().get(indexEjecucion).get(0).get("nombre")});
                 LinkedList<String> variables = this.listarVariablesRegistro(this.heapsort.getRegistroAmbientes().get(indexEjecucion).get(1));
@@ -355,7 +332,7 @@ public class Principal extends javax.swing.JFrame {
 
             }
         } else if (this.algoritmo == 4) {
-            if (indexEjecucion < this.multMatriz.getRegistroAmbientes().size()) {
+            if (indexEjecucion < this.multMatriz.getRegistroAmbientes().size()-1) {
                 lineaActual = Integer.parseInt(this.multMatriz.getRegistroAmbientes().get(indexEjecucion).get(0).get("lineaSiguiente"));
                 modelTableExcecution.insertRow(0, new Object[]{indexEjecucion, this.multMatriz.getRegistroAmbientes().get(indexEjecucion).get(0).get("idMio"), this.multMatriz.getRegistroAmbientes().get(indexEjecucion).get(0).get("nombre")});
                 LinkedList<String> variables = this.listarVariablesRegistro(this.multMatriz.getRegistroAmbientes().get(indexEjecucion).get(1));
@@ -387,9 +364,9 @@ public class Principal extends javax.swing.JFrame {
                 quickSort.QuickSort(arreglo);
 
                 this.listaalgoritmos.setSelectedIndex(lineaActual);
-                
-                //panelprueba1.setarbol(e.Escena(metodos.generarNodos(quickSort.getRegistroAmbientes())));
-                this.graficarArbol(metodos.generarNodos(quickSort.getRegistroAmbientes()), 1);
+
+                panelprueba1.setarbol(e.Escena(metodos.generarNodos(quickSort.getRegistroAmbientes())));
+                //this.graficarArbol(metodos.generarNodos(quickSort.getRegistroAmbientes()), 1);
                 this.listVariables.setEnabled(true);
                 this.btnEjecutarAlg.setEnabled(true);
 
@@ -456,17 +433,25 @@ public class Principal extends javax.swing.JFrame {
         seleccionarAlgoritmo("Algoritmos/HeapSort");
         this.algoritmo = 3;
     }//GEN-LAST:event_btnHeapSortActionPerformed
-    
-    private void graficarArbol(LinkedList<Nodo> nodos, int idAmbiente){
-        
+
+    private void btnLineaAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLineaAnteriorActionPerformed
+        if(this.algoritmo == 1){
+            if(indexEjecucion > 0){
+                indexEjecucion--;
+                this.ejecutarEstado(this.quickSort.getRegistroAmbientes());
+            }
+        }
+    }//GEN-LAST:event_btnLineaAnteriorActionPerformed
+
+    private void graficarArbol(LinkedList<Nodo> nodos, int idAmbiente) {
+
         for (int i = 0; i < nodos.size(); i++) {
-            
+
             //arbil.insertarhijo(Integer.parseInt(nodos.get(i).getidPropio()),Integer.parseInt(nodos.get(i).getidPadre()))
-            
         }
         //arbol.grafigararbol
     }
-    
+
     private void seleccionarAlgoritmo(String url) {
         DefaultListModel modelo = new DefaultListModel();
         File a = new File(url);
@@ -483,7 +468,7 @@ public class Principal extends javax.swing.JFrame {
             this.txtEntradaDAtos.setEnabled(true);
             this.btnEntradaDatos.setEnabled(true);
             lineaActual = -1;
-            indexEjecucion = 0;
+            indexEjecucion = -1;
             this.borrarTabla();
             this.listVariables.removeAll();
         } catch (FileNotFoundException ex) {
@@ -545,9 +530,9 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton btnEntradaDatos;
     private javax.swing.JButton btnHeapSort;
     private javax.swing.JButton btnInserSort;
+    private javax.swing.JButton btnLineaAnterior;
     private javax.swing.JButton btnMultMatrix;
     private javax.swing.JButton btnQuickSort;
-    private javax.swing.JButton btncargar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
