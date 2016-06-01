@@ -5,7 +5,6 @@
  */
 package Vista;
 
-import App5.Escena;
 import Modelo.HeapSort;
 import Modelo.InsertSort;
 import Modelo.MetodosVarios;
@@ -34,13 +33,11 @@ import javax.swing.table.DefaultTableModel;
 public class Principal extends javax.swing.JFrame implements Runnable {
 
     MetodosVarios metodos = new MetodosVarios();
-    Escena e = new Escena();
     QuickSort quickSort = new QuickSort();
     InsertSort insertSort = new InsertSort();
     HeapSort heapsort = new HeapSort();
     Mmatriz multMatriz = new Mmatriz();
     int[] arreglo = {5, 7, 8, 5, 4, 1, 3, 6, 8, 10, 35};
-    Panelprueba p;
     int lineaActual = -1;
     int indexEjecucion = -1;
     DefaultTableModel modelTableExcecution;
@@ -102,7 +99,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         txtEntradaDAtos = new javax.swing.JTextField();
         btnEntradaDatos = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        panelprueba1 = new Vista.Panelprueba();
+        panel1 = new Vista.Panel();
         btnQuickSort = new javax.swing.JButton();
         btnInserSort = new javax.swing.JButton();
         btnHeapSort = new javax.swing.JButton();
@@ -167,20 +164,27 @@ public class Principal extends javax.swing.JFrame implements Runnable {
             }
         });
 
-        panelprueba1.setBackground(new java.awt.Color(255, 255, 255));
+        jScrollPane3.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jScrollPane3MouseDragged(evt);
+            }
+        });
 
-        javax.swing.GroupLayout panelprueba1Layout = new javax.swing.GroupLayout(panelprueba1);
-        panelprueba1.setLayout(panelprueba1Layout);
-        panelprueba1Layout.setHorizontalGroup(
-            panelprueba1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1815, Short.MAX_VALUE)
+        panel1.setBackground(new java.awt.Color(255, 255, 255));
+        panel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
+        panel1.setLayout(panel1Layout);
+        panel1Layout.setHorizontalGroup(
+            panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1252, Short.MAX_VALUE)
         );
-        panelprueba1Layout.setVerticalGroup(
-            panelprueba1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 335, Short.MAX_VALUE)
+        panel1Layout.setVerticalGroup(
+            panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 337, Short.MAX_VALUE)
         );
 
-        jScrollPane3.setViewportView(panelprueba1);
+        jScrollPane3.setViewportView(panel1);
 
         btnQuickSort.setText("QuickSort");
         btnQuickSort.addActionListener(new java.awt.event.ActionListener() {
@@ -251,7 +255,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(scrollTableExcecution, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)
+                .addComponent(jScrollPane2)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(23, 23, 23)
@@ -312,9 +316,10 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         modelTableExcecution.insertRow(0, new Object[]{indexEjecucion, estados.get(indexEjecucion).get(0).get("idMio"), estados.get(indexEjecucion).get(0).get("nombre")});
         LinkedList<String> variables = this.listarVariablesRegistro(estados.get(indexEjecucion).get(1));
 
-        panelprueba1.setAmbiente(estados.get(indexEjecucion).get(0).get("idMio"));
+        panel1.setEstadoActual(estados.get(indexEjecucion).get(0).get("idMio"));
+        //panelprueba1.setAmbiente(estados.get(indexEjecucion).get(0).get("idMio"));
         //this.graficarArbol(metodos.generarNodos(estados), Integer.parseInt(estados.get(indexEjecucion).get(0).get("idMio")));
-        panelprueba1.repaint();
+        //panelprueba1.repaint();
 
         modelListVariables.removeAllElements();
         for (String variable : variables) {
@@ -363,8 +368,8 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                 quickSort.QuickSort(arreglo);
 
                 this.listaalgoritmos.setSelectedIndex(lineaActual);
-
-                panelprueba1.setarbol(e.Escena(metodos.generarNodos(quickSort.getRegistroAmbientes())));
+                panel1.pintarArbol(metodos.generarNodos(quickSort.getRegistroAmbientes()));
+                //panelprueba1.setarbol(e.Escena(metodos.generarNodos(quickSort.getRegistroAmbientes())));
                 //this.graficarArbol(metodos.generarNodos(quickSort.getRegistroAmbientes()), 1);
                 this.listVariables.setEnabled(true);
                 this.btnEjecutarAlg.setEnabled(true);
@@ -378,8 +383,8 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                 this.insertSort.Sort(arreglo);
 
                 this.listaalgoritmos.setSelectedIndex(lineaActual);
-
-                panelprueba1.setarbol(e.Escena(metodos.generarNodos(this.insertSort.getRegistroAmbientes())));
+                panel1.pintarArbol(metodos.generarNodos(this.insertSort.getRegistroAmbientes()));
+                //panelprueba1.setarbol(e.Escena(metodos.generarNodos(this.insertSort.getRegistroAmbientes())));
                 this.listVariables.setEnabled(true);
                 this.btnEjecutarAlg.setEnabled(true);
             } else if (this.algoritmo == 3) {
@@ -391,8 +396,8 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                 this.heapsort.heapSort(arreglo);
 
                 this.listaalgoritmos.setSelectedIndex(lineaActual);
-
-                panelprueba1.setarbol(e.Escena(metodos.generarNodos(this.heapsort.getRegistroAmbientes())));
+                panel1.pintarArbol(metodos.generarNodos(this.heapsort.getRegistroAmbientes()));
+                //panelprueba1.setarbol(e.Escena(metodos.generarNodos(this.heapsort.getRegistroAmbientes())));
                 this.listVariables.setEnabled(true);
                 this.btnEjecutarAlg.setEnabled(true);
             } else if (this.algoritmo == 4) {
@@ -404,8 +409,8 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                 this.multMatriz.mult(arreglo);
 
                 this.listaalgoritmos.setSelectedIndex(lineaActual);
-
-                panelprueba1.setarbol(e.Escena(metodos.generarNodos(this.multMatriz.getRegistroAmbientes())));
+                panel1.pintarArbol(metodos.generarNodos(this.multMatriz.getRegistroAmbientes()));
+                //panelprueba1.setarbol(e.Escena(metodos.generarNodos(this.multMatriz.getRegistroAmbientes())));
                 this.listVariables.setEnabled(true);
                 this.btnEjecutarAlg.setEnabled(true);
             }
@@ -473,6 +478,10 @@ public class Principal extends javax.swing.JFrame implements Runnable {
     private void btnautomaticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnautomaticoActionPerformed
         thagl.start();
     }//GEN-LAST:event_btnautomaticoActionPerformed
+
+    private void jScrollPane3MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane3MouseDragged
+        this.panel1.repaint();
+    }//GEN-LAST:event_jScrollPane3MouseDragged
 
     private void graficarArbol(LinkedList<Nodo> nodos, int idAmbiente) {
 
@@ -573,7 +582,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JList listVariables;
     private javax.swing.JList listaalgoritmos;
-    private Vista.Panelprueba panelprueba1;
+    private Vista.Panel panel1;
     private javax.swing.JScrollPane scrollTableExcecution;
     private javax.swing.JTable tableEjecucion;
     private javax.swing.JTextField txtEntradaDAtos;
@@ -584,8 +593,6 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         while (true) {
             switch (algoritmo) {
                 case 1:
-
-                   
 
                     while (indexEjecucion < quickSort.getRegistroAmbientes().size() - 1) {
                         checkForPaused();
@@ -614,7 +621,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                     }
 
                 case 3:
-                    
+
                     while (indexEjecucion < heapsort.getRegistroAmbientes().size() - 1) {
                         checkForPaused();
                         indexEjecucion++;
@@ -628,7 +635,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                     }
 
                 case 4:
-                    
+
                     while (indexEjecucion < multMatriz.getRegistroAmbientes().size() - 1) {
                         checkForPaused();
                         indexEjecucion++;
