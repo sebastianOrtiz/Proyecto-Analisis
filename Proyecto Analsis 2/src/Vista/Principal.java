@@ -359,23 +359,27 @@ public class Principal extends javax.swing.JFrame implements Runnable {
             if (indexEjecucion < quickSort.getRegistroAmbientes().size() - 1) {
                 indexEjecucion++;
                 this.ejecutarEstado(quickSort.getRegistroAmbientes());
+                this.btnLineaAnterior.setEnabled(true);
             }
         } else if (this.algoritmo == 2) {
             if (indexEjecucion < insertSort.getRegistroAmbientes().size() - 1) {
                 indexEjecucion++;
                 this.ejecutarEstado(insertSort.getRegistroAmbientes());
+                this.btnLineaAnterior.setEnabled(true);
 
             }
         } else if (this.algoritmo == 3) {
             if (indexEjecucion < heapsort.getRegistroAmbientes().size() - 1) {
                 indexEjecucion++;
                 this.ejecutarEstado(heapsort.getRegistroAmbientes());
+                this.btnLineaAnterior.setEnabled(true);
             }
 
         } else if (this.algoritmo == 4) {
             if (indexEjecucion < multMatriz.getRegistroAmbientes().size() - 1) {
                 indexEjecucion++;
                 this.ejecutarEstado(multMatriz.getRegistroAmbientes());
+                this.btnLineaAnterior.setEnabled(true);
             }
 
         }
@@ -397,7 +401,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                 //this.graficarArbol(metodos.generarNodos(quickSort.getRegistroAmbientes()), 1);
                 this.listVariables.setEnabled(true);
                 this.btnEjecutarAlg.setEnabled(true);
-                this.btnLineaAnterior.setEnabled(true);
+                
                 btnautomatico.setEnabled(true);
 
             } else if (this.algoritmo == 2) {
@@ -413,7 +417,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                 //panelprueba1.setarbol(e.Escena(metodos.generarNodos(this.insertSort.getRegistroAmbientes())));
                 this.listVariables.setEnabled(true);
                 this.btnEjecutarAlg.setEnabled(true);
-                this.btnLineaAnterior.setEnabled(true);
+                
                 btnautomatico.setEnabled(true);
             } else if (this.algoritmo == 3) {
                 String[] stringArray = this.txtEntradaDAtos.getText().split(",");
@@ -428,7 +432,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                 //panelprueba1.setarbol(e.Escena(metodos.generarNodos(this.heapsort.getRegistroAmbientes())));
                 this.listVariables.setEnabled(true);
                 this.btnEjecutarAlg.setEnabled(true);
-                this.btnLineaAnterior.setEnabled(true);
+                
                 btnautomatico.setEnabled(true);
             } else if (this.algoritmo == 4) {
                 String[] stringArray = this.txtEntradaDAtos.getText().split(",");
@@ -443,7 +447,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                 //panelprueba1.setarbol(e.Escena(metodos.generarNodos(this.multMatriz.getRegistroAmbientes())));
                 this.listVariables.setEnabled(true);
                 this.btnEjecutarAlg.setEnabled(true);
-                this.btnLineaAnterior.setEnabled(true);
+                
                 btnautomatico.setEnabled(true);
             }
 
@@ -451,6 +455,8 @@ public class Principal extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_btnEntradaDatosActionPerformed
 
     private void btnMultMatrixActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMultMatrixActionPerformed
+        txtEntradaDAtos.setEnabled(true);
+        btnEntradaDatos.setEnabled(true);
         btnEjecutarAlg.setEnabled(false);
         btnLineaAnterior.setEnabled(false);
         btnautomatico.setEnabled(false);
@@ -465,7 +471,8 @@ public class Principal extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_btnMultMatrixActionPerformed
 
     private void btnQuickSortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuickSortActionPerformed
-        
+        txtEntradaDAtos.setEnabled(true);
+        btnEntradaDatos.setEnabled(true);
         btnEjecutarAlg.setEnabled(false);
         btnLineaAnterior.setEnabled(false);
         btnautomatico.setEnabled(false);
@@ -479,7 +486,8 @@ public class Principal extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_btnQuickSortActionPerformed
 
     private void btnInserSortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInserSortActionPerformed
-        
+        txtEntradaDAtos.setEnabled(true);
+        btnEntradaDatos.setEnabled(true);
         btnEjecutarAlg.setEnabled(false);
         btnLineaAnterior.setEnabled(false);
         btnautomatico.setEnabled(false);
@@ -494,7 +502,8 @@ public class Principal extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_btnInserSortActionPerformed
 
     private void btnHeapSortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHeapSortActionPerformed
-        
+        txtEntradaDAtos.setEnabled(true);
+        btnEntradaDatos.setEnabled(true);
         btnEjecutarAlg.setEnabled(false);
         btnLineaAnterior.setEnabled(false);
         btnautomatico.setEnabled(false);
@@ -532,7 +541,10 @@ public class Principal extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_btnLineaAnteriorActionPerformed
 
     private void btnpausaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnpausaActionPerformed
-
+        this.btnLineaAnterior.setEnabled(true);
+        btncontinuar.setEnabled(true);
+        btnEjecutarAlg.setEnabled(true);
+        btnLineaAnterior.setEnabled(true);
         try {
             pausa();
         } catch (InterruptedException ex) {
@@ -541,12 +553,19 @@ public class Principal extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_btnpausaActionPerformed
 
     private void btncontinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncontinuarActionPerformed
+        btnEjecutarAlg.setEnabled(false);
+        btnLineaAnterior.setEnabled(false);
         continuar();
     }//GEN-LAST:event_btncontinuarActionPerformed
 
     private void btnautomaticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnautomaticoActionPerformed
         Thread th = new Thread(this);
         th.start();
+        btncontinuar.setEnabled(false);
+        btnEjecutarAlg.setEnabled(false);
+        btnLineaAnterior.setEnabled(false);
+        btnEntradaDatos.setEnabled(false);
+        txtEntradaDAtos.setEditable(false);
         btnautomatico.setEnabled(false);
         btnpausa.setEnabled(true);
         btncontinuar.setEnabled(true);
