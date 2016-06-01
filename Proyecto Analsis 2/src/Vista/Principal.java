@@ -619,7 +619,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         } else if (this.algoritmo == 3) {
             JOptionPane.showMessageDialog(rootPane, heapsort.determinarComplejidad());
         } else if (this.algoritmo == 4) {
-
+            JOptionPane.showMessageDialog(rootPane, multMatriz.determinarComplejidad());
         }
 
     }//GEN-LAST:event_btnComplejidadActionPerformed
