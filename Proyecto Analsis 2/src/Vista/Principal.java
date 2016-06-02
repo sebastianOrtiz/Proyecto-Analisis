@@ -14,6 +14,7 @@ import Modelo.Nodo;
 import Modelo.QuickSort;
 import Modelo.Sudoku;
 import java.awt.Color;
+import java.awt.Component;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -24,10 +25,10 @@ import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 
 /**
  *
@@ -54,7 +55,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
     boolean controlheapsort = false;
     boolean controlmulti = false;
     Thread thagl = new Thread(this);
-    Arbol arbolSudoku = null; 
+    Arbol arbolSudoku = null;
 
     /**
      * Creates new form Principal
@@ -64,6 +65,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         inicializarTableModel();
         inicializarListVariableModel();
+        this.modificarInterfaz();
 
     }
 
@@ -267,7 +269,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
             }
         });
 
-        btnautomatico.setBackground(new java.awt.Color(204, 204, 255));
+        btnautomatico.setBackground(new java.awt.Color(102, 0, 0));
         btnautomatico.setForeground(new java.awt.Color(255, 255, 255));
         btnautomatico.setText("automatico");
         btnautomatico.setEnabled(false);
@@ -379,12 +381,12 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                     .addComponent(btncontinuar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(scrollTableExcecution, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(scrollTableExcecution, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane4)))
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -421,7 +423,6 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         //panelprueba1.setAmbiente(estados.get(indexEjecucion).get(0).get("idMio"));
         //this.graficarArbol(metodos.generarNodos(estados), Integer.parseInt(estados.get(indexEjecucion).get(0).get("idMio")));
         //panelprueba1.repaint();
-
         modelListVariables.removeAllElements();
         for (String variable : variables) {
             modelListVariables.addElement(variable);
@@ -460,7 +461,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                 this.btnLineaAnterior.setEnabled(true);
             }
 
-        }else if(this.algoritmo == 5){
+        } else if (this.algoritmo == 5) {
             if (indexEjecucion < sudoku.getRegistroAmbientes().size() - 1) {
                 indexEjecucion++;
                 this.ejecutarEstadoSudoku(sudoku.getRegistroAmbientes());
@@ -480,7 +481,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                 quickSort.QuickSort(arreglo);
 
                 this.listaalgoritmos.setSelectedIndex(lineaActual);
-                panel1.pintarArbol(metodos.generarNodos(quickSort.getRegistroAmbientes()),"QuickSort");
+                panel1.pintarArbol(metodos.generarNodos(quickSort.getRegistroAmbientes()), "QuickSort");
                 quickSort.setArbol(panel1.getA());
                 //panelprueba1.setarbol(e.Escena(metodos.generarNodos(quickSort.getRegistroAmbientes())));
                 //this.graficarArbol(metodos.generarNodos(quickSort.getRegistroAmbientes()), 1);
@@ -498,7 +499,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                 this.insertSort.Sort(arreglo);
 
                 this.listaalgoritmos.setSelectedIndex(lineaActual);
-                panel1.pintarArbol(metodos.generarNodos(this.insertSort.getRegistroAmbientes()),"InsertSort");
+                panel1.pintarArbol(metodos.generarNodos(this.insertSort.getRegistroAmbientes()), "InsertSort");
                 //panelprueba1.setarbol(e.Escena(metodos.generarNodos(this.insertSort.getRegistroAmbientes())));
                 this.listVariables.setEnabled(true);
                 this.btnComplejidad.setEnabled(true);
@@ -514,7 +515,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                 this.heapsort.heapSort(arreglo);
 
                 this.listaalgoritmos.setSelectedIndex(lineaActual);
-                panel1.pintarArbol(metodos.generarNodos(this.heapsort.getRegistroAmbientes()),"HeapSort");
+                panel1.pintarArbol(metodos.generarNodos(this.heapsort.getRegistroAmbientes()), "HeapSort");
                 //panelprueba1.setarbol(e.Escena(metodos.generarNodos(this.heapsort.getRegistroAmbientes())));
                 this.listVariables.setEnabled(true);
                 this.btnComplejidad.setEnabled(true);
@@ -530,7 +531,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                 this.multMatriz.mult(arreglo);
 
                 this.listaalgoritmos.setSelectedIndex(lineaActual);
-                panel1.pintarArbol(metodos.generarNodos(this.multMatriz.getRegistroAmbientes()),"multiplicacionMatrices");
+                panel1.pintarArbol(metodos.generarNodos(this.multMatriz.getRegistroAmbientes()), "multiplicacionMatrices");
                 //panelprueba1.setarbol(e.Escena(metodos.generarNodos(this.multMatriz.getRegistroAmbientes())));
                 this.listVariables.setEnabled(true);
                 this.btnComplejidad.setEnabled(true);
@@ -568,6 +569,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         seleccionarAlgoritmo("Algoritmos/Multiplicaionmatrices");
         this.panel1.setNullRoot();
         this.algoritmo = 4;
+        this.modificarInterfaz();
     }//GEN-LAST:event_btnMultMatrixActionPerformed
 
     private void btnQuickSortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuickSortActionPerformed
@@ -585,6 +587,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         seleccionarAlgoritmo("Algoritmos/QuickSort");
         this.panel1.setNullRoot();
         this.algoritmo = 1;
+        this.modificarInterfaz();
     }//GEN-LAST:event_btnQuickSortActionPerformed
 
     private void btnInserSortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInserSortActionPerformed
@@ -602,6 +605,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         seleccionarAlgoritmo("Algoritmos/InsertSort");
         this.panel1.setNullRoot();
         this.algoritmo = 2;
+        this.modificarInterfaz();
 
     }//GEN-LAST:event_btnInserSortActionPerformed
 
@@ -620,6 +624,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         seleccionarAlgoritmo("Algoritmos/HeapSort");
         this.panel1.setNullRoot();
         this.algoritmo = 3;
+        this.modificarInterfaz();
     }//GEN-LAST:event_btnHeapSortActionPerformed
 
     private void btnLineaAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLineaAnteriorActionPerformed
@@ -724,7 +729,8 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         this.panel1.setNullRoot();
         this.algoritmo = 5;
         this.sudoku.cargarSudoku();
-        
+        this.modificarInterfaz();
+
         this.generarModeloMatrizSudoku(this.sudoku.getTablero());
         this.sudoku.resolver(sudoku.getTablero());
         this.generarArbolSudoku();
@@ -975,29 +981,38 @@ public class Principal extends javax.swing.JFrame implements Runnable {
             }
         }
     }
-    
-    private void generarArbolSudoku(){
-        if(this.arbolSudoku == null){
-            LinkedList<Nodo> nodos = new LinkedList<>();
-            int  idNodo = 1;
-            nodos.add(new Nodo("0", "1", "Sudoku"));
-            for (int i = 0; i < 9; i++) {
+
+    private void generarArbolSudoku() {
+
+        LinkedList<Nodo> nodos = new LinkedList<>();
+        int idNodo = 1;
+        nodos.add(new Nodo("0", "1", "Sudoku"));
+        for (int i = 0; i < 9; i++) {
+            idNodo++;
+            nodos.add(new Nodo("1", idNodo + "", "Sudoku"));
+            String idPadre = idNodo + "";
+            for (int j = 0; j < 9; j++) {
                 idNodo++;
-                nodos.add(new Nodo("1", idNodo+"", "Sudoku"));
-                String idPadre = idNodo+"";
-                for (int j = 0; j < 9; j++) {
-                    idNodo++;
-                    nodos.add(new Nodo(idPadre, idNodo+"", "Sudoku"));
-                }
+                nodos.add(new Nodo(idPadre, idNodo + "", "Sudoku"));
             }
-            
-            this.arbolSudoku = new Arbol();
-            this.arbolSudoku.armarArbolDesdeListaDeNodos(nodos, "Sudoku");
-            this.arbolSudoku.darPosiciones(this.arbolSudoku.getRaiz(), 10);
         }
-        
+
+        this.arbolSudoku = new Arbol();
+        this.arbolSudoku.armarArbolDesdeListaDeNodos(nodos, "Sudoku");
+        this.arbolSudoku.darPosiciones(this.arbolSudoku.getRaiz(), 10);
+
         this.panel1.setA(arbolSudoku);
-        
-        
+
+    }
+
+    private void modificarInterfaz() {
+        if (this.algoritmo != 5) {
+            DefaultTableModel temp = new DefaultTableModel();
+            temp.addColumn("Info");
+            temp.setRowCount(1);
+            temp.setValueAt("Aqui se mostrara la informacion del sudoku", 0, 0);
+            
+            this.tableSUdoku.setModel(temp);
+        }
     }
 }
