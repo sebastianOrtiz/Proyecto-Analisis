@@ -16,17 +16,19 @@ public class NodoArbol {
     private LinkedList<NodoArbol> hijos;
     private int x;
     private int y;
+    private boolean recursivo;
 
     public NodoArbol() {
     }
 
-    public NodoArbol(String idMio) {
+    public NodoArbol(String idMio, boolean ppl) {
         this.idMio = idMio;
         this.hijos = new LinkedList<>();
+        this.recursivo = ppl;
     }
     
-    public void adicionarHijo(String id){
-        hijos.add(new NodoArbol(id));
+    public void adicionarHijo(String id, boolean ppl){
+        hijos.add(new NodoArbol(id, ppl));
     }
     
     public boolean esHoja(){
@@ -86,5 +88,19 @@ public class NodoArbol {
      */
     public void setY(int y) {
         this.y = y;
+    }
+
+    /**
+     * @return the recursivo
+     */
+    public boolean isRecursivo() {
+        return recursivo;
+    }
+
+    /**
+     * @param recursivo the recursivo to set
+     */
+    public void setRecursivo(boolean recursivo) {
+        this.recursivo = recursivo;
     }
 }

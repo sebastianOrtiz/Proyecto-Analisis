@@ -21,10 +21,14 @@ public class Arbol {
         this.raiz = null;
     }
 
-    public void armarArbolDesdeListaDeNodos(LinkedList<Nodo> nodos) {
+    public void armarArbolDesdeListaDeNodos(LinkedList<Nodo> nodos, String algPp) {
         this.setRaiz(null);
-        this.setRaiz(new NodoArbol(nodos.get(0).getIdPropio()));
-        this.insertarHijos(raiz, nodos);
+        boolean ppl = false;
+        if (nodos.get(0).getDato().equalsIgnoreCase(algPp)) {
+            ppl = true;
+        }
+        this.setRaiz(new NodoArbol(nodos.get(0).getIdPropio(), ppl));
+        this.insertarHijos(raiz, nodos, algPp);
     }
     LinkedList<Integer> ps;
 
@@ -42,18 +46,18 @@ public class Arbol {
         }
 
     }
-    
-    public LinkedList<Integer> obtenerProfundidades(){
+
+    public LinkedList<Integer> obtenerProfundidades() {
         ps = new LinkedList<>();
-        if(!raiz.esHoja()){
+        if (!raiz.esHoja()) {
             llenarProfundidades(raiz, 1);
         }
         return ps;
     }
-    
-    public LinkedList<Integer> obtenerProfundidadesQuickSort(){
+
+    public LinkedList<Integer> obtenerProfundidadesQuickSort() {
         ps = new LinkedList<>();
-        if(!raiz.esHoja()){
+        if (!raiz.esHoja()) {
             llenarProfundidadesQuickSort(raiz, 1);
         }
         return ps;
@@ -62,19 +66,19 @@ public class Arbol {
     private void llenarProfundidades(NodoArbol nodo, int altura) {
         if (nodo.esHoja()) {
             this.ps.add(altura);
-        }else{
+        } else {
             for (NodoArbol nodo1 : nodo.getHijos()) {
-                llenarProfundidades(nodo1, altura+1);
+                llenarProfundidades(nodo1, altura + 1);
             }
         }
     }
-    
+
     private void llenarProfundidadesQuickSort(NodoArbol nodo, int altura) {
         if (nodo.esHoja()) {
             this.ps.add(altura);
-        }else{
+        } else {
             for (int i = 1; i < nodo.getHijos().size(); i++) {
-                llenarProfundidadesQuickSort(nodo.getHijos().get(i), altura+1);
+                llenarProfundidadesQuickSort(nodo.getHijos().get(i), altura + 1);
             }
         }
     }
@@ -91,15 +95,16 @@ public class Arbol {
             return mayor;
         }
     }
-    
-    public int profundidadMinima(){
-        if(raiz.esHoja()){
+
+    public int profundidadMinima() {
+        if (raiz.esHoja()) {
             return 0;
-        }else{
+        } else {
             return profundidadMinima(raiz, Integer.MAX_VALUE);
         }
-        
+
     }
+
     private int profundidadMinima(NodoArbol nodo, int minima) {
         if (nodo.esHoja()) {
             return minima;
@@ -117,15 +122,19 @@ public class Arbol {
         this.xMax = 30;
     }
 
-    private void insertarHijos(NodoArbol nodo, LinkedList<Nodo> nodos) {
+    private void insertarHijos(NodoArbol nodo, LinkedList<Nodo> nodos, String nomPp) {
         for (int i = 1; i < nodos.size(); i++) {
             if (nodos.get(i).getIdPadre().equalsIgnoreCase(nodo.getIdMio())) {
-                nodo.adicionarHijo(nodos.get(i).getIdPropio());
+                boolean ppl = false;
+                if(nodos.get(i).getDato().equalsIgnoreCase(nomPp)){
+                    ppl = true;
+                }
+                nodo.adicionarHijo(nodos.get(i).getIdPropio(), ppl);
             }
         }
         if (!nodo.esHoja()) {
             for (NodoArbol nodoArbol : nodo.getHijos()) {
-                this.insertarHijos(nodoArbol, nodos);
+                this.insertarHijos(nodoArbol, nodos, nomPp);
             }
         }
     }

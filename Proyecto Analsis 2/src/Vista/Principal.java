@@ -265,7 +265,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
             }
         });
 
-        btnautomatico.setBackground(new java.awt.Color(102, 0, 0));
+        btnautomatico.setBackground(new java.awt.Color(204, 204, 255));
         btnautomatico.setForeground(new java.awt.Color(255, 255, 255));
         btnautomatico.setText("automatico");
         btnautomatico.setEnabled(false);
@@ -478,7 +478,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                 quickSort.QuickSort(arreglo);
 
                 this.listaalgoritmos.setSelectedIndex(lineaActual);
-                panel1.pintarArbol(metodos.generarNodos(quickSort.getRegistroAmbientes()));
+                panel1.pintarArbol(metodos.generarNodos(quickSort.getRegistroAmbientes()),"QuickSort");
                 quickSort.setArbol(panel1.getA());
                 //panelprueba1.setarbol(e.Escena(metodos.generarNodos(quickSort.getRegistroAmbientes())));
                 //this.graficarArbol(metodos.generarNodos(quickSort.getRegistroAmbientes()), 1);
@@ -496,7 +496,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                 this.insertSort.Sort(arreglo);
 
                 this.listaalgoritmos.setSelectedIndex(lineaActual);
-                panel1.pintarArbol(metodos.generarNodos(this.insertSort.getRegistroAmbientes()));
+                panel1.pintarArbol(metodos.generarNodos(this.insertSort.getRegistroAmbientes()),"InsertSort");
                 //panelprueba1.setarbol(e.Escena(metodos.generarNodos(this.insertSort.getRegistroAmbientes())));
                 this.listVariables.setEnabled(true);
                 this.btnComplejidad.setEnabled(true);
@@ -512,7 +512,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                 this.heapsort.heapSort(arreglo);
 
                 this.listaalgoritmos.setSelectedIndex(lineaActual);
-                panel1.pintarArbol(metodos.generarNodos(this.heapsort.getRegistroAmbientes()));
+                panel1.pintarArbol(metodos.generarNodos(this.heapsort.getRegistroAmbientes()),"HeapSort");
                 //panelprueba1.setarbol(e.Escena(metodos.generarNodos(this.heapsort.getRegistroAmbientes())));
                 this.listVariables.setEnabled(true);
                 this.btnComplejidad.setEnabled(true);
@@ -528,7 +528,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                 this.multMatriz.mult(arreglo);
 
                 this.listaalgoritmos.setSelectedIndex(lineaActual);
-                panel1.pintarArbol(metodos.generarNodos(this.multMatriz.getRegistroAmbientes()));
+                panel1.pintarArbol(metodos.generarNodos(this.multMatriz.getRegistroAmbientes()),"multiplicacionMatrices");
                 //panelprueba1.setarbol(e.Escena(metodos.generarNodos(this.multMatriz.getRegistroAmbientes())));
                 this.listVariables.setEnabled(true);
                 this.btnComplejidad.setEnabled(true);
@@ -866,7 +866,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                         indexEjecucion++;
                         this.ejecutarEstado(quickSort.getRegistroAmbientes());
                         try {
-                            Thread.sleep(500);
+                            Thread.sleep(250);
                         } catch (InterruptedException ex) {
                             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
                         }

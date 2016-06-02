@@ -26,27 +26,27 @@ public class Panel extends javax.swing.JPanel {
     /**
      * Creates new form Panel
      */
-    public void pintarArbol(LinkedList<Nodo> nodos) {
+    public void pintarArbol(LinkedList<Nodo> nodos, String Alg) {
         getA().resetxMax();
-        getA().armarArbolDesdeListaDeNodos(nodos);
+        getA().armarArbolDesdeListaDeNodos(nodos, Alg);
         getA().darPosiciones(getA().getRaiz(), 10);
         this.redimencionar();
         this.repaint();
     }
-    
+
     public Panel() {
         initComponents();
-        
+
     }
-    
-    private void redimencionar(){
-        if(getA().getxMax() > 1254){
-            this.setPreferredSize(new Dimension(getA().getxMax() + 10, getA().getyMax()+40));
-        }else{
-            this.setPreferredSize(new Dimension(1254, getA().getyMax()+40));
-            getA().reajustarPosiciones(1254/2);
+
+    private void redimencionar() {
+        if (getA().getxMax() > 1254) {
+            this.setPreferredSize(new Dimension(getA().getxMax() + 10, getA().getyMax() + 40));
+        } else {
+            this.setPreferredSize(new Dimension(1254, getA().getyMax() + 40));
+            getA().reajustarPosiciones(1254 / 2);
         }
-        
+
         this.revalidate();
     }
 
@@ -65,10 +65,17 @@ public class Panel extends javax.swing.JPanel {
             g.fillOval((int) nodo.getX(), (int) nodo.getY(), 30, 25);
             g.setColor(Color.white);
             g.drawString(nodo.getIdMio(), (int) nodo.getX() + 11, (int) nodo.getY() + 17);
-        }else{
-            g.setColor(Color.black);
-            g.drawOval((int) nodo.getX(), (int) nodo.getY(), 30, 25);
-            g.drawString(nodo.getIdMio(), (int) nodo.getX() + 11, (int) nodo.getY() + 17);
+        } else {
+            if (nodo.isRecursivo()) {
+                g.setColor(Color.black);
+                g.drawOval((int) nodo.getX(), (int) nodo.getY(), 30, 25);
+                g.drawString(nodo.getIdMio(), (int) nodo.getX() + 11, (int) nodo.getY() + 17);
+            } else {
+                g.setColor(Color.red);
+                g.drawOval((int) nodo.getX(), (int) nodo.getY(), 30, 25);
+                g.drawString(nodo.getIdMio(), (int) nodo.getX() + 11, (int) nodo.getY() + 17);
+            }
+
         }
 
         if (!nodo.esHoja()) {
@@ -153,7 +160,6 @@ public class Panel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
-
     /**
      * @param estadoActual the estadoActual to set
      */
