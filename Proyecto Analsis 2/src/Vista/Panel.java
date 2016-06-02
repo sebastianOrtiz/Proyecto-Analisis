@@ -174,4 +174,20 @@ public class Panel extends javax.swing.JPanel {
     public Arbol getA() {
         return a;
     }
+
+    /**
+     * @param a the a to set
+     */
+    public void setA(Arbol a) {
+        this.a = a;
+        this.redimencionar();
+        this.repaint();
+    }
+    
+    public void setNullRoot(){
+        this.a.setRaiz(null);
+        this.repaint();
+        this.estadoActual = "1";
+    }
+           
 }

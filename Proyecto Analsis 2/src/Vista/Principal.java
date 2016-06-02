@@ -5,6 +5,7 @@
  */
 package Vista;
 
+import Modelo.Arbol;
 import Modelo.HeapSort;
 import Modelo.InsertSort;
 import Modelo.MetodosVarios;
@@ -53,6 +54,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
     boolean controlheapsort = false;
     boolean controlmulti = false;
     Thread thagl = new Thread(this);
+    Arbol arbolSudoku = null; 
 
     /**
      * Creates new form Principal
@@ -564,6 +566,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         controlquicksort = false;
         controlheapsort = false;
         seleccionarAlgoritmo("Algoritmos/Multiplicaionmatrices");
+        this.panel1.setNullRoot();
         this.algoritmo = 4;
     }//GEN-LAST:event_btnMultMatrixActionPerformed
 
@@ -580,6 +583,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         controlinsertsort = false;
         controlmulti = false;
         seleccionarAlgoritmo("Algoritmos/QuickSort");
+        this.panel1.setNullRoot();
         this.algoritmo = 1;
     }//GEN-LAST:event_btnQuickSortActionPerformed
 
@@ -596,6 +600,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         controlheapsort = false;
         controlmulti = false;
         seleccionarAlgoritmo("Algoritmos/InsertSort");
+        this.panel1.setNullRoot();
         this.algoritmo = 2;
 
     }//GEN-LAST:event_btnInserSortActionPerformed
@@ -613,6 +618,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         controlquicksort = false;
         controlmulti = false;
         seleccionarAlgoritmo("Algoritmos/HeapSort");
+        this.panel1.setNullRoot();
         this.algoritmo = 3;
     }//GEN-LAST:event_btnHeapSortActionPerformed
 
@@ -715,11 +721,13 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         controlquicksort = false;
         controlmulti = false;
         seleccionarAlgoritmo("Algoritmos/Sudoku");
+        this.panel1.setNullRoot();
         this.algoritmo = 5;
         this.sudoku.cargarSudoku();
         
         this.generarModeloMatrizSudoku(this.sudoku.getTablero());
         this.sudoku.resolver(sudoku.getTablero());
+        this.generarArbolSudoku();
     }//GEN-LAST:event_btnSudokuActionPerformed
 
     public void generarModeloMatrizSudoku(int[][] tablero) {
@@ -966,5 +974,30 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                 }
             }
         }
+    }
+    
+    private void generarArbolSudoku(){
+        if(this.arbolSudoku == null){
+            LinkedList<Nodo> nodos = new LinkedList<>();
+            int  idNodo = 1;
+            nodos.add(new Nodo("0", "1", "Sudoku"));
+            for (int i = 0; i < 9; i++) {
+                idNodo++;
+                nodos.add(new Nodo("1", idNodo+"", "Sudoku"));
+                String idPadre = idNodo+"";
+                for (int j = 0; j < 9; j++) {
+                    idNodo++;
+                    nodos.add(new Nodo(idPadre, idNodo+"", "Sudoku"));
+                }
+            }
+            
+            this.arbolSudoku = new Arbol();
+            this.arbolSudoku.armarArbolDesdeListaDeNodos(nodos, "Sudoku");
+            this.arbolSudoku.darPosiciones(this.arbolSudoku.getRaiz(), 10);
+        }
+        
+        this.panel1.setA(arbolSudoku);
+        
+        
     }
 }
