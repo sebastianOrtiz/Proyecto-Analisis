@@ -653,6 +653,11 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                 indexEjecucion--;
                 this.ejecutarEstado(this.multMatriz.getRegistroAmbientes());
             }
+        } else if (this.algoritmo == 5) {
+            if (indexEjecucion > 0) {
+                indexEjecucion--;
+                this.ejecutarEstadoSudoku(this.sudoku.getRegistroAmbientes());
+            }
         }
     }//GEN-LAST:event_btnLineaAnteriorActionPerformed
 
@@ -713,7 +718,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
             JOptionPane.showMessageDialog(rootPane, heapsort.determinarComplejidad());
         } else if (this.algoritmo == 4) {
             JOptionPane.showMessageDialog(rootPane, multMatriz.determinarComplejidad());
-        }else if(this.algoritmo == 5){
+        } else if (this.algoritmo == 5) {
             JOptionPane.showMessageDialog(rootPane, sudoku.determinarComplejidad());
         }
         //btnComplejidad.setEnabled(false);
@@ -743,6 +748,8 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         this.generarModeloMatrizSudoku(this.sudoku.getTablero());
         this.sudoku.resolver(sudoku.getTablero());
         this.generarArbolSudoku();
+        btnEntradaDatos.setEnabled(false);
+        txtEntradaDAtos.setEnabled(false);
     }//GEN-LAST:event_btnSudokuActionPerformed
 
     public void generarModeloMatrizSudoku(int[][] tablero) {
@@ -965,20 +972,20 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                 btncontinuar.setEnabled(false);
                 break;
             case 5:
-                
-            while (indexEjecucion < sudoku.getRegistroAmbientes().size() - 1) {
-                if(controlsudoku){
-                checkForPaused();
-                indexEjecucion++;
-                this.ejecutarEstadoSudoku(sudoku.getRegistroAmbientes());
-                    try {
-                        Thread.sleep(500);
-                        //this.btnLineaAnterior.setEnabled(true);
-                    } catch (InterruptedException ex) {
-                        Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+
+                while (indexEjecucion < sudoku.getRegistroAmbientes().size() - 1) {
+                    if (controlsudoku) {
+                        checkForPaused();
+                        indexEjecucion++;
+                        this.ejecutarEstadoSudoku(sudoku.getRegistroAmbientes());
+                        try {
+                            Thread.sleep(500);
+                            //this.btnLineaAnterior.setEnabled(true);
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                     }
-            }
-            }
+                }
 
         }
 
@@ -1035,7 +1042,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
             temp.addColumn("Info");
             temp.setRowCount(1);
             temp.setValueAt("Aqui se mostrara la informacion del sudoku", 0, 0);
-            
+
             this.tableSUdoku.setModel(temp);
         }
     }
