@@ -558,6 +558,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         txtEntradaDAtos.setEnabled(true);
         btnEntradaDatos.setEnabled(true);
         btnEjecutarAlg.setEnabled(false);
+        btnComplejidad.setEnabled(false);
         btnLineaAnterior.setEnabled(false);
         btnautomatico.setEnabled(false);
         btnpausa.setEnabled(false);
@@ -575,6 +576,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
     private void btnQuickSortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuickSortActionPerformed
         txtEntradaDAtos.setEnabled(true);
         btnEntradaDatos.setEnabled(true);
+        btnComplejidad.setEnabled(false);
         btnEjecutarAlg.setEnabled(false);
         btnLineaAnterior.setEnabled(false);
         btnautomatico.setEnabled(false);
@@ -593,6 +595,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
     private void btnInserSortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInserSortActionPerformed
         txtEntradaDAtos.setEnabled(true);
         btnEntradaDatos.setEnabled(true);
+        btnComplejidad.setEnabled(false);
         btnEjecutarAlg.setEnabled(false);
         btnLineaAnterior.setEnabled(false);
         btnautomatico.setEnabled(false);
@@ -612,6 +615,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
     private void btnHeapSortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHeapSortActionPerformed
         txtEntradaDAtos.setEnabled(true);
         btnEntradaDatos.setEnabled(true);
+        btnComplejidad.setEnabled(false);
         btnEjecutarAlg.setEnabled(false);
         btnLineaAnterior.setEnabled(false);
         btnautomatico.setEnabled(false);
@@ -708,8 +712,10 @@ public class Principal extends javax.swing.JFrame implements Runnable {
             JOptionPane.showMessageDialog(rootPane, heapsort.determinarComplejidad());
         } else if (this.algoritmo == 4) {
             JOptionPane.showMessageDialog(rootPane, multMatriz.determinarComplejidad());
+        }else if(this.algoritmo == 5){
+            JOptionPane.showMessageDialog(rootPane, sudoku.determinarComplejidad());
         }
-        btnComplejidad.setEnabled(false);
+        //btnComplejidad.setEnabled(false);
     }//GEN-LAST:event_btnComplejidadActionPerformed
 
     private void btnSudokuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSudokuActionPerformed
@@ -720,6 +726,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         //btnautomatico.setEnabled(false);
         //btnpausa.setEnabled(false);
         //btncontinuar.setEnabled(false);
+        this.btnComplejidad.setEnabled(true);
         this.btnEjecutarAlg.setEnabled(true);
         controlheapsort = false;
         controlinsertsort = false;
@@ -880,7 +887,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                         indexEjecucion++;
                         this.ejecutarEstado(quickSort.getRegistroAmbientes());
                         try {
-                            Thread.sleep(250);
+                            Thread.sleep(400);
                         } catch (InterruptedException ex) {
                             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
                         }

@@ -32,6 +32,13 @@ public class Sudoku {
     public Sudoku() {
         this.metodos = new MetodosVarios();
     }
+    
+    public String determinarComplejidad() {
+        String complejidad = "T(n) = Θ(n^n) con n igual a la cantidad de √filas * columnas\nPara este caso en especifico sera 9^9=387420489";
+        
+
+        return complejidad;
+    }
 
     public int[][] cadenaToMatriz(String cadena) {
         String[] elementos = cadena.split(",");

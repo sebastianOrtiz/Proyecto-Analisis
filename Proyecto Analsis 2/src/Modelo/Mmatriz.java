@@ -23,7 +23,7 @@ public class Mmatriz {
     }
     
     public String determinarComplejidad() {
-        return "Θ(k^n) con 1,4 < k < 3 y n >= 2";
+        return "T(n) = Θ(k^n) con 1,4 < k < 3 y n >= 2";
     }
 
     public int mult(int[] array) {//

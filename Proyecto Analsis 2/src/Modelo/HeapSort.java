@@ -23,7 +23,7 @@ public class HeapSort {
     }
     
     public String determinarComplejidad() {
-        return "Θ(n log n)";
+        return "T(n) = Θ(n log n)";
     }
     public void heapSort(int[] array) {
         this.ambientes = 1;

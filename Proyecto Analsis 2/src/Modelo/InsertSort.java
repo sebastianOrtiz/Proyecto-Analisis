@@ -19,13 +19,13 @@ public class InsertSort {
     public String determinarComplejidad() {
         String complejidad = "";
         if (ejecuciones == tamañoEntradaDeDatos) {
-            complejidad = "O(n)";
+            complejidad = "T(n) = O(n)";
         } else {
             double pivote = ((((tamañoEntradaDeDatos * tamañoEntradaDeDatos) / 2) + (tamañoEntradaDeDatos / 2)) / 2) - (tamañoEntradaDeDatos / 2);
             if (ejecuciones <= pivote) {
-                complejidad = "O(n)";
+                complejidad = "T(n) = O(n)";
             } else {
-                complejidad = "O(n^2)";
+                complejidad = "T(n) = O(n^2)";
             }
         }
 

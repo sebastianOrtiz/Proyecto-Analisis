@@ -42,11 +42,11 @@ public class QuickSort {
             }
             double prom = sum/alturas.size();
             if(max == min){
-                complejidad = ("Θ(n log n)");
+                complejidad = ("T(n) = Θ(n log n)");
             }else if (max - min >= prom){
-                complejidad = ("Θ(n^2)");
+                complejidad = ("T(n) = Θ(n^2)");
             }else if(max - min < prom){
-                complejidad = ("Θ(n)");
+                complejidad = ("T(n) = Θ(n)");
             }
             
         }
