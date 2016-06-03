@@ -54,6 +54,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
     boolean controlinsertsort = false;
     boolean controlheapsort = false;
     boolean controlmulti = false;
+    boolean controlsudoku = false;
     Thread thagl = new Thread(this);
     Arbol arbolSudoku = null;
 
@@ -721,9 +722,9 @@ public class Principal extends javax.swing.JFrame implements Runnable {
     private void btnSudokuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSudokuActionPerformed
         //txtEntradaDAtos.setEnabled(true);
         //btnEntradaDatos.setEnabled(true);
-        //btnEjecutarAlg.setEnabled(false);
+        btnEjecutarAlg.setEnabled(true);
         //btnLineaAnterior.setEnabled(false);
-        //btnautomatico.setEnabled(false);
+        btnautomatico.setEnabled(true);
         //btnpausa.setEnabled(false);
         //btncontinuar.setEnabled(false);
         this.btnComplejidad.setEnabled(true);
@@ -732,6 +733,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         controlinsertsort = false;
         controlquicksort = false;
         controlmulti = false;
+        controlsudoku = true;
         seleccionarAlgoritmo("Algoritmos/Sudoku");
         this.panel1.setNullRoot();
         this.algoritmo = 5;
@@ -962,6 +964,21 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                 btnpausa.setEnabled(false);
                 btncontinuar.setEnabled(false);
                 break;
+            case 5:
+                
+            while (indexEjecucion < sudoku.getRegistroAmbientes().size() - 1) {
+                if(controlsudoku){
+                checkForPaused();
+                indexEjecucion++;
+                this.ejecutarEstadoSudoku(sudoku.getRegistroAmbientes());
+                    try {
+                        Thread.sleep(500);
+                        //this.btnLineaAnterior.setEnabled(true);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+            }
+            }
 
         }
 
